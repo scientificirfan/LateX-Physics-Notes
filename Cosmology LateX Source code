@@ -1,0 +1,2537 @@
+\documentclass[12pt]{article}
+
+% ---- Packages ----
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{physics}           % For derivatives, bras, kets, etc.
+\usepackage{graphicx}          % For including figures
+\usepackage{setspace}          % For spacing
+\usepackage{cite}              % For bibliography citation
+\usepackage{hyperref}          % For clickable links
+\usepackage{titlesec}          % Custom section formatting
+\usepackage{xcolor}            % Colored text if needed
+\usepackage{enumitem}          % For custom lists
+\usepackage{fancyhdr}          % Header/footer
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+
+
+
+
+
+
+
+
+% ---- Page Style ----
+\pagestyle{fancy}
+\fancyhf{ }
+\rhead{Md Irfan — Cosmology Notes}
+\lhead{}
+\rfoot{\thepage}
+
+% ---- Custom Commands ----
+\newcommand{\mpl}{M_{\text{Pl}}}
+\newcommand{\Hubble}{\mathcal{H}}
+
+% ---- Title ----
+\title{\huge{\textbf{Cosmology Notes}}\\
+\large  \textit{Cosmology And GTR}}
+\author{Md Irfan }
+
+\date{\today}
+
+% ---- Document ----
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ---- Example Section ----
+\section{\huge{} \textbf{ The FRW Universe}}}
+
+Our goal in this chapter is to derive, and then solve, the equations governing the
+evolution of the entire universe. This may seem like a daunting task. How can we
+hope to describe the long-term evolution of the cosmos when we have such a hard
+time just predicting the weather or the stability of the Solar System?
+Fortunately, the coarse-grained properties of the universe are remarkably simple.
+While the distribution of galaxies is clumpy on small scales, it becomes more and
+more uniform on large scales. In particular, when averaged over sufficiently large
+distances (say larger than 100 Mpc), the universe looks isotropic (the same in all
+
+directions). Assuming that we don’t live at a special point in space—and that nobody else does either—the observed isotropy then implies that the universe is also
+homogeneous (the same at every point in space). This leads to a simple mathematical description of the universe because the spacetime geometry takes a very simple form.
+
+\subsection{Spacetime and Relativity}
+
+
+The line elements of general case can be written  as
+\begin{equation}
+    d\ell^2 = d\vec{x}^{2} \pm du^2, \quad \vec{x}^{\,2} \pm u^2 = \pm R_0^2. \tag{1.1.1}
+\end{equation}
+The differential of the embedding condition gives
+\[
+    u\,du = \mp \vec{x} \cdot d\vec{x}  \tag{1.1.2}
+\]
+so that we can eliminate the dependence on the auxiliary coordinate \( u \) from the line element:
+
+   \[ d\ell^2 = d\vec{x}^{\,2} \pm \frac{(\vec{x} \cdot d\vec{x})^2}{R_0^2 \mp \vec{x}^{\,2}}   \tag{1.1.3}  
+\]
+
+This can be written as 
+\begin{equation}
+    d\ell^2 = d\vec{x}^{\,2} + k \frac{(\vec{x} \cdot d\vec{x})^2}{R_0^2 - k\vec{x}^{\,2}}, 
+    \quad \text{for} \quad
+    k \equiv 
+    \begin{cases}
+        0 & flat \\
+        +1 & spherical \\
+        -1 & hyperbolic
+    \end{cases}
+    \tag{1.1.4}
+\end{equation}
+
+To make the symmetries of the space more manifest, it is convenient to write the metric in spherical polar coordinates, \( (r, \theta, \phi) \). Using
+\begin{align}
+    d\vec{x}^{\,2} &= dr^2 + r^2 \left( d\theta^2 + \sin^2 \theta \, d\phi^2 \right), \nonumber \\
+    \vec{x} \cdot d\vec{x} &= r\, dr, \nonumber \\
+    \vec{x}^{\,2} &= r^2, \tag{1.1.5}
+\end{align}
+
+the metric in (1.1.4) becomes
+\begin{equation}
+    d\ell^2 = \frac{dr^2}{1 - kr^2 / R_0^2} + r^2 d\Omega^2, \tag{1.1.6}
+\end{equation}
+where \( d\Omega^2 \equiv d\theta^2 + \sin^2 \theta \, d\phi^2 \) is the metric on the unit two-sphere.
+
+The four-dimensional line element can then be written as\textsuperscript{2}
+\begin{equation}
+    ds^2 = -c^2 dt^2 + a^2(t) \, d\ell^2, \tag{1.1.7}
+\end{equation}
+where \( d\ell^2 \equiv \gamma_{ij}(x^k) \, dx^i dx^j \) is the spatial line element.
+
+
+
+\subsection{Robertson-Walker Metric}
+
+Substituting (1.1.6) into (1.1.7), we obtain the Robertson--Walker metric in polar coordinates:
+\begin{equation}
+    ds^2 = -c^2 dt^2 + a^2(t) \left( \frac{dr^2}{1 - k r^2 / R_0^2} + r^2 d\Omega^2 \right), \tag{1.2.8}
+\end{equation}
+
+ the line element (1.2.8) has a rescaling symmetry
+\begin{equation}
+    a \rightarrow \lambda a \,, \quad r \rightarrow \frac{r}{\lambda} \,, \quad R_0 \rightarrow \frac{R_0}{\lambda} \,. \tag{1.2.9}
+\end{equation}
+This means that the geometry of the spacetime stays the same if we simultaneously rescale $a$, $r$ and $R_0$ by a constant $\lambda$ . We can use this freedom to set the scale factor today, at $t = t_0$, to be unity, $a(t_0) \equiv 1$. The scale $R_0$ is then the physical curvature scale today, justifying the use of the subscript.
+
+\begin{itemize}
+    \item The coordinate $r$ is called a \textbf{comoving coordinate}. Instead, physical results can only depend on the \textbf{physical coordinate}, $r_{\text{phys}} = a(t)r$.
+
+    \vspace{0.5em}
+    Consider a galaxy with a trajectory $\vec{r}(t)$ in comoving coordinates and $r_{\text{phys}} = a(t)\vec{r}$ in physical coordinates. The physical velocity of the galaxy is
+    \begin{align}
+        \vec{v}_{\text{phys}} &\equiv \frac{d\vec{r}_{\text{phys}}}{dt} = \frac{da}{dt}\vec{r} + a(t)\frac{d\vec{r}}{dt} \equiv H \vec{r}_{\text{phys}} + \vec{v}_{\text{pec}}, \tag{1.2.10}
+    \end{align}
+    where we have introduced the \textbf{Hubble parameter}
+    \begin{equation}
+        H \equiv \frac{\dot{a}}{a}. \tag{1.2.11}
+    \end{equation}
+
+    Here, and in the following, an overdot denotes a time derivative, $\dot{a} \equiv da/dt$.
+ 
+    The first term, $H \vec{r}_{\text{phys}}$, is the \textbf{Hubble flow}, which is the velocity of the galaxy resulting from the expansion of the space between the origin and $\vec{r}_{\text{phys}}(t)$. The second term, $\vec{v}_{\text{pec}} \equiv a(t) \dot{\vec{r}}$, is the \textbf{peculiar velocity}, which is the velocity measured by a “comoving observer” (i.e. an observer who follows the Hubble flow). It describes the motion of the galaxy relative to the cosmological rest frame, typically due to the gravitational attraction of other nearby galaxies.
+
+    \item The complicated $g_{rr}$ component of (1.2.8) can sometimes be inconvenient. In that case, we may redefine the radial coordinate, $\mathrm{d}\chi \equiv \mathrm{d}r/\sqrt{1 - kr^2/R_0^2}$, such that
+    \begin{equation}
+        ds^2 = -c^2 dt^2 + a^2(t) \left[ d\chi^2 + S_k^2(\chi)\, d\Omega^2 \right], \tag{1.2.12}
+    \end{equation}
+\end{itemize}
+
+\[
+S_k(\chi) \equiv R_0 \begin{cases}
+\sinh(\chi / R_0) & k = -1 \\
+\chi / R_0 & k = 0 \\
+\sin(\chi / R_0) & k = +1
+\end{cases} \tag{1.2.13}
+\]
+
+
+
+\begin{itemize}
+    \item Finally, it is often helpful to introduce \textbf{conformal time},
+\end{itemize}
+
+\[
+\mathrm{d}\eta = \frac{\mathrm{d}t}{a(t)} , \tag{1.2.14}
+\]
+
+so that (1.1.12) becomes
+
+\[
+ds^2 = a^2(\eta) \left[ -c^2 \mathrm{d}\eta^2 + (\mathrm{d}\chi^2 + S_k^2(\chi)\, \mathrm{d}\Omega^2) \right] . \tag{1.2.15}
+\]
+
+We see that the metric has now factorized into a static part and a time-dependent conformal factor \( a(\eta) \). This form of the metric is particularly convenient for studying the propagation of light, for which \( ds^2 = 0 \).
+
+
+
+\subsection{Geodesics}
+
+For massive particles, a geodesic is the timelike curve \( x^\mu(\tau) \) which extremises the proper time \( \Delta \tau \) between two points in the spacetime. 
+
+\begin{equation}
+\frac{d^2 x^\mu}{d\tau^2} = - \Gamma^\mu_{\alpha \beta} \frac{dx^\alpha}{d\tau} \frac{dx^\beta}{d\tau} \,, \tag{1.3.16}
+\end{equation}
+
+where the Christoffel symbol is
+
+\begin{equation}
+\Gamma^\mu_{\alpha \beta} \equiv \frac{1}{2} g^{\mu \lambda} \left( \partial_\alpha g_{\beta \lambda} + \partial_\beta g_{\alpha \lambda} - \partial_\lambda g_{\alpha \beta} \right), \quad \text{with} \quad \partial_\alpha \equiv \partial / \partial x^\alpha \,. \tag{1.3.16}
+\end{equation}
+
+
+\textit{**Geodesic equation in terms of four momentum** :}\\
+
+
+\begin{equation}
+P^\mu \equiv m \frac{dx^\mu}{d\tau} \,. 
+\end{equation}
+
+
+\begin{equation}
+\frac{d}{d\tau} P^\mu(x^\alpha(\tau)) = \frac{dx^\alpha}{d\tau} \frac{\partial P^\mu}{\partial x^\alpha} = \frac{P^\alpha}{m} \frac{\partial P^\mu}{\partial x^\alpha} \,, 
+\end{equation}
+so that equation 1.3.16 becomes
+
+\begin{equation}
+P^\alpha \frac{\partial P^\mu}{\partial x^\alpha} = -\Gamma^\mu_{\alpha \beta} P^\alpha P^\beta \,. 
+\end{equation}
+
+Rearranging this expression, we can also write
+\begin{equation}
+P^\alpha \left( \partial_\alpha P^\mu + \Gamma^\mu_{\alpha \beta} P^\beta \right) = 0 \,. 
+\end{equation}
+
+The term in brackets is the so-called \textbf{covariant derivative} of the four-vector \( P^\mu \), which we denote by \( \nabla_\alpha P^\mu \equiv \partial_\alpha P^\mu + \Gamma^\mu_{\alpha \beta} P^\beta \).So we write
+
+\begin{equation}
+P^\alpha \nabla_\alpha P^\mu = 0 \,. \tag{1.3.17}
+\end{equation}
+
+This is the geodesic equation.
+
+\subsection{Perfect Fluid In Cosmology }
+
+The energy-momentum tensor for perfect fluid is given by:\\
+
+T_{\mu\nu}=(\rho+\frac{P}{c^2})U_{\mu}U_{\nu}+Pg_{\mu\nu} ----- (1.4.18)\\ 
+
+
+Consider the number-current four-vector \( N^{\mu} \),  
+where \( N^{0} \) is the number density, and  
+\( N^{i} \) is the flux of particles in the \( x^{i} \) direction.
+The number current measured by a comoving observer has the following components
+\begin{equation}
+N^0 = c\,n(t), \quad N^i = 0, \tag{1.4.19}
+\end{equation}
+where \( n(t) \) is the number of galaxies per proper volume.  
+A general observer (i.e.\ an observer in motion relative to the mean rest frame of the particles), would measure the following number current four-vector:
+\begin{equation}
+N^{\mu} = n\,U^{\mu}, \tag{1.4.20}
+\end{equation}
+where \( U^{\mu} \equiv \frac{dx^{\mu}}{d\tau} \) is the relative four-velocity between the particles and the observer.  
+
+if the no. of particles is conserved ,then 
+$\nabla_{\mu} N^{\mu} = 0$ in curved spacetime. Note that $\nabla_{\mu}=\partial_{\mu}+\Gamma^\nu_{\mu \lambda} $, now we can write \\
+
+\partial_{\mu}N^{\mu}=-\Gamma^\mu_{\mu\lambda}N^{\lambda}, since $ N^{i}=0 $ in the comoving frame, we, we, we write : \\
+
+\partial_{0}N^{0}-\nabla N^{i}= -\Gamma^\mu_{\mu 0}N^{0}-\Gamma^\mu_{\mu i}N^{i}
+=>\( \frac{1}{c}\frac{d}{dt}(cn)=-\Gamma^\mu_{\mu 0}(cn) \).
+
+The non-zero components of the Christofell symbols is\\
+\( \Gamma^i_{i0}=\frac{1}{2}g^{ii}\partial_{0}g_{ii} = \frac{1}{2}\frac{1}{a^2}\frac{2a\dot{a}}{c} = \frac{\dot{a}}{ca} = > \frac{1}{c}\frac{d}{dt}= -\frac{3\dot{a}n}{ac}  (1.4.21)
+
+\)
+we have taken sum over i=1,2,3
+From equation 1.4.21, we get :\\
+
+
+\boxed{n(t) \propto a^{-3}}        (1.4.22)\\
+
+
+Energy Momentum Tensor:\\
+
+
+The energy-momentum tensor for perfect fluid is given by\\
+
+T_{\mu\nu}=(\rho+\frac{P}{c^2})U_{\mu}U_{\nu}+Pg_{\mu\nu}\\
+
+
+in matrix form ,it is represented as follow:\\
+
+\[
+T^\mu_{\ \nu} = g^{\mu\lambda} T_{\lambda \nu} =
+\begin{pmatrix}
+-\rho c^2 & 0 & 0 & 0 \\
+0 & P & 0 & 0 \\
+0 & 0 & P & 0 \\
+0 & 0 & 0 & P
+\end{pmatrix},
+\]
+
+The conservation of energy-momentum in GTR requires that\\
+\nabla_{\mu}T^\mu_{\nu}=0 =>
+\partial_T^\mu_{\nu}+\Gamma^\mu_{\nu\lambda}T^\lambda_{\nu}-\Gamma^\lambda_{\mu\nu}T^\mu_{\lambda}=0 \\
+
+by taking non-zero components only,we would get:\\
+
+\boxed{\(\dot{\rho}+3\frac{\dot{a}}{a}(\rho+\frac{P}{c^2})=0 \)}     (1.4.22)\\
+
+This is the continuity equation in an expanding universe.\\
+
+The equation of state is defined by \boxed{\( w=\frac{P}{\rho c^2} \)}  (1.4.23) \\
+
+Using the last two equations,we have\\
+
+\( \frac{\dot{\rho}}{\rho}=-3(1+w)\frac{\dot{a}}{a} => \boxed{\rho \propto a^{-3(1+w)}}    \)   (1.4.24)
+
+\subsection{Matter And Radiation}
+The term \emph{matter} refers to a fluid whose pressure is much smaller than its energy density, i.e., \( |P| \ll \rho c^2 \).
+
+Setting \( w = 0 \) in (1.4.24) gives
+\[
+\rho \propto a^{-3}. \tag{1.5.25}
+\]
+This dilution of the energy density simply reflects the fact that the volume of a region of space increases as \( V \propto a^3 \), while the energy within that region stays constant.\\
+
+For radiation:\[ w=\frac{1}{3} => \rho \propto a^{-4} \tag{1.5.26} \]
+
+For dark energy: \[w=-1 => \rho \propto a^{0} \tag{1.5.27} \]
+
+\subsection{Friedmann Equations}
+
+
+
+
+The first Friedmann equation is:
+\begin{equation}
+\left( \frac{\dot{a}}{a} \right)^2 = \frac{8\pi G}{3} \rho - \frac{kc^2}{a^2 R_0^2}, \tag{1.6.28}
+\end{equation}
+
+The second Friedmann equation (also known as the Raychaudhuri equation) is:
+\begin{equation}
+\frac{\ddot{a}}{a} = -\frac{4\pi G}{3} \left( \rho + \frac{3P}{c^2} \right). \tag{1.6.29}
+\end{equation}
+
+the first Friedmann equation is often written in terms of the Hubble parameter,
+
+\begin{equation}
+\boxed{H \equiv \frac{\dot{a}}{a}} \tag{1.6.30}
+\end{equation}
+
+so we write : \begin{equation}
+H^2=\left( \frac{\dot{a}}{a} \right)^2 = \frac{8\pi G}{3} \rho - \frac{kc^2}{a^2 R_0^2}, \tag{1.6.31}
+\end{equation}
+We will use subscripts ‘0’ to denote quantities evaluated today, at t = t_{0}.\\
+
+We define critical density as \\
+
+\boxed{\rho_{\text{crit},0} = \frac{3H_0^2}{8\pi G}} (1.6.32)\\
+
+The dimensionless density parameter is defined as\\
+
+\boxed{\Omega_{i,0} \equiv \frac{\rho_{i,0}}{\rho_{\text{crit},0}}, \quad i = r, m, \Lambda, \dots} (1.6.33)\\
+
+Using these,we write:\\
+
+\[\frac{H^2}{H_0^2} = \Omega_r a^{-4} + \Omega_m a^{-3} + \Omega_k a^{-2} + \Omega_\Lambda \tag{1.6.34} \]
+
+1 = \underbrace{\Omega_r + \Omega_m + \Omega_\Lambda}_{\equiv\, \Omega_0} + \Omega_k
+
+\Omega_k = -\frac{kc^2}{(R_0 H_0)^2} = 1 - \Omega_0
+
+
+\subsection{Exact Solutions of Friedmann Equation}
+
+For a single component universe ,equation (1.6.34) can be written as\\
+
+\[\frac{H^2}{H^2_{0}}=\Omega_{i}a^{-3(1+\omega_{i}) 
+=> \boxed{\frac{\dot{a}}{a}=H_{0}\sqrt{\Omega_{i}}e^{-\frac{3}{2}(1+\omega_{i})}}
+\tag{1.7.36}         \]
+This can be integrated to show that\\
+
+\boxed{a(t) \propto t^{\frac{2}{3}(1+\omega_{i})}}   (1.7.37)
+
+The following table shows the useful quantities based on the above calculations:\\
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Component} & \(\boldsymbol{\Omega}\) \textbf{value} & \textbf{Energy Density} \(\boldsymbol{\rho(a)}\) & \textbf{Scale Factor} \(\boldsymbol{a(t)}\) \\
+\hline
+Radiation & \(\Omega_r \sim 10^{-5}\) & \(\rho_r \propto a^{-4}\) & \(a(t) \propto t^{1/2}\) \\
+\hline
+Matter (dark + baryonic) & \(\Omega_m \sim 0.3\) & \(\rho_m \propto a^{-3}\) & \(a(t) \propto t^{2/3}\) \\
+\hline
+Dark Energy (\(\Lambda\)) & \(\Omega_\Lambda \sim 0.7\) & \(\rho_\Lambda = \text{constant}\) & \(a(t) \propto e^{Ht}\) \\
+\hline
+Curvature & \(\Omega_k \sim 0\) & \(\rho_k \propto a^{-2}\) & \(a(t) \propto t\) (open) \\
+\hline
+\end{tabular}
+\caption{Cosmological components and their evolution}
+\end{table}
+
+
+\newpage
+
+
+\section{\huge{\textbf{ The Hot Big Bang}}}
+
+
+%important code 
+
+
+\begin{table}[ht]
+\centering
+\rowcolors{2}{gray!10}{white}
+\arrayrulecolor{black}
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{12pt}
+
+\begin{tabular}{|l|c|c|c|}
+\rowcolor{gray!50}
+\multicolumn{4}{|l|}{\textbf{Table 3.1} \quad Key events in the history of the early universe.} \\
+\hline
+\textbf{Event} & \textbf{Time} & \textbf{Redshift} & \textbf{Temperature} \\
+\hline
+Inflation & ? & ? & -- \\
+Baryogenesis & ? & ? & ? \\
+Dark matter freeze-out & ? & ? & ? \\
+EW phase transition & 20 ps & $10^{15}$ & 100 GeV \\
+QCD phase transition & 20 $\mu$s & $10^{12}$ & 150 MeV \\
+Neutrino decoupling & 1 s & $6 \times 10^{9}$ & 1 MeV \\
+Electron-positron annihilation & 6 s & $2 \times 10^{9}$ & 500 keV \\
+Big Bang nucleosynthesis & 3 min & $4 \times 10^{8}$ & 100 keV \\
+Matter-radiation equality & 60 kyr & 3400 & 0.75 eV \\
+Recombination & 260--380 kyr & 1100--1400 & 0.25--0.30 eV \\
+Photon decoupling & 380 kyr & 1100 & 0.25 eV \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+\subsection{Thermal Equilibrium And Statistical Mechanics }
+
+At equilibrium, the gas reaches a state of maximum entropy in which the distribution function is given by either the \textbf{Fermi-Dirac distribution} (for fermions) or the \textbf{Bose-Einstein distribution} (for bosons):
+
+\begin{equation}
+f(p, T) = \frac{1}{\exp\left(\frac{E(p) - \mu}{T}\right) \pm 1} \tag{2.1.1}
+\end{equation}
+
+where the $+$ sign is for fermions and the $-$ sign is for bosons.\\
+
+
+In quantum mechanics, the momentum eigenstates of a particle in a box of side length $L$ have a discrete spectrum. Solving the Schrödinger equation with periodic boundary conditions gives
+
+\begin{equation}
+\vec{p} = \frac{h}{L} (r_1 \hat{x} + r_2 \hat{y} + r_3 \hat{z}) \tag{2.1.2}
+\end{equation}
+
+where $r_i = 0, \pm 1, \pm 2, \dots$ and $h = 4.14 \times 10^{-15}~\text{eV} \cdot \text{s}$ is Planck’s constant. In momentum space, the states of the particle are therefore represented by a discrete set of points. The density of states in momentum space $\{\vec{p}\}$ is
+
+\[
+\frac{L^3}{h^3} = \frac{V}{h^3}, \tag{2.1.3}
+\]
+
+and the state density in phase space $\{x, p\}$ is
+
+\[
+\frac{1}{h^3}.
+\]
+
+
+if the particle has g internal degrees of freedom ,then the density of states becomes \\
+\[
+\frac{g}{h^3} = \frac{g}{(2\pi)^3} \tag{2.1.4}
+\]
+where in the second equality we have used natural units with \(\hbar = \frac{h}{2\pi} \equiv 1\).
+
+Weighting each state by its probability distribution, and integrating over momentum, we obtain the number density of particles:
+\[
+n(T) = \frac{g}{(2\pi)^3} \int d^3p \, f(p, T) 
+\]
+
+Moreover, the energy density and pressure of the gas are then given by the following integrals:
+\[
+\rho(T) = \frac{g}{(2\pi)^3} \int d^3p \, f(p, T) E(p)
+\]
+\[
+P(T) = \frac{g}{(2\pi)^3} \int d^3p \, f(p, T) \frac{p^2}{3E(p)}
+\]
+
+where \( E(p) = \sqrt{p^2 + m^2} \), if we can ignore the interaction energies between the particles.
+
+
+\subsection{Primordial Plasma}
+
+Let us now use the results from the previous section to describe the state of the early universe in thermal equilibrium. Concretely, we will relate the densities and pressures of the different species in the primordial plasma to the overall temperature of the universe.
+
+Setting the chemical potential to zero, we obtain
+\[
+n = \frac{g}{2\pi^{2}} \int_{0}^{\infty} dp \,
+\frac{p^{2}}{\exp\!\bigl(\sqrt{p^{2}+m^{2}}/T\bigr) \,\pm\, 1},
+\qquad
+\rho = \frac{g}{2\pi^{2}} \int_{0}^{\infty} dp \,
+\frac{p^{2}\sqrt{p^{2}+m^{2}}}{\exp\!\bigl(\sqrt{p^{2}+m^{2}}/T\bigr) \,\pm\, 1}.
+\]
+
+Defining the dimensionless variables \(x \equiv m/T\) and \(\xi \equiv p/T\), these can be written as
+\[
+n = \frac{g}{2\pi^{2}} \, T^{3}\, I_{\pm}(x), 
+\qquad
+I_{\pm}(x) \equiv \int_{0}^{\infty} d\xi \,
+\frac{\xi^{2}}{\exp\!\bigl(\sqrt{\xi^{2}+x^{2}}\bigr) \,\pm\, 1},
+\]
+\[
+\rho = \frac{g}{2\pi^{2}} \, T^{4}\, J_{\pm}(x), 
+\qquad
+J_{\pm}(x) \equiv \int_{0}^{\infty} d\xi \,
+\frac{\xi^{2}\sqrt{\xi^{2}+x^{2}}}{\exp\!\bigl(\sqrt{\xi^{2}+x^{2}}\bigr) \,\pm\, 1}.
+\]
+
+In general, the functions \(I_{\pm}(x)\) and \(J_{\pm}(x)\) must be evaluated numerically (see Fig.\,3.1). However, in the relativistic and non‑relativistic limits they can be determined analytically.
+
+
+
+\begin{center}
+ \textbf{Relativistic Limit}   
+\end{center}
+
+At temperatures much larger than the particle mass, we can take the limit \( x \to 0 \), and the integral in equation (3.13) reduces to
+\[
+I_{\pm}(0) = \int_{0}^{\infty} d\xi \, \frac{\xi^2}{e^{\xi} \pm 1}.
+\]
+
+The denominator can be written as a geometric series
+\[
+\frac{1}{e^\xi \pm 1} = \frac{e^{-\xi}}{1 \pm e^{-\xi}} = \sum_{j=1}^{\infty} (\mp 1)^{j-1} e^{-j\xi},
+\]
+so that the integral in (3.15) becomes
+\[
+I_{\pm}(0) = \sum_{j=1}^{\infty} (\mp 1)^{j-1} \int_{0}^{\infty} d\xi \, \xi^2 e^{-j\xi} = \sum_{j=1}^{\infty} (\mp 1)^{j-1} \frac{2}{j^3}.
+\]
+
+For bosons, we get
+\[
+I_{-}(0) = 2 \left( 1 + \frac{1}{2^3} + \frac{1}{3^3} + \cdots \right) = 2 \zeta(3),
+\]
+where the Riemann zeta function is \( \zeta(3) \approx 1.20205\ldots \)
+
+For fermions, we instead have
+\[
+\begin{aligned}
+I_{+}(0) &= 2 \left( 1 - \frac{1}{2^3} + \frac{1}{3^3} - \cdots \right) \\
+&= 2 \left( \left( 1 + \frac{1}{2^3} + \frac{1}{3^3} + \cdots \right) - 2 \left( \frac{1}{2^3} + \frac{1}{4^3} + \cdots \right) \right) \\
+&= 2 \left( 1 + \frac{1}{2^3} + \frac{1}{3^3} + \cdots \right) - 4 \left( \frac{1}{2^3} + \frac{1}{4^3} + \cdots \right) \\
+&= \left( 1 - \frac{1}{2^2} \right) 2 \zeta(3) = \frac{3}{4} I_{-}(0).
+\end{aligned}
+\]
+
+Alternatively, the proportionality between \( I_{+}(0) \) and \( I_{-}(0) \) can be found by noting that
+\[
+\frac{1}{e^\xi + 1} = \frac{1}{e^\xi - 1} - \frac{2}{e^{2\xi} - 1},
+\]
+so that
+\[
+I_{+}(0) = I_{-}(0) - 2 \left( \frac{1}{2} \right)^3 I_{-}(0) = \frac{3}{4} I_{-}(0).
+\]
+
+Substituting into (3.13), we get
+\[
+n = \frac{\zeta(3)}{\pi^2} g T^3 
+\begin{cases}
+1 & \text{bosons} \\
+\frac{3}{4} & \text{fermions}
+\end{cases}
+\]
+
+A similar computation for the energy density gives
+\[
+\rho = \frac{\pi^2}{30} g T^4
+\begin{cases}
+1 & \text{bosons} \\
+\frac{7}{8} & \text{fermions}
+\end{cases}
+\]
+where we have used that \( \zeta(4) = \pi^4 / 90 \).
+
+Using the observed temperature of the CMB, \( T_0 \approx 2.73~\text{K} \), we find that the number density and energy density of relic photons today are
+\[
+n_{\gamma,0} = \frac{2\zeta(3)}{\pi^2} T_0^3 \approx 410~\text{photons cm}^{-3},
+\]
+\[
+\rho_{\gamma,0} = \frac{\pi^2}{15} T_0^4 \approx 4.6 \times 10^{-34}~\text{g cm}^{-3}.
+\]
+
+In terms of the critical density, the photon energy density is then found to be
+\[
+\Omega_\gamma h^2 \approx 2.5 \times 10^{-5}.
+\]
+
+Finally, taking \( p = E \) in (3.10), we get
+\boxed{\[
+P = \frac{1}{3} \rho
+\]}
+as expected for a gas of relativistic particles (``radiation").
+
+
+\begin{center}
+ \textbf{Non-relativistic Limit}   
+\end{center}
+
+At temperatures below the particle mass, we take the limit \( x \gg 1 \) and the integral in (3.13) is the same for bosons and fermions
+\[
+I_{\pm}(x) \approx \int_0^{\infty} d\xi \, \frac{\xi^2}{e^{\sqrt{\xi^2 + x^2}}}.
+\]
+
+Most of the contribution to the integral comes from \( \xi \ll x \) and we can Taylor expand the square root in the exponential to lowest order in \( \xi \),
+\[
+I_{\pm}(x) \approx \int_0^{\infty} d\xi \, \frac{\xi^2}{e^{x + \xi^2/(2x)}} = e^{-x} \int_0^{\infty} d\xi \, \xi^2 e^{-\xi^2/(2x)}
+= (2x)^{3/2} e^{-x} \int_0^{\infty} d\xi \, \xi^2 e^{-\xi^2}.
+\]
+
+Performing the Gaussian integral, we then get
+\[
+I_{\pm}(x) = \sqrt{\frac{\pi}{2}} x^{3/2} e^{-x},
+\]
+
+and, using (3.18), we find
+\[
+\frac{I_{\pm}(x)}{I_{-}(0)} \approx 0.5\, x^{3/2} e^{-x} \ll 1.
+\]
+
+As expected, massive particles are exponentially rare at low temperatures.
+
+Substituting (3.29) into (3.13), we can write the density of the non-relativistic gas as a function of its temperature\\
+
+\[
+n = g \left( \frac{mT}{2\pi} \right)^{3/2} e^{-m/T}.
+\]
+
+To determine the energy density in the non-relativistic limit, we write \( E(p) = \sqrt{m^2 + p^2} \approx m + p^2/2m \). The energy density then is
+
+\[
+\rho \approx mn + \frac{3}{2}nT,
+\]
+
+where the leading term is simply equal to the mass density (recall that \( c \equiv 1 \)).
+
+Finally, from (3.10), it is easy to show that the pressure of a non-relativistic gas of particles is
+
+\[
+P = nT,
+\]
+
+which is nothing but the ideal gas law, \( PV = Nk_B T \) (for \( k_B \equiv 1 \)). Since \( T \ll m \), we have \( P \ll \rho \), so that the gas acts like pressureless dust (“matter”).
+
+By comparing the relativistic limit (\( T \gg m \)) and the non-relativistic limit (\( T \ll m \)), we see that the number density, energy density, and pressure of a particle species fall exponentially (are “Boltzmann suppressed”) as the temperature drops below the mass of the particles. This can be interpreted as the annihilation of particles and anti-particles. At higher energies these annihilations also occur, but they are balanced by particle-antiparticle pair production. At low temperatures, the thermal energies of the particles aren’t sufficient for pair production.
+
+\begin{center}
+ \textbf{Relativistic Species}   
+\end{center}
+
+The early universe was a collection of different species and the total energy density \( \rho \) is the sum over all contributions
+\[
+\rho = \sum_i \frac{g_i}{2\pi^2} T_i^4 J_\pm(x_i),
+\]
+where we have allowed for the possibility that the different species have different temperatures \( T_i \).
+
+The density in terms of the “temperature of the universe” \( T \) (typically chosen to be the photon temperature \( T_\gamma \)),
+\[
+\rho = \frac{\pi^2}{30} \, g_*(T) \, T^4,
+\]
+
+
+
+Here we have defined the “effective number of degrees of freedom” at the temperature \( T \) as
+\[
+g_*(T) \equiv \sum_i g_i \left( \frac{T_i}{T} \right)^4 \frac{J_\pm(x_i)}{J_-(0)}.
+\]
+
+Since the energy density of relativistic species is much greater than that of non-relativistic species, it often suffices to include only the relativistic species in the sum. Moreover, for \( T_i \gg m_i \), we have \( J_\pm(x_i \ll 1) \approx \text{const} \), and this reduces to
+
+\boxed{\[
+g_*(T) \equiv \sum_{i = b} g_i \left( \frac{T_i}{T} \right)^4 + \frac{7}{8} \sum_{i = f} g_i \left( \frac{T_i}{T} \right)^4.
+\]}\\
+
+
+When all particles are in equilibrium at a common temperature \( T \), determining \( g_*(T) \) is simply a counting exercise.\\
+
+
+\textit{At \( T \gtrsim 100\, \text{GeV} \), all particles of the Standard Model were relativistic (see Table 3.2). To determine the \( g_* \) associated with these particles, we have to determine how many internal degrees of freedom each particle species has.}\\
+
+\newpage
+
+
+\begin{table}[h]
+\centering
+\caption{Particle content of the Standard Model.}
+\label{tab:standard_model}
+\begin{tabular}{llccc}
+\hline
+type & & mass & spin & $g$ \\
+\hline
+gauge bosons & $\gamma$ & 0 & & 2 \\
+& $W^{\pm}$ & 80 GeV & 1 & 3 \\
+& $Z$ & 91 GeV & & \\
+\hline
+gluons & $g_i$ & 0 & 1 & $8 \times 2 = 16$ \\
+\hline
+Higgs boson & $H$ & 125 GeV & 0 & 1 \\
+\hline
+quarks & $t, \bar{t}$ & 173 GeV & $\frac{1}{2}$ & $2 \times 3 \times 2 = 12$ \\
+& $b, \bar{b}$ & 4 GeV & & \\
+& $c, \bar{c}$ & 1 GeV & & \\
+& $s, \bar{s}$ & 100 MeV & & \\
+& $d, \bar{d}$ & 5 MeV & & \\
+& $u, \bar{u}$ & 2 MeV & & \\
+\hline
+leptons & $\tau^{\pm}$ & 1777 MeV & $\frac{1}{2}$ & $2 \times 2 = 4$ \\
+& $\mu^{\pm}$ & 106 MeV & & \\
+& $e^{\pm}$ & 511 keV & & \\
+& $\nu_\tau, \bar{\nu}_\tau$ & $< 0.6$ eV & $\frac{1}{2}$ & $2 \times 1 = 2$ \\
+& $\nu_\mu, \bar{\nu}_\mu$ & $< 0.6$ eV & & \\
+& $\nu_e, \bar{\nu}_e$ & $< 0.6$ eV & & \\
+\hline
+\end{tabular}
+\end{table}
+Adding up the internal degrees of freedom, we get:\\
+
+\begin{equation}
+\begin{aligned}
+& g_b = 28 \quad \text{photons (2), } W^{\pm} \text{ and } Z (3 \times 3), \text{ gluons } (8 \times 2), \text{ and Higgs } (1) \\
+& g_f = 90 \quad \text{quarks } (6 \times 12), \text{ charged leptons } (3 \times 4), \text{ and neutrinos } (3 \times 2) \\
+& \text{and hence} \\
+& \boxed{ g_* = g_b + \frac{7}{8} g_f = 106.75}
+\end{aligned}
+\end{equation}
+
+
+\begin{center}
+ \textbf{Entropy and Expansion History}   
+\end{center}
+
+The first law states that the change in the entropy (\(S\)) of a system is related to
+changes in its internal energy (\(U\)) and volume (\(V\)) as
+\[
+T dS = dU + P dV,
+\]
+where we have assumed that any chemical potentials are small. Defining the \textbf{entropy density} as \(s \equiv S/V\), we can write
+\[
+T\, d(sV) = d(\rho V) + P\, dV
+\]
+\[
+T s\, dV + T V\, ds = \rho\, dV + V\, d\rho + P\, dV.
+\]
+Since \(s\) and \(\rho\) depend only on the temperature \(T\), and not on the volume \(V\), this implies
+\[
+\left( T s - \rho - P \right) dV + V \left( T \frac{ds}{dT} - \frac{d\rho}{dT} \right) dT = 0.
+\]
+In order for this to be satisfied for arbitrary variations \(dV\) and \(dT\), the two brackets have to vanish separately: The vanishing of the first bracket implies that the entropy
+density can be written as
+\begin{equation}
+s = \frac{\rho + P}{T}, \tag{}
+\end{equation}
+while the vanishing of the second bracket enforces that
+\begin{equation}
+\frac{ds}{dT} = \frac{1}{T} \frac{d\rho}{dT}. \tag{}
+\end{equation}
+Using the continuity equation, $d\rho/dt = -3H(\rho + P) = -3HTs$, the last equation
+can also be written in the following instructive form
+\begin{equation}
+\boxed{\frac{d(sa^3)}{dt} = 0} \tag{}
+\end{equation}
+This means that the total entropy is conserved in equilibrium and that the entropy
+density evolves as $s \propto a^{-3}$. \\
+
+Again we note that \\
+
+\begin{equation}
+s = \frac{\rho + P}{T} \tag{3.42}
+\end{equation}
+
+\begin{equation}
+\frac{ds}{dT} = \frac{1}{T} \frac{d\rho}{dT} \tag{3.43}
+\end{equation}
+
+\begin{equation}
+\frac{d(sa^3)}{dt} = 0 \tag{3.44}
+\end{equation}
+
+\begin{equation}
+s(T) = \int_0^T \frac{dT'}{T'} \frac{d\rho}{dT'} = \frac{\rho(T)}{T} + \int_0^T \frac{\rho(T')}{(T')^2} dT' \tag{3.48}
+\end{equation}
+The equation of state of plasma is given by :\\
+\begin{equation}
+w(T) \equiv \frac{P(T)}{\rho(T)} = \int_0^1 \frac{g_s(yT)}{g_*(T)} y^2 dy \tag{3.49}
+\end{equation}
+
+
+If all particles are relativistic, then \( g_{*}(T) = \text{const} \) and we recover the equation of state of radiation, i.e.\ \( w = 1/3 \).
+
+For a collection of different species, the total entropy density is  
+\[
+s = \sum_{i} \frac{\rho_i + P_i}{T_i} = \frac{2\pi^2}{45} g_{*S}(T) T^3,
+\]
+
+where we have defined \( g_{*S}(T) \) as the ``effective number of degrees of freedom in entropy.'' Away from mass thresholds, we have  
+\[
+g_{*S}(T) \approx \sum_{\text{bos}} g_i \left( \frac{T_i}{T} \right)^3 + \frac{7}{8} \sum_{\text{fer}} g_i \left( \frac{T_i}{T} \right)^3.
+\]
+
+When all species are in equilibrium at the same temperature, \( T_i = T \), then \( g_{*S} \) is simply equal to \( g_* \). In our universe, this is the case until \( t \approx 1 \, \text{ns} \). Since \( s \) is proportional to the number density of relativistic particles, it is sometimes useful to write \( s \approx 1.8\, g_{*S}(T)\, n_\gamma \), where \( n_\gamma \) is the number density of photons. In general, \( g_{*S}(T) \) depends on temperature, so that \( s \) and \( n_\gamma \) cannot be used interchangeably. However, after electron-positron annihilation (see below), we have \( g_{*S} = 3.94 \) and hence \( s \approx 7\, n_\gamma \).
+
+Since \( s \propto a^{-3} \), the number of particles in a comoving volume is proportional to the number density \( n_i \) divided by the entropy density:
+\[
+N_i \equiv \frac{n_i}{s}.
+\]
+
+If particles are neither produced nor destroyed, then \( n_i \propto a^{-3} \) and \( N_i \) is a constant. An important example, of a conserved species is the total baryon number after baryogenesis, \( n_B/s \equiv (n_b - n_{\bar{b}})/s \). A related quantity is the \textbf{ baryon-to-photon ratio}:
+\boxed{\[
+\eta \equiv \frac{n_B}{n_\gamma} = \frac{n_B}{1.8\, g_{*S}\, N_\gamma}.
+\]}
+
+After electron-positron annihilation, \( \eta \approx 7\, n_B/s \) becomes a conserved quantity and is therefore the best observational measure of the baryon content of the universe.
+
+Another important consequence of entropy conservation is that  
+\[
+g_{*S}(T)\, T^3\, a^3 = \text{const} \quad \Rightarrow \quad T \propto g_{*S}^{-1/3}\, a^{-1}.
+\]
+
+Away from particle mass thresholds, \( g_{*S} \) is approximately constant and the temperature has the expected scaling \( T \propto a^{-1} \). The factor \( g_{*S}^{-1/3} \) accounts for the change in the entropy content of the universe. Once a massive species disappears, its entropy is transferred to the other relativistic species still present in the thermal plasma, causing \( T \) to decrease slightly more slowly than \( a^{-1} \). We will see an example of this phenomenon in the next section.
+
+
+
+
+At early times, the universe is dominated by relativistic species and spatial curvature is negligible. The expansion of the universe is governed by the Friedmann equation,
+\[
+H^2 = \left( \frac{1}{a} \frac{da}{dt} \right)^2 = \frac{\rho}{3M_{\text{Pl}}^2} = \frac{\pi^2}{90} \frac{g_* T^4}{M_{\text{Pl}}^2},
+\]
+where \( g_* \) is the effective number of relativistic degrees of freedom.\\
+
+
+
+For a \underline{radiation-dominated universe}, the scale factor evolves as \( a(t) \propto t^{1/2} \), and the temperature of the universe scales as
+\[
+\frac{T}{\text{MeV}} \simeq 1.5\, g_*^{-1/4} \left( \frac{1\, \text{sec}}{t} \right)^{1/2}.
+\]
+
+A useful rule of thumb is that the temperature of the universe at \( t = 1 \) second after the Big Bang was about \( 1\, \text{MeV} \), and evolved approximately as \( t^{-1/2} \) before that.
+
+
+
+\newpage
+
+
+\subsection{Cosmic Neutrino Background}\\
+
+
+\begin{center}
+    \textbf{Neutrino Decoupling}
+\end{center}
+
+
+Neutrinos were coupled to the thermal bath through weak interaction processes like
+\[
+\nu_e + \bar{\nu}_e \;\leftrightarrow\; e^+ + e^- \,,\\
+e^- + \bar{\nu}_e \;\leftrightarrow\; e^- + \bar{\nu}_e\,.
+\]
+
+The interaction rate (per particle) is \( \Gamma \equiv n \sigma |v| \), where \( n \) is the number density of the target particles, \( \sigma \) is the cross section, and \( v \) is the relative velocity . By dimensional analysis, we infer that the cross section for weak scale interactions is \( \sigma \approx G_F^2 T^2 \), where \( G_F \approx 1.2 \times 10^{-5} \, \text{GeV}^{-2} \) is Fermi’s constant. Taking the number density to be \( n \approx T^3 \), the interaction rate becomes
+
+\[
+\Gamma = n\sigma |v| \approx G_F^2 T^5\,.
+\]
+
+
+
+Neutrinos are decoupled and their temperature redshifts simply as
+\( T_\nu \propto a^{-1} \). The energy density of the electron-positron pairs is transferred to the
+photon gas, whose temperature therefore redshifts more slowly,
+\( T_\gamma \propto g_*^{\,-1/3} a^{-1} \).
+
+As the temperature decreases, the interaction rate drops much more rapidly than
+the Hubble rate \( H \approx T^2/M_{\text{Pl}} \):
+\[
+\frac{H}{\Gamma} \approx \left( \frac{1\,\text{MeV}}{T} \right)^3\,.
+\]
+
+We conclude that neutrinos decouple around \( 1\,\text{MeV} \).After decoupling, the neutrinos move
+freely along geodesics and preserve the relativistic Fermi-Dirac distribution.\\
+
+
+
+After \( e^+e^- \) annihilation, the neutrino temperature is slightly lower than the photon temperature,
+\boxed{\[
+T_\nu = \left( \frac{11}{4} \right)^{1/3} T_\gamma\,.
+\] }\\
+
+
+
+\subsection{Cosmic Microwave Background}
+
+Around 0.25 eV, the photons decoupled from the matter and the
+universe became transparent. Today, these photons are observed as the cosmic
+microwave background (CMB).\\
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Screenshot 2025-06-30 200929.png}
+    \caption{Photon Decoupling}
+    \label{fig:enter-label}
+\end{figure}
+Key events in the formation of the cosmic microwave background:
+
+
+
+\begin{center}
+    \textbf{Chemical Equilibrium}
+\end{center}
+
+Consider the generic reaction
+\[
+1 + 2 \leftrightarrow 3 + 4 \,.
+\]
+Each particle species has a chemical potential $\mu_i$. The second law of thermodynamics implies that particles flow to the side of the reaction where the total chemical potential is lower.\\
+Chemical equilibrium is reached when the sum of the chemical potentials on each side is equal:\\
+\mu_1 + \mu_2= \mu_3 +\mu_4
+
+If the chemical potential of a particle \( X \) is \( \mu_X \), then the chemical potential of the corresponding antiparticle \( \overline{X} \) is
+\[
+\mu_{\overline{X}} = -\mu_X \,.
+\]
+
+\begin{centr}
+    \textbf{Hydrogen recombination}
+\end{centr}
+
+
+The formation of hydrogen atoms occurs via the reaction
+\[
+e^- + p^+ \leftrightarrow \text{H} + \gamma \,.
+\]
+Initially, this reaction keeps the particles in equilibrium, and since \( T < m_i \), \( i = \{e, p, \text{H}\} \), we have the following equilibrium abundances
+\[
+n_i^{\text{eq}} = g_i \left( \frac{m_i T}{2\pi} \right)^{3/2} \exp\left( \frac{\mu_i - m_i}{T} \right),
+\]
+where \( \mu_p + \mu_e = \mu_H \) (recall that \( \mu_\gamma = 0 \)). To remove the dependence on the chemical potentials, we consider the following ratio
+\[
+\left( \frac{n_H}{n_e n_p} \right)_{\text{eq}} = \frac{g_H}{g_e g_p} \left( \frac{m_H}{m_e m_p} \frac{2\pi}{T} \right)^{3/2} e^{(m_p + m_e - m_H)/T}.
+\]
+In the prefactor, we can use \( m_H \approx m_p \), but in the exponential the small difference between \( m_H \) and \( m_p + m_e \) is crucial: it is the ionization energy of hydrogen
+\[
+E_I \equiv m_p + m_e - m_H = 13.6\, \text{eV}.
+\]
+The number of internal degrees of freedom are \( g_p = g_e = 2 \) and \( g_H = 4 \). As far as we know, the universe isn’t electrically charged, so we have \( n_e = n_p \). Equation above then becomes
+\[
+\left( \frac{n_H}{n_e^2} \right)_{\text{eq}} = \left( \frac{2\pi}{m_e T} \right)^{3/2} e^{E_I/T}.
+\]
+
+It is convenient to describe the process of recombination in terms of the \textbf{free electron fraction}:
+\[
+X_e \equiv \frac{n_e}{n_p + n_H} = \frac{n_e}{n_e + n_H}.
+\]
+
+\textbf{Note:} The spins of the electron and proton in a hydrogen atom can be aligned or anti-aligned, giving one singlet state and one triplet state, so \( g_H = 1 + 3 = 4 \).
+
+
+A fully ionized universe then corresponds to \( X_e = 1 \), while a universe of only neutral atoms has \( X_e = 0 \). Our goal is to understand how \( X_e \) evolves.
+
+If we neglect the small number of helium atoms, then the denominator in the previous expression can be approximated by the baryon density
+\[
+n_b = \eta n_\gamma = \eta \times \frac{2 \zeta(3)}{\pi^2} T^3,
+\]
+where \( \eta \) is the baryon-to-photon ratio. We can then write
+\[
+\frac{1 - X_e}{X_e^2} = \frac{n_H}{n_e^2} n_b,
+\]
+and substituting the earlier result, we arrive at the so-called \textbf{Saha equation}
+
+\boxed{\[
+\left( \frac{1 - X_e}{X_e^2} \right)_{\text{eq}} = \frac{2 \zeta(3)}{\pi^2} \, \eta \left( \frac{2\pi T}{m_e} \right)^{3/2} e^{E_I/T}.
+\]}\\
+
+
+
+Let us define the recombination temperature \( T_{\text{rec}} \) as the temperature at which \( X_e = 0.5 \) in the Saha equation. For \( \eta = 6 \times 10^{-10} \), we get
+\[
+T_{\text{rec}} \approx 0.32\, \text{eV} \approx 3760\, \text{K}.
+\]
+
+
+Using \( T_{\text{rec}} = T_0(1 + z_{\text{rec}}) \), with \( T_0 = 2.73\, \text{K} \), gives the redshift of recombination,
+\[
+z_{\text{rec}} \approx 1380.
+\]
+
+
+ The moment of recombination is delayed relative to the Saha prediction, with $X_e = 0.5$ only being reached at $z_{\text{rec}} \approx 1270$. Since matter-radiation equality is at $z_{\text{eq}} \approx 3400$, we conclude that recombination occurred in the matter-dominated era. Assuming that the matter era persisted until today (i.e. ignoring dark energy), we have $a(t) = (t/t_0)^{2/3}$ and the time of recombination is roughly
+
+\[
+t_{\text{rec}} = \frac{t_0}{(1 + z_{\text{rec}})^{3/2}} \approx 290000 \text{ yrs}.
+\]
+
+This estimated time is however not correct as shown by the observation.So we estimate it using better approach below.\\
+
+
+\begin{centre}
+    \textbf{Photon Decoupling}
+\end{centre}
+
+
+At early times,photons are strongly coupled to free electrons:\\
+
+e^{-}+\gamma \leftrightarrow e^{-}+\gamma
+
+
+with an \underline{interaction rate }given by
+\[
+\Gamma_\gamma \approx n_e \, \sigma_T , \qquad 
+\sigma_T \approx 2 \times 10^{-3} \, \text{MeV}^{-2},
+\]
+where \(\sigma_T\) is the Thomson cross section.  It is useful to express this in more familiar units.  
+At \( a = 10^{-5}\) (prior to matter–radiation equality), the photon–electron scattering rate is
+\boxed{\[
+\Gamma_\gamma \approx 5.0 \times 10^{-6}\,\text{s}^{-1},
+\]}
+Although this may seem small, the interaction rate was still much larger than the expansion rate at that time,
+\[
+H \approx 2 \times 10^{-10}\,\text{s}^{-1},
+\]
+so electrons and photons remained in thermal equilibrium.
+
+
+
+Since $\Gamma_s \propto n_e$, the interaction rate decreases as the density of free electrons drops during recombination. At some point, this rate becomes smaller the expansion rate and the photons decouple. We define the approximate moment of photon decoupling as $\Gamma_s(T_{\text{dec}}) \approx H(T_{\text{dec}})$. Writing
+
+\[
+\Gamma_s(T_{\text{dec}}) = n_b X_e(T_{\text{dec}}) \sigma_T = \frac{2\zeta(3)}{\pi^2} \eta \sigma_T X_e(T_{\text{dec}}) T_{\text{dec}}^3,
+\]
+
+\[
+H(T_{\text{dec}}) = H_0 \sqrt{\Omega_m} \left(\frac{T_{\text{dec}}}{T_0}\right)^{3/2},
+\]
+
+we get
+
+\[
+X_e(T_{\text{dec}}) T_{\text{dec}}^{3/2} \approx \frac{\pi^2}{2\zeta(3)} \frac{H_0 \sqrt{\Omega_m}}{\eta \sigma_T T_0^{3/2}}.
+\]
+
+Using the Saha equation for $X_e(T_{\text{dec}})$ and substituting the standard values for the cosmological parameters on the right-hand side, we find $T_{\text{dec}} \approx 0.27$ eV. In the more precise treatment in Section 3.2.5, we find that decoupling occurs at a slightly lower temperature,
+
+\[
+T_{\text{dec}} \approx 0.25 \text{ eV} \approx 2940 \text{ K},
+\]
+
+with the corresponding redshift and time of decoupling being\\
+
+\boxed{\[
+z_{\text{dec}} \approx 1100,
+\]
+\[
+t_{\text{dec}} \approx 380000 \text{ yrs}.
+\]}\\
+
+After decoupling, the photons stream freely through the universe.\\
+The scattering of photons off electrons essentially stops at photon decoupling.\\
+
+
+
+\begin{centre}
+    \textbf{Last Scattering}
+\end{centre}
+
+
+To define the moment of \textbf{last-scattering}, we have to consider the probability of photon scattering. Let $dt$ be a small time interval around the time $t$. The probability that a photon will scatter during this time is $\Gamma_\gamma(t) \, dt$, and the integrated probability between the times $t$ and $t_0 > t$ is
+
+\[
+\tau(t) = \int_t^{t_0} \Gamma_\gamma(t) \, dt .
+\]
+
+
+This probability is also called the \textit{optical depth}.\\
+
+Taking $t_0$ to be the present time, the moment of last-scattering is defined by $\tau(t_*) \equiv 1$. To a good approximation, last-scattering coincides with photon decoupling, $t_* \approx t_{\text{dec}}$.\\
+
+
+We observe the cosmic microwave background, we are detecting photons
+from the surface of last-scattering. Given the age of the universe,
+and taking into account the expansion of the universe, the distance between us
+and the spherical last-scattering surface today is 42 billion light-years.
+\newpage
+
+\begin{centr}
+    \textbf{Blackbody Spectrum Of CMB Radiation}
+\end{centr}
+\\
+
+Before decoupling, the number density of photons with frequency in the range $f$ and $f + df$ is given using the \textbf{Planck's blackbody equation}:\\
+
+\[
+n(f, T) \, df = \frac{2}{c^3} \frac{4\pi f^2}{e^{hf/k_B T} - 1} \, df,
+\]
+
+This frequency distribution is called the \textbf{blackbody spectrum} and is characteristic of objects in thermal equilibrium. After decoupling, the photons propagate freely, with their frequencies redshifting as $f(t) \propto a(t)^{-1}$ and the number density decreasing as $a(t)^{-3}$. The spectrum therefore maintains its blackbody form as long as we take the temperature to scale as $T \propto a(t)^{-1}$. It is in this sense that the relic radiation encodes the early equilibrium phase of the hot Big Bang.\\
+
+
+
+CMB experiments observe the so-called \textbf{spectral radiation intensity}, $I_f$, which is the flux of energy per unit area per unit frequency. Let us see how this is related to the spectrum equation. We first pick a specific direction and consider photons travelling in a solid angle $\delta\Omega$ around this direction. In a given time interval $\delta t$, these photons move through a volume $\delta V = (c\delta t)^3 \delta\Omega$ and cross a cap of area $\delta A = (c\delta t)^2 \delta\Omega$. The number of photons in this volume are
+
+\[
+\delta N = \frac{n(f) \, df}{4\pi} \delta V = \frac{2}{c^3} \frac{f^2 \, df}{e^{hf/k_B T} - 1} (c\delta t)^3 \delta\Omega.
+\]
+
+and the number of photons crossing the surface per unit area and per unit time is
+
+\[
+\frac{\delta N}{\delta A \delta t} = \frac{2}{c^2} \frac{f^2 df}{e^{hf/k_B T} - 1}.
+\]
+
+Since each photon has energy $hf$, the flux of energy across the surface (per unit frequency) is
+
+\boxed{\[
+I_f = \frac{2h}{c^2} \frac{f^3}{e^{hf/k_B T} - 1}.
+\]}
+\\
+
+CMB is the most perfect
+blackbody radiation ever observed in nature, proving that the early universe indeed started
+in a state of thermal equilibrium
+
+
+\subsection{Beyond Equilibrium }
+
+To understand the world around us, it is crucial to understand deviations from equilibrium. For example, we saw that a massive particle species in thermal equilibrium becomes exponentially rare when the temperature drops below the mass of the particles, 
+\[
+N_i \equiv \frac{n_i}{s} \sim \left(\frac{m}{T}\right)^{3/2} e^{-m/T}.
+\]
+In order for these particles to survive until the present time, they must drop out of thermal equilibrium before \( m/T \) becomes much larger than unity. This decoupling, and the associated freeze-out of massive particles, occurs when the interaction rate of the particles becomes smaller than the expansion rate.
+
+
+\subsubsection{The Boltzmann Equation}
+
+In the absence of interactions, the number density of a particle species $i$ evolves as
+
+\[
+\frac{dn_i}{dt} + 3\frac{\dot{a}}{a} n_i = 0,
+\]
+
+which simply means that the number of particles in a fixed physical volume ($V \propto a^3$) is conserved, so that the density dilutes as $n_i \propto a^{-3}$. To include the effects of interactions, we add a collision term to the right-hand side ,
+
+\boxed{\[
+\frac{1}{a^3} \frac{d(n_i a^3)}{dt} = C_i[[n_j]]
+\]} This is the\textbf{ Boltzmann equation}.\\
+
+
+Let us consider the following process
+\[
+1 + 2 \leftrightarrow 3 + 4,
+\]
+i.e.\ particle 1 interacts with particle 2 to produce particles 3 and 4, or the inverse process can produce 1 and 2.\\
+
+
+The rate of change in the abundance of species 1 is given by the difference between the rates for producing and eliminating the species. The Boltzmann equation simply formalises this statement,
+\[
+\frac{1}{a^3} \frac{d(n_1 a^3)}{dt} = -\alpha\, n_1 n_2 + \beta\, n_3 n_4.
+\]
+We understand the right-hand side as follows: The first term, $-\alpha n_1 n_2$, describes the destruction of particles 1, while the second term, $+\beta n_3 n_4$, accounts for their production. Notice that the first term is proportional to $n_1$ and $n_2$, while the second term is proportional to $n_3$ and $n_4$.\\
+
+The parameter $\alpha = \hbar \langle \sigma v \rangle$ is the \textbf{thermally averaged cross-section}.\\
+
+
+The second parameter $\beta$ can be related to $\alpha$ by noting that the collision term has to vanish in (chemical) equilibrium
+
+\[
+\beta = \left(\frac{n_1 n_2}{n_3 n_4}\right)_{\text{eq}} \alpha,
+\]
+
+where $n_i^{\text{eq}}$ are the equilibrium number densities that we calculated above. The relation in () is sometimes called \textbf{detailed balance}. We therefore find
+
+\[
+\frac{1}{a^3} \frac{d(n_i a^3)}{dt} = -\langle\sigma v\rangle \left[n_1 n_2 - \left(\frac{n_1 n_2}{n_3 n_4}\right)_{\text{eq}} n_3 n_4\right].
+\]
+
+It is instructive to write this in terms of the number of particles in a comoving volume, as defined in (), $N_i \equiv n_i/s \propto n_i a^3$. This gives
+
+\[
+\frac{d \ln N_1}{d \ln a} = -\frac{\Gamma_1}{H} \left[1 - \left(\frac{N_1 N_2}{N_3 N_4}\right)_{\text{eq}} \frac{N_3 N_4}{N_1 N_2}\right],
+\]
+
+where $\Gamma_1 \equiv n_2\langle\sigma v\rangle$ is the interaction rate of species 1. The right-hand side of () contains a factor describing the \textbf{interaction efficiency}, $\Gamma_1/H$, and a factor characterizing the \textbf{deviation from equilibrium}, $[1 - \cdots]$.
+
+When the interaction rate is large, $\Gamma_1 \gg H$, the natural state of the system is to be in equilibrium.
+
+
+
+\subsubsection{Dark Matter Freeze-Out}
+
+
+
+Consider a heavy fermion $X$ that can annihilate with its antiparticle $\bar{X}$ to produce two light particles,
+
+\[
+X + \bar{X} \leftrightarrow \ell + \bar{\ell}.
+\]
+
+The particles $X$ might be the dark matter, while $\ell$ could be particles of the Standard Model.\\
+
+The light particles maintain their equilibrium densities throughout, $n_\ell = n_\ell^{\text{eq}}$ and  $n_X = n_{\bar{X}}$.\\
+
+With these assumptions, the Boltzmann equation () for the evolution of the particles $X$ becomes
+
+\[
+\frac{1}{a^3} \frac{d(n_X a^3)}{dt} = -\langle\sigma v\rangle \left[n_X^2 - (n_X^{\text{eq}})^2\right] \tag{2.5.2.1}
+\]
+
+
+It is convenient to introduce the quantity $Y_X \equiv n_X/T^3$, which is proportional to the number of particles in a comoving volume, $N_X \equiv n_X/s \propto Y_X$. In fact, as long as $T \propto a^{-1}$, we can treat $Y_X$ and $N_X$ interchangeably. In terms of $Y_X$, the left-hand side of (2.5.2.1) becomes $T^3 dY_X/dt$. Since most of the interesting dynamics will take place when the temperature is of order the particle mass, $T \sim M_X$, it will be convenient to define a new measure of time,
+
+\[
+x \equiv \frac{M_X}{T}, \quad \text{where} \quad \frac{dx}{dt} = Hx.
+\]
+
+For weakly-interacting particles, the decoupling occurs at very early times, during the radiation-dominated era, where the Hubble parameter can be written as $H = H(M_X)/x^2$. Equation (2.5.2.1) then becomes the so-called \textbf{Riccati equation},
+
+\boxed{\[
+\frac{dY_X}{dx} = -\frac{\lambda}{x^2} \left[Y_X^2 - (Y_X^{\text{eq}})^2\right],
+\]}
+
+where we have defined the dimensionless parameter
+
+\[
+\lambda \equiv \frac{\Gamma(M_X)}{H(M_X)} = \frac{M_X^2 \langle\sigma v\rangle}{H(M_X)}.
+\]
+At low temperatures, $x \gg 1$, the equilibrium abundance becomes exponentially suppressed, $Y_X^{\text{eq}} \sim (x/2\pi)^{3/2}e^{-x}$. Eventually, the massive particles will become so rare that they will not be able to find each other fast enough to maintain the equilibrium abundance. We see that this freeze-out happens at about $x_f \sim 10$.
+
+
+\subsubsection{Baryogenesis:}
+
+Baryogenesis refers to the set of physical processes that took place in the early universe, just after the Big Bang, and created a small excess of baryons (particles like protons and neutrons) over antibaryons. This excess explains the existence of all the matter we see today.\\
+
+
+\begin{centr}
+    \textbf{Sakharov conditions}
+\end{centr}
+
+
+To generate a matter–antimatter asymmetry (baryogenesis), the following three conditions must be satisfied:
+
+\begin{enumerate}
+    \item \textbf{Baryon number violation:} \\
+    There must exist processes that violate the conservation of baryon number ($B$).
+    
+    \item \textbf{C and CP violation:} \\
+    The laws of physics must violate charge conjugation symmetry ($C$) and charge-parity symmetry ($CP$), so that matter and antimatter behave differently.
+    
+    \item \textbf{Departure from thermal equilibrium:} \\
+    The universe must undergo phases where thermal equilibrium is not maintained, allowing asymmetric processes to dominate.
+\end{enumerate}
+These three conditions are necessary to produce more matter than antimatter in the early universe — explaining why we exist today.\\
+
+
+
+\textbf{Models of Baryogenesis}
+
+Several theoretical models have been proposed to explain the origin of the matter–antimatter asymmetry in the universe. The key models are:
+
+\begin{enumerate}
+    \item \textbf{GUT Baryogenesis}
+    \begin{itemize}
+        \item Based on Grand Unified Theories (e.g., SU(5), SO(10)).
+        \item Heavy bosons decay in a way that violates baryon number ($B$) and CP symmetry.
+        \item Operates at very high energy scales ($\sim 10^{16}~\mathrm{GeV}$).
+        \item Can be washed out by sphalerons if not linked with lepton asymmetry.
+    \end{itemize}
+
+    \item \textbf{Electroweak Baryogenesis}
+    \begin{itemize}
+        \item Occurs during the electroweak phase transition ($\sim 100~\mathrm{GeV}$).
+        \item Requires a strong first-order phase transition and extra sources of CP violation.
+        \item Realized in extensions of the Standard Model (e.g., MSSM, 2HDM).
+        \item Some predictions may be testable at the LHC.
+    \end{itemize}
+
+    \item \textbf{Leptogenesis}
+    \begin{itemize}
+        \item A lepton asymmetry is generated via CP-violating decays of heavy right-handed neutrinos.
+        \item Sphaleron processes convert lepton asymmetry into baryon asymmetry.
+        \item Linked to the seesaw mechanism and neutrino masses.
+        \item Operates at energy scales $\sim 10^{9}$–$10^{13}~\mathrm{GeV}$.
+    \end{itemize}
+
+    \item \textbf{Affleck–Dine Baryogenesis}
+    \begin{itemize}
+        \item Originates in supersymmetric theories.
+        \item Scalar fields carrying baryon or lepton number evolve and decay asymmetrically.
+        \item Can generate large asymmetry and explain dark matter in some versions.
+    \end{itemize}
+
+    \item \textbf{Spontaneous Baryogenesis}
+    \begin{itemize}
+        \item A rolling scalar field couples to the baryon current, inducing a chemical potential.
+        \item Generates asymmetry even in thermal equilibrium.
+        \item Appears in theories with time-varying backgrounds (e.g., inflationary models).
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Big Bang Nucleosynthesis}
+
+In this section,we study about the physical origin of  the \\
+\underline{ratio of the (mass) density of helium to hydrogen}
+
+\boxed{\[
+Y_P \equiv \frac{4n_{\text{He}}}{n_H} \sim \frac{1}{4}.
+\]}
+
+This number is one of the key predictions of the Big Bang theory.\\
+
+
+At early times, the baryonic matter in the universe was mostly in the form of protons and neutrons, which were coupled to each other by processes mediated by the weak interaction, such as $\beta$-decay and inverse $\beta$-decay:
+
+\[
+n + \nu_e \leftrightarrow p^+ + e^-,
+\]
+\[
+n + e^+ \leftrightarrow p^+ + \bar{\nu}_e,
+\]
+
+where $\nu_e$ and $\bar{\nu}_e$ are electron neutrinos and anti-neutrinos. Initially, the relative abundances of the protons and neutrons was determined by equilibrium thermodynamics. Around 1 MeV (close to the time of neutrino decoupling), the reactions in (3.123) became inefficient and the neutrons decoupled. We will determine the freeze-out abundance by solving the relevant Boltzmann equation. Free neutrons decay, which further reduced their abundance, until neutrons and protons combine into deuterium
+
+\[
+n + p^+ \leftrightarrow D + \gamma.
+\]
+
+This occurred at a temperature of around 0.1 MeV. Finally, the deuterium nuclei fused into helium
+
+\[
+D + p^+ \leftrightarrow {}^3\text{He} + \gamma,
+\]
+\[
+D + {}^3\text{He} \leftrightarrow {}^4\text{He} + p^+.
+\]
+
+In this way, essentially all of the primordial neutrons got converted into helium. The formation of heavier elements was very inefficient, which is why most protons survived and became the hydrogen in the late universe.\\
+
+The image shows a paragraph of recombination in the early universe and contains the specific details.
+
+\begin{table}
+\centering
+\caption{Binding energies per nucleon.}
+\begin{tabular}{cc}
+\hline
+Element & $B/A$ \\
+\hline
+D & 1.1 MeV \\
+${}^3$H & 2.8 MeV \\
+${}^3$He & 2.6 MeV \\
+${}^4$He & 7.1 MeV \\
+${}^6$Li & 5.3 MeV \\
+${}^7$Li & 5.7 MeV \\
+${}^7$Be & 5.4 MeV \\
+${}^9$Be & 6.5 MeV \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+
+\section{\huge{\textbf{ Cosmological Inflation}}}
+
+The standard Big Bang theory is incomplete.
+Key features of the observed universe, such as its large-scale homogeneity and flatness, seem to require that the universe started with very special, finely-tuned initial
+conditions. These initial conditions must be imposed by hand. In this chapter,we study how inflation—an early period of accelerated expansion—drives the primordial universe towards this special state, even if it started from more generic initial
+conditions.
+
+\subsection{Problems of the Hot Big Bang}
+
+There are three problems that we discuss here \\
+
+\subsubsection{The Horizon Problem}
+
+The size of a causally-connected patch of space is determined by the maximal
+distance from which light can be received.\\
+If the Big Bang “started” with the singularity at $t_i \equiv 0$, then the greatest comoving distance from which an observer at time $t$ will be able to receive signals traveling at the speed of light is the (comoving) particle horizon:
+
+\[
+d_h(\eta) = \eta - \eta_i = \int_{t_i}^{t} \frac{dt}{a(t)} \tag{3.1}
+\]
+
+where $\eta$ is the \underline{conformal time}, defined as\\
+
+\boxed{\[
+\eta(t) = \int_{0}^{t} \frac{dt'}{a(t')}. \tag{3.2}
+\]}
+
+The comoving particle horizon can be expressed in three equivalent forms:
+
+\[
+d_h(\eta) = \int_{t_i}^{t} \frac{\mathrm{d}t}{a(t)} = \int_{a_i}^{a} \frac{\mathrm{d}a}{a \dot{a}} = \int_{\ln a_i}^{\ln a} (aH)^{-1}  \mathrm{d}(\ln a) \tag{3.3}
+\]
+
+where:
+- $t_i \equiv 0$ is the Big Bang singularity time  
+- $a_i \equiv 0$ is the initial scale factor  
+- $\dot{a} \equiv da/dt$ is the time derivative of the scale factor  
+- $H \equiv \dot{a}/a$ is the Hubble parameter  
+
+This reveals that the causal structure of spacetime is governed by the evolution of the comoving \textbf{Hubble radius} $(aH)^{-1}$.
+
+The amount of conformal time between the initial singularity
+and the formation of the CMB (or, equivalently, the comoving horizon at the time
+of recombination) was much smaller than the conformal age of the universe today
+(or, equivalently, the comoving distance to the last-scattering surface), \[
+\eta_{\text{rec}} \ll \eta_0
+\]
+it means that most parts of the CMB have non-overlapping past light cones and hence never
+were in causal contact.\\
+
+The homogeneity of the CMB spans scales that are much larger than the
+particle horizon at the time when the CMB was formed. In fact, in the standard
+cosmology the CMB consists of over 40,000 causally-disconnected patches of space.
+If there wasn’t enough time for these regions to communicate, why do they look so
+similar? This is the \textbf{horizon problem}.
+
+\subsubsection{The Flatness Problem}
+
+Let us define the time-dependent critical density of the universe as 
+\[
+\rho_{\text{crit}}(t) = 3 M_{\text{Pl}}^2 H^2.  \tag{3.4}
+\]
+The \textit{time-dependent curvature parameter} then is
+\[
+\Omega_k(t) = \frac{\rho_{\text{crit}} - \rho}{\rho_{\text{crit}}} = \left( \frac{a_0 H_0}{a H} \right)^2 \Omega_{k,0}, \tag{3.5}
+\]
+where we used that $\rho_{\text{crit}} \propto H^2$ and $\rho_{\text{crit}} - \rho \propto a^{-2}$. Recall that CMB observations provide an upper bound on the size of the curvature parameter today, $|\Omega_{k,0}| < 0.005$. Because the comoving Hubble radius $(aH)^{-1}$ is growing during the conventional hot Big Bang, we expect that $|\Omega_k(t)|$ was even smaller in the past.Ignoring the short period of dark energy domination, then
+\[
+\Omega_k(t) = \frac{\Omega_{k,0}}{\Omega_{m,0}} \frac{a^2}{a + a_{\text{eq}}}, \tag{3.6}
+\]
+where we have set $a_0 \equiv 1$ and introduced $a_{\text{eq}} \equiv (1 + z_{\text{eq}})^{-1} \approx 3400^{-1}$. At matter-radiation equality, this implies
+\[
+|\Omega_k(t_{\text{eq}})| = \left| \frac{\Omega_{k,0}}{\Omega_{m,0}} \frac{a_{\text{eq}}}{2} \right| < 10^{-6}. \tag{3.7}
+\]
+
+At earlier times, the universe was dominated by radiation and we can use
+\[
+H^2 = H_{\text{eq}}^2 \, \Omega_{r,\text{eq}} \left( \frac{a_{\text{eq}}}{a} \right)^4. \tag{3.8}
+\]
+
+
+with $\Omega_{r,\text{eq}} = 0.5$. The curvature parameter then becomes
+\[
+\Omega_k(t) = \left( \frac{a_{\text{eq}} H_{\text{eq}}}{aH} \right)^2 \Omega_k(t_{\text{eq}}) = 2\Omega_k(t_{\text{eq}}) \left( \frac{a}{a_{\text{eq}}} \right)^2. \tag{3.9}
+\]
+
+Evaluating this at the time of Big Bang nucleosynthesis, $z_{\text{BBN}} \approx 4 \times 10^8$, or the electroweak phase transition, $z_{\text{EW}} \approx 10^{15}$, we find
+\[
+|\Omega_k(t_{\text{BBN}})| < 10^{-16}, \tag{3.10}
+\]
+\[
+|\Omega_k(t_{\text{EW}})| < 10^{-30}. \tag{3.11}
+\]
+
+At even earlier times, the curvature parameter is constrained to be even smaller.
+
+A useful way of re-phrasing the problem is in terms of curvature scale $R(t)$, which is related to $\Omega_k(t)$ as follows
+\[
+R(t) = \frac{1}{\sqrt{|\Omega_k(t)|}} H^{-1}(t). \tag{3.12}
+\]
+
+We have seen that observations constrain the curvature scale today to be $R(t_0) > 14 H_0^{-1}$. \\
+The above constraints on $\Omega_k(t)$ then imply that curvature scale in the early universe was many orders of magnitude larger than the Hubble radius at that time.\\
+
+
+Why was \( \Omega_k \) so extremely close to zero in the early universe?
+
+It seems like the initial conditions had to be fine-tuned to a ridiculous degree --- like setting the density to 1 part in \( 10^{30} \) accuracy!
+
+This is unnatural and suggests we’re missing something fundamental.
+
+\subsubsection{The Superhorizon Correlations}
+
+The fact that universe is
+filled with fluctuations that are correlated over apparently acausal distances.\\
+
+For the standard hot Big Bang, the Hubble radius is approximately equal to the particle horizon, so we call these regimes “subhorizon”
+and “superhorizon.” The particle horizon at recombination
+was about 265 Mpc. Scales larger than this would not have been inside the horizon
+before the CMB was created. Yet, we find the CMB fluctuations to be correlated
+on scales that are larger than this apparent horizon. This is the modern version
+of the horizon problem and this is the superhorizon correlations problem. Not only is the CMB homogeneous on apparently acausal
+scales, it also has correlated fluctuations on these scales.
+\newpage
+
+\subsection{The Physics of Inflation}
+
+A key characteristic of inflation is that all physical quantities are slowly varying,
+despite the fact that the space is expanding rapidly.\\
+
+The time derivative of the comoving Hubble radius as
+\[
+    \dv{t}(aH)^{-1} = -\frac{\dot{a}H + a\dot{H}}{(aH)^2} = -\frac{1}{a}(1 - \varepsilon), \tag{3.13}
+\]
+where we have introduced the \textbf{slow-roll parameter}\\
+\boxed{\[
+    \varepsilon \equiv -\frac{\dot{H}}{H^2} = -\dv{\ln H}{N}, \tag{3.14}
+\]}  (3.14) \\
+
+with \( dN \equiv d\ln a = H dt \). This shows that a shrinking Hubble radius, \( \partial_t(aH)^{-1} < 0 \), is associated with \( \varepsilon < 1 \) for inflation to occur.
+
+
+
+The \textbf{number of e-foldings} is defined as\\
+
+\boxed{\[
+N_{\text{tot}} \equiv \ln\left(\frac{a_e}{a_i}\right). \tag{3.15}
+\]} (3.15)\\
+
+We want inflation to last for a sufficiently long time (usually at least 40 to 60 e-folds), which requires that \( \epsilon \) remains small for a sufficiently large number of Hubble times. This condition is measured by a \textbf{second slow-roll parameter}
+\[
+\kappa \equiv \frac{d \ln \epsilon}{dN} = \frac{\dot{\epsilon}}{H \epsilon}. \tag{3.16}
+\]
+For \( |\kappa| < 1 \), the fractional change of \( \epsilon \) per e-fold is small and inflation persists. \\
+
+**For inflation to occur,the conditions 
+\[
+\epsilon < 1 \quad \text{and} \quad |\kappa| < 1 \tag{3.17}
+\]
+must be satisfied**.
+
+
+\subsubsection{Scalar Field Dynamics}
+
+The simplest models of inflation implement the time-dependent dynamics during
+inflation in terms of the evolution of a scalar field, $\phi(t, x)$, called the \textbf{inflaton}.\\
+
+For the inflaton in Minkowski spacetime,its action is:\\
+\[
+S = \int dt\, d^3x \left[ \frac{1}{2} \dot{\phi}^2 - \frac{1}{2} (\nabla \phi)^2 - V(\phi) \right], \tag{3.18}
+\]
+where we have also included the gradient energy, \( \frac{1}{2}(\nabla \phi)^2 \), associated with a spatially varying field. To determine the equation of motion of the scalar field, we consider
+
+the variation \(\phi \rightarrow \phi + \delta\phi\). Under this variation, the action changes as
+\[
+\delta S = \int dt\, d^3x \left[ \dot{\phi} \delta \dot{\phi} - \nabla \phi \cdot \nabla \delta \phi - \frac{\partial V}{\partial \phi} \delta \phi \right]
+= \int dt\, d^3x \left[ -\ddot{\phi} + \nabla^2 \phi - \frac{\partial V}{\partial \phi} \right] \delta \phi ,
+\]
+where we have integrated by parts and dropped a boundary term. \textbf{If the variation is around the classical field configuration, then the principle of least action states that \(\delta S = 0\)}. For this to be valid for an arbitrary field variation \(\delta \phi\), the terms in the square brackets must add to zero:
+\[
+\ddot{\phi} - \nabla^2 \phi = -\frac{\partial V}{\partial \phi} . \tag{3.19}
+\]
+
+This is the \textbf{Klein-Gordon equation}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2025-07-02 212316.png}
+    \caption{Example of a slow-roll potential. Inflation occurs in the shaded part of the potential.}
+    \label{fig:enter-label}
+\end{figure}
+
+The generalization of the action to an FRW background is
+\[
+S = \int dt\, d^3x\, a^3(t) \left( \frac{1}{2} \dot{\phi}^2 - \frac{1}{2a^2(t)} (\nabla \phi)^2 - V(\phi) \right) . \tag{3.20}
+\]
+We are interested in the evolution of a \underline{homogeneous field configuration}, \(\phi = \phi(t)\), in which case the action reduces to
+\[
+S = \int dt\, d^3x\, a^3(t) \left( \frac{1}{2} \dot{\phi}^2 - V(\phi) \right) .
+\]
+Performing the same variation of the action as before, we find
+\[
+\delta S = \int dt\, d^3x\, a^3(t) \left( \dot{\phi} \delta \dot{\phi} - \frac{\partial V}{\partial \phi} \delta \phi \right)
+= \int dt\, d^3x \left( -\frac{d}{dt}(a^3 \dot{\phi}) - a^3 \frac{\partial V}{\partial \phi} \right) \delta \phi ,
+\]
+and the principle of least action leads to the following Klein-Gordon equation
+\[
+\ddot{\phi} + 3H \dot{\phi} = -\frac{\partial V}{\partial \phi} . \tag{3.21}
+\]
+
+The expansion of the spacetime has introduced one new feature, the so-called \textbf{Hubble friction} associated with the term \(3H \dot{\phi}\). This friction will play a crucial role in the inflationary dynamics.\\
+
+
+It is natural to guess that the energy density is the sum of kinetic and potential energy densities
+\[
+\rho_\phi = \frac{1}{2} \dot{\phi}^2 + V(\phi) \,. \tag{3.22}
+\]
+
+This will determine the expansion rate through \( 3 M_{\rm Pl}^2 H^2 = \rho_\phi \). Taking the time derivative of the energy density, we find
+\[
+\dot{\rho}_\phi = \left( \ddot{\phi} + \frac{\partial V}{\partial \phi} \right) \dot{\phi} = -3H \dot{\phi}^2 \,.
+\]
+
+where the Klein-Gordon equation was used in the second equality. Comparing this to the continuity equation, \( \dot{\rho}_\phi = -3H(\rho_\phi + P_\phi) \), we infer that the pressure induced by the field is
+\[
+P_\phi = \frac{1}{2} \dot{\phi}^2 - V(\phi) \,. \tag{3.23}
+\]
+
+\textit{This pressure will determine the acceleration of the expansion, \( \ddot{a} \propto -(\rho_\phi + 3P_\phi) \)}. We see that the density and pressure are in general not related by a constant equation of state as for a perfect fluid. Notice, however, that if the kinetic energy of the inflaton is much smaller than its potential energy, then \( P_\phi \approx -\rho_\phi \). The inflationary potential then acts like a temporary cosmological constant, sourcing a period of exponential expansion.
+
+\subsubsection{Slow-Roll Inflation}
+
+We know that the Friedmann equation is given by:\\
+\[3 M_{\rm Pl}^2 H^2 = \rho_\phi \tag{3.24}\]
+
+the energgy-density $ \rho $ is given by : \\
+
+\[
+\rho_\phi = \frac{1}{2} \dot{\phi}^2 + V(\phi) \tag{3.25}
+\]
+
+
+using equations 3.24 and 3.25,   we get: \[H^2 = \frac{1}{3 M_{\text{Pl}}^2} \left[ \frac{1}{2} \dot{\phi}^2 + V \right], \tag{3.26}
+\]
+and we know that the Klein-Gordon equationn is : \[\ddot{\phi} + 3H\dot{\phi} = -\frac{dV}{d\phi} \tag{3.27}
+\]
+
+By differentiating 3.26 and then putting in 3.25 ,we get:\\
+\[\dot{H} = -\frac{1}{2} \frac{\dot{\phi}^2}{M_{\text{Pl}}^2} \tag{3.28}
+\]
+now taking ratio of 3.28 and 3.26,we get:\\
+\[\varepsilon \equiv -\frac{\dot{H}}{H^2} 
+= \frac{1}{2} \frac{\dot{\phi}^2}{M_{\text{Pl}}^2 H^2} 
+= \frac{\frac{3}{2} \dot{\phi}^2}{\frac{1}{2} \dot{\phi}^2 + V} \tag{3.29}\]
+
+\textit{Inflation} ($\varepsilon \ll 1$) therefore occurs if the kinetic energy density, $\frac{1}{2} \dot{\phi}^2$, only makes a small contribution to the total energy density, $\rho_\phi = \frac{1}{2} \dot{\phi}^2 + V(\phi)$. For obvious reasons, this situation is called \textbf{slow-roll inflation}.\\
+
+
+In order for the slow-roll behavior to persist, the acceleration of the scalar field also has to be small. To assess this, it is useful to define the dimensionless acceleration per Hubble time
+\begin{equation}
+    \delta \equiv - \frac{\ddot{\phi}}{H \dot{\phi}}. \tag{3.30}
+\end{equation}
+
+When $\delta$ is small, the friction term in () dominates and the inflaton speed is determined by the slope of the potential. Moreover, as long as $\delta$ is small, the inflaton kinetic energy stays subdominant and the inflationary expansion continues. To see this more explicitly, we take the time derivative of (),
+\begin{equation}
+    \dot{\varepsilon} = \frac{\dot{\phi} \ddot{\phi}}{M_{\text{Pl}}^2 H^2} - \frac{\dot{\phi}^2 \dot{H}}{M_{\text{Pl}}^2 H^3}, \tag{3.31}
+\end{equation}
+and substitute it into ():
+\begin{equation}
+    \kappa = \frac{\dot{\varepsilon}}{H \varepsilon} = 2 \frac{\ddot{\phi}}{H \dot{\phi}} - 2 \frac{\dot{H}}{H^2} = 2(\varepsilon - \delta). \tag{3.31}
+\end{equation}
+
+***This shows that $\{\varepsilon, |\delta|\} \ll 1$ implies $\{\varepsilon, |\kappa|\} \ll 1$.These are the conditions required for inflation to persist.\\
+We wil use these conditions to simplify the equations of motion. This is called the \textbf{slow-roll approximation.}***\\
+
+
+\textbf{Slow-Roll Approximation:}\\
+
+
+From equation 3.29,we note that the condition $\varepsilon \ll 1$ implies $\dot{\phi}^2 \ll V$, which leads to the following simplification of the Friedmann equation (3.26),
+\begin{equation}
+H^2 \approx \frac{V}{3 M_{\text{Pl}}^2}. \tag{3.32}
+\end{equation}
+
+Also, the condition $|\delta| \ll 1$ simplifies the Klein-Gordon equation (3.27) to
+\begin{equation}
+3H\dot{\phi} \approx -V_{,\phi} \, \tag{3.33}
+\end{equation}
+
+\[
+\epsilon = \frac{1}{2} \frac{\dot{\phi}^2}{M_{\text{Pl}}^2 H^2} 
+\approx \frac{M_{\text{Pl}}^2}{2} \left( \frac{V_{,\phi}}{V} \right)^2 , \tag{3.34}
+\]
+
+To evaluate the parameter $\delta$, defined in (3.30), in the slow-roll approximation, we take the time derivative of (3.33), $3H\dot{\phi} + 3H\dot{\phi} = -V_{,\phi\phi} \dot{\phi}$. This leads to
+
+\[
+\delta + \epsilon = -\frac{\ddot{\phi}}{H \dot{\phi}} - \frac{\dot{H}}{H^2} \approx M_{\text{Pl}}^2 \frac{V_{,\phi\phi}}{V} \,. \tag{3.35}
+\]
+
+Hence, a convenient way to judge whether a given potential $V(\phi)$ can lead to slow-roll inflation is to compute the \textbf{potential slow-roll parameters}
+
+\[
+\epsilon_V \equiv \frac{M_{\text{Pl}}^2}{2} \left( \frac{V_{,\phi}}{V} \right)^2 , \qquad 
+\eta_V \equiv M_{\text{Pl}}^2 \frac{V_{,\phi\phi}}{V} \,. \tag{3.36}
+\]
+
+Successful inflation occurs when these parameters are much smaller than unity.\\
+
+The total number of \textit{e}-foldings of accelerated expansion is
+\[
+N_{\text{tot}} \equiv \int_{a_i}^{a_e} \mathrm{d} \ln a = \int_{t_i}^{t_e} H(t) \, \mathrm{d}t 
+= \int_{\phi_i}^{\phi_e} \frac{H}{\dot{\phi}} \, \mathrm{d}\phi \,, \tag{3.37}
+\]
+where $t_i$ and $t_e$ are defined as the times when $\epsilon(t_i) = \epsilon(t_e) \equiv 1$. 
+As we have seen above, a solution to the horizon problem requires 
+\[
+\boxed{N_{\text{tot}} \gtrsim 60}, \tag{3.38}
+\]
+which provides an important constraint on successful inflationary models.\\
+
+\subsubsection{Reheating And The Hot Big Bang}
+
+
+Most of the energy density during inflation is in the form of the inflaton potential \( V(\phi) \). Inflation ends when the potential steepens and the field picks up kinetic energy. The energy in the inflaton sector then has to be transferred to the particles of the Standard Model. This process is called \textbf{reheating} and starts the \underline{ hot Big Bang}.\\
+
+Once the inflaton field reaches the bottom of the potential, it begins to oscillate.  
+Near the minimum, the potential can be approximated as \( V(\phi) \approx \frac{1}{2} m^2 \phi^2 \),  
+and the equation of motion of the inflaton(using 3.27) is  
+\[
+\ddot{\phi} + 3H\dot{\phi} = -m^2 \phi \tag{3.39}
+\]  
+The energy density of the inflaton evolves according to the continuity equation  
+\[
+\dot{\rho}_\phi + 3H \rho_\phi = -3H P_\phi = -\frac{3}{2} H (m^2 \phi^2 - \dot{\phi}^2) \tag{3.40}
+\]
+
+
+
+
+\subsection*{\textbf{**Derivation of the Continuity Equation for a Scalar Field in FRW Spacetime**}}
+
+\subsubsection*{Energy-Momentum Tensor for a Scalar Field}
+
+For a minimally coupled real scalar field with Lagrangian
+\[
+\mathcal{L} = \frac{1}{2} g^{\mu\nu} \partial_\mu \phi\, \partial_\nu \phi - V(\phi),
+\]
+the energy-momentum tensor is given by
+\[
+T_{\mu\nu} = \partial_\mu \phi\, \partial_\nu \phi - g_{\mu\nu}
+\left( \frac{1}{2} g^{\rho\sigma} \partial_\rho \phi\, \partial_\sigma \phi - V(\phi) \right).
+\]
+
+\subsubsection*{ FRW Background and Homogeneous Scalar Field}
+
+Assume a flat FRW metric:
+\[
+ds^2 = -dt^2 + a^2(t)\, d\vec{x}^2,
+\]
+and a homogeneous scalar field: \( \phi = \phi(t) \). Then,
+\[
+\partial_0 \phi = \dot{\phi}, \quad \partial_i \phi = 0.
+\]
+
+\subsubsection*{ Energy Density and Pressure}
+
+We identify the energy density and pressure from the components of the energy-momentum tensor:
+\[
+\rho_\phi = T^0{}_0 = \frac{1}{2} \dot{\phi}^2 + V(\phi), \qquad
+P_\phi = T^i{}_i = \frac{1}{2} \dot{\phi}^2 - V(\phi).
+\]
+
+\subsubsection*{ Covariant Conservation: \( \nabla_\mu T^{\mu\nu} = 0 \)}
+
+In FRW, the time component (\( \nu = 0 \)) gives the continuity equation:
+\[
+\dot{\rho}_\phi + 3H(\rho_\phi + P_\phi) = 0.
+\]
+
+Substituting the expressions for \( \rho_\phi \) and \( P_\phi \),
+\[
+\rho_\phi + P_\phi = \dot{\phi}^2,
+\]
+so the equation becomes:
+\[
+\dot{\rho}_\phi + 3H \dot{\phi}^2 = 0.
+\]
+
+\subsubsection*{ Time Derivative of Energy Density}
+
+We compute:
+\[
+\dot{\rho}_\phi = \frac{d}{dt} \left( \frac{1}{2} \dot{\phi}^2 + V(\phi) \right)
+= \dot{\phi} \ddot{\phi} + \frac{dV}{d\phi} \dot{\phi}
+= \dot{\phi} \left( \ddot{\phi} + \frac{dV}{d\phi} \right).
+\]
+
+\subsubsection*{ Klein-Gordon Equation in Expanding Universe}
+
+The equation of motion for \( \phi \) is:
+\[
+\ddot{\phi} + 3H\dot{\phi} + \frac{dV}{d\phi} = 0
+\quad \Rightarrow \quad
+\ddot{\phi} + \frac{dV}{d\phi} = -3H\dot{\phi}.
+\]
+
+Substitute into \( \dot{\rho}_\phi \):
+\[
+\dot{\rho}_\phi = \dot{\phi}(-3H\dot{\phi}) = -3H\dot{\phi}^2.
+\]
+
+\subsubsection*{ Final Continuity Equation}
+
+Now plug into the continuity equation:
+\[
+\dot{\rho}_\phi + 3H\dot{\phi}^2 = 0 \quad \Rightarrow \quad
+\boxed{
+\dot{\rho}_\phi + 3H\rho_\phi = -3H P_\phi
+= -\frac{3}{2} H \left( m^2 \phi^2 - \dot{\phi}^2 \right)
+}
+\]
+where in the last step we have taken \( V(\phi) = \frac{1}{2} m^2 \phi^2 \).
+
+\underline{We see that the oscillating field
+behaves like pressureless matter, with \(\rho_{\phi} \propto a^{-3}\)}.\\
+
+
+To avoid that the universe ends up completely empty, the inflaton has to couple to Standard Model fields. The energy stored in the inflaton field will then be transferred to ordinary particles. If the decay is slow, then the inflaton's energy density follows the equation
+
+\[
+\dot{\rho}_\phi + 3H\rho_\phi = -\Gamma_\phi\rho_\phi ,
+\]
+
+where $\Gamma_\phi$ parameterizes the inflaton decay rate. A slow decay of the inflaton typically occurs if the coupling is only to fermions. If the inflaton can also decay into bosons, on the other hand, then the decay rate may be enhanced by Bose condensation and parametric resonance effects. This kind of rapid decay is called \boxed{\textbf{preheating}}, since the bosons are created far from thermal equilibrium.\\
+
+The new particles will interact with each other and eventually reach the thermal state that characterizes the hot Big Bang. The energy density at the end of the reheating epoch is $\rho_R < \rho_{\phi,e}$, where $\rho_{\phi,e}$ is the energy density at the end of inflation, and the reheating temperature $T_R$ is determined by
+
+\[
+\rho_R = \frac{\pi^2}{30} g_*(T_R) T_R^4 . \tag{3.41}
+\]
+
+If reheating takes a long time, then $\rho_R \ll \rho_{\phi,e}$ and the reheating temperature gets smaller. At a minimum, the reheating temperature has to be larger than 1 MeV to
+allow for successful BBN, and most likely it is much larger than this to also allow
+for baryogenesis after inflation.\\
+
+the dynamics during or at the ending the period of reheating  can
+generate relics such as isocurvature perturbations, stochastic gravitational waves,
+non-Gaussianities, dark matter/radiation, primordial black holes, topological and
+non-topological solitons, matter/antimatter asymmetry, and primordial magnetic
+fields. Detecting any of these relics would give us an interesting window into the
+reheating era.
+
+\subsection{Duration of Inflation}
+The number of e-foldings is defined as:\\
+\[
+N_{\text{tot}} \equiv \ln\left(\frac{a_e}{a_i}\right) \tag{3.42}
+\]
+
+We would like to determine the minimal number of e-foldings that is required to solve the problems of the hot Big Bang.\\
+
+As illustrated in Fig. 4.7, \textbf{the decrease of the comoving Hubble radius during inflation must compensate for its increase during the hot Big Bang evolution.} The amount by which the Hubble radius has grown during the hot Big Bang evolution depends on the maximal temperature of the thermal plasma at the beginning of the hot Big Bang. We will denote this so-called \textbf{reheating temperature} by $T_R$. For simplicity, we take the universe to be radiation dominated throughout and ignore the relatively recent periods of matter and dark energy domination. Remembering that $H \propto a^{-2}$ during the radiation-dominated era, we have
+
+\[
+\frac{a_0 H_0}{a_R H_R} = \frac{a_0}{a_R} \left(\frac{a_R}{a_0}\right)^2 = \frac{a_R}{a_0} \sim \frac{T_0}{T_R} \sim 10^{-28} \left(\frac{10^{15} \text{ GeV}}{T_R}\right), \tag{3.43}
+\]
+
+where we have introduced a reference value of $10^{15}$ GeV for the reheating temperature. We will furthermore assume that the energy density at the end of inflation was converted relatively quickly into the particles of the thermal plasma, so that the Hubble radius didn't experience significant growth between the end of inflation and the beginning of the hot Big Bang, $(a_e H_e)^{-1} \sim (a_R H_R)^{-1}$. The condition in (4.28) can then be written as
+
+\[
+(a_i H_i)^{-1} > (a_0 H_0)^{-1} \sim 10^{28} \left(\frac{T_R}{10^{15} \text{ GeV}}\right) (a_e H_e)^{-1},
+\]
+
+and, using $H_i \approx H_e$, we get
+
+\[
+N_{\text{tot}} \equiv \ln(a_e/a_i) > 64 + \ln(T_R/10^{15} \text{ GeV}). \tag{3.44}
+\]
+
+This is the famous \textbf{statement} that the solution of the horizon problem requires about 60 $e$-folds of inflation. Notice that fewer $e$-folds are needed if the reheating temperature is lower.
+
+
+
+
+\subsection{Open Problems In Inflation Theory}
+
+\subsubsection{Ultraviolet Sensitivity}
+
+The UV sensitivity of inflation is both a challenge and an opportunity. It is a
+challenge, because it means that we either need to work in a UV-complete theory of
+quantum gravity or make assumptions about the form that such a UV-completion
+might take. It is also an opportunity, because it suggests the exciting possibility
+
+of using cosmological observations to learn about fundamental aspects of quantum gravity.
+
+
+
+\subsubsection{Initial Conditions}
+
+
+
+\textit{The main motivation for inflation were the fine-tuned initial conditions of the hot
+Big Bang. Explaining these initial conditions, however, cannot be viewed as a success if inflation itself requires fine-tuned initial conditions to get started}.\\
+
+1. We assumed that the initial inhomogeneities in the inflaton field were
+small. Since inflation is supposed to explain the homogeneous initial conditions of
+the hot Big Bang, we must ask what happens when we allow for large inhomogeneities in the inflaton field. These inhomogeneities carry gradient energy, which
+might hinder the accelerated expansion.\\
+
+2. We also assumed that the initial velocity of the inflaton field was small and
+that the slow-roll solution was an attractor. If the initial inflaton velocity is nonnegligible, then it is possible that the field will overshoot the region of the potential
+where inflation is supposed to occur, without actually sourcing accelerated expansion. This problem is stronger for small-field models where Hubble friction is often
+not efficient enough to slow down the field before it reaches the region of interest.
+In large-field models, on the other hand, Hubble friction is usually very efficient
+and the slow-roll solution becomes an attractor.\\
+
+3. We assumed that the inflaton field began its evolution at the
+top of a suitable potential. Who put it there? This question does not have a very
+satisfactory answer. The following argument is often made: Imagine that the inflaton
+field initially takes different values in different regions of space, some at the top of
+the potential, some at the bottom. The regions of space where the vacuum energy
+is large will inflate and therefore grow. Weighted by volume, these regions will
+dominate, explaining why most of space experiences inflation. Alternatively, it is
+sometimes assumed that slow-roll inflation was preceded by an earlier phase of
+false vacuum domination. In quantum mechanics, there is a small
+probability that the field will tunnel through the potential energy barrier. The question why inflation began at the top of the potential, then becomes the question
+why the quantum mechanical tunnelling is more likely to put the inflaton field
+at the top of the potential than at its minimum. Of course, in this scenario, you
+should still ask why the universe started in the high-energy false vacuum. Finally,
+and most ambitiously, the no-boundary proposal by Hartle and Hawking gives a
+prescription for evaluating the probability that a universe is spontaneously created
+from nothing. The hope is that this would explain why the universe started in
+the high-energy vacuum.\\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-07-05 071006.png}
+    \caption{Sketch of the inflaton potential with a metastable high-energy vacuum. Tunnelling
+from this false vacuum state may set the initial conditions for slow-roll inflation. If
+the tunnelling rate is smaller than the expansion rate, then this also provides an
+example of eternal inflation}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{Eternal Inflation}
+
+Inflation is driven by a scalar field called the inflaton.
+
+The inflaton "rolls down" a potential, but due to quantum fluctuations, in some regions it gets kicked back up the potential randomly.
+
+As a result, while some regions stop inflating (and reheat to form universes like ours), other regions keep inflating — and those inflating regions expand exponentially faster than the ones that stopped.
+
+This leads to a self-reproducing universe — a multiverse — where inflation never ends as a whole.\\
+
+
+\textit{**Although we have remarkable observational evidence that something like
+inflation occurred in the early universe, inflation cannot yet be considered a part of the standard model of cosmology, with the same level of confidence
+as, for example, BBN is a fact about the early universe. Inflation is still a work in
+progress, leaving some things to be desired and making the search for alternatives
+
+a worthwhile enterprise**}.
+
+\newpage
+
+ \section{\huge{ \textbf{Structure Formation}}}
+
+In this chapter, we will describe the evolution of perturbations in a non-relativistic
+fluid in Newtonian gravity.\\
+
+Oor most of the history of the universe, the growth of structure was dominated by
+the evolution of dark matter. Although the microscopic nature of the dark matter
+is still unknown, its long-wavelength properties are captured by a small number of
+parameters, such as an equation of state and a sound speed. The insensitivity of
+the physics at long distances to effects on small scales is a general feature of most
+physical systems.
+
+\subsection{Newtonian Perturbation Theory}
+
+Newtonian gravity is a good approximation when all velocities are small compared
+to the speed of light and the departures from a flat spacetime geometry are small.
+
+The latter is satisfied on scales smaller than the Hubble radius,  &H^{-1}&.
+
+
+\subsubsection{Fluid Dynamics}
+
+Consider a non-relativistic fluid with a mass density $\rho$, pressure $P \ll \rho$ and velocity $\vec{u}$. We will first study the evolution of perturbations in this fluid while ignoring gravity and the expansion of the universe.\\
+
+Mass conservation implies the continuity equation
+\[
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \vec{u}) = 0 \tag{4.1}
+\]
+
+and momentum conservation leads to the \text Euler equation 
+\[
+\rho \frac{d\vec{u}}{dt} = \rho \left( \frac{\partial}{\partial t} + \vec{u} \cdot \nabla \right) \vec{u} = -\nabla P \tag{4.2}
+\]
+which is simply “\( F = ma \)” for a fluid element. Note that \text{\textbf{“convective time derivative”}} \quad \((\partial_t + \mathbf{u} \cdot \nabla)\) is the acceleration of fluid.\\
+
+
+We define equation of state as:
+\[
+P = P(\rho, T) \tag{4.3}
+\]
+
+\text{For a static fluid, with } \mathbf{u} = 0, \text{ the above equations simply imply a constant density and pressure, } \rho = \bar{\rho} \text{ and } P = \bar{P}. \text{ We wish to see how small perturbations around this solution evolve in time.}
+
+
+\text{We take the velocity of the perturbed fluid to be small, }  \mathbf{u} \ll c, \text{ and write}
+
+\[
+\rho(t, \mathbf{x}) = \bar{\rho} + \delta \rho(t, \mathbf{x}), \tag{4.4}
+\]
+\[
+P(t, \mathbf{x}) = \bar{P} + \delta P(t, \mathbf{x}). \tag{4.5}
+\]
+
+\text{As long as all perturbations are small, we can linearize the fluid equations.}
+
+\text{Consider a product of two quantities } A \text{ and } B. \text{ Expanding each factor into a background value and a perturbation, we get}
+\[
+AB = (\bar{A} + \delta A)(\bar{B} + \delta B)
+= \bar{A} \bar{B} + \bar{A} \, \delta B + \delta A \, \bar{B} + \delta A \, \delta B
+\]
+we can write in approximation as\\
+
+\[AB \approx \bar{A} \bar{B} + \bar{A} \, \delta B + \delta A \, \bar{B} \tag{4.6}  \]
+
+
+
+Starting from the continuity equation:
+\[
+\frac{\partial \rho}{\partial t} + \nabla \cdot (\rho \mathbf{u}) = 0
+\]
+
+Expand $\rho$ into a background and a perturbation:
+\[
+\rho(t, \mathbf{x}) = \bar{\rho} + \delta\rho(t, \mathbf{x})
+\]
+
+Assuming $\bar{\rho}$ is constant and perturbations are small (linear order), we have:
+\[
+\frac{\partial \rho}{\partial t} = \frac{\partial \delta\rho}{\partial t}
+\]
+\[
+\rho \mathbf{u} \approx \bar{\rho} \mathbf{u}
+\]
+\[
+\nabla \cdot (\rho \mathbf{u}) \approx \nabla \cdot (\bar{\rho} \mathbf{u})
+\]
+
+Substitute into the continuity equation:
+\[
+\frac{\partial \delta\rho}{\partial t} + \nabla \cdot (\bar{\rho} \mathbf{u}) = 0
+\]
+
+Hence,
+\[
+\boxed{
+\partial_t \delta\rho = -\nabla \cdot (\bar{\rho} \mathbf{u}) \tag{4.7}
+}
+\]
+
+
+
+%--- Linearised Euler equation ----------------------------------------------
+The full Euler equation is :\\
+\[
+\rho \left( \frac{\partial}{\partial t} + \mathbf{u}\!\cdot\!\nabla \right)\mathbf{u}
+  \;=\; -\,\nabla P .
+\]
+
+Decompose background\,+\,perturbations:\\
+\[
+\rho = \bar{\rho} + \delta\rho , \qquad
+P   = \bar{P} + \delta P , \qquad
+\mathbf{u} = \mathbf{u}\;(\text{perturbation only}).
+\]
+
+\textbf{Linearise (keep first order):}
+
+*  Background quantities \( \bar{\rho},\bar{P} \) are spatially uniform  
+  \( \Longrightarrow \ \nabla\bar{P}=0 \).
+
+*  Retain only the leading term in \( \rho\,\partial_t\mathbf{u} \):
+\[
+\rho \,\partial_t\mathbf{u}
+  \;=\; (\bar{\rho} + \delta\rho)\,\partial_t\mathbf{u}
+  \;\approx\; \bar{\rho}\,\partial_t\mathbf{u}
+  \quad (\delta\rho\,\partial_t\mathbf{u} \text{ is second order}).
+\]
+
+*  Advective term is quadratic in perturbations and is dropped:
+\[
+\rho\,(\mathbf{u}\!\cdot\!\nabla)\mathbf{u}
+  \;=\; \mathcal{O}\!\bigl(\mathbf{u}^2\bigr)\;\;\Longrightarrow 0
+  \quad \text{to first order.}
+\]
+
+*  Right–hand side:
+\[
+-\nabla P
+  \;=\; -\nabla(\bar{P}+\delta P)
+  \;=\; -\nabla\delta P .
+\]
+
+\textbf{Linearised result:}
+\[
+\boxed{\;
+\bar{\rho}\,\partial_t\mathbf{u} = -\,\nabla\delta P
+\;} \tag{4.8}
+\]
+
+
+We start from the linearised continuity and Euler equations:
+
+\begin{align}
+\partial_t \delta\rho &= -\nabla \cdot (\bar{\rho} \mathbf{u}) \tag{4.7} \\
+\bar{\rho}\, \partial_t \mathbf{u} &= -\nabla \delta P \tag{4.8}
+\end{align}
+
+Now take the time derivative of equation (4.7):
+\[
+\partial_t^2 \delta\rho = -\nabla \cdot \left( \bar{\rho} \, \partial_t \mathbf{u} \right)
+\]
+
+Now substitute \(\partial_t \mathbf{u}\) from (4.8):
+\[
+\partial_t^2 \delta\rho = -\nabla \cdot \left( \bar{\rho} \cdot \left( -\frac{1}{\bar{\rho}} \nabla \delta P \right) \right)
+= \nabla \cdot \nabla \delta P = \nabla^2 \delta P
+\]
+
+Therefore, we obtain the wave-like equation:
+\[
+\boxed{
+\partial_t^2 \delta\rho - \nabla^2 \delta P = 0 \tag{4.9}
+}
+\]
+
+
+
+To write this purely in terms of the density fluctuation $\delta\rho$, we use the relation between $P$ and $\rho$ provided by the equation of state. For simplicity, we will consider a \textbf{barotropic fluid}, such that $P = P(\rho)$. In that case, we can write the pressure perturbation as
+\[
+\delta P = \frac{\partial P}{\partial \rho} \delta\rho \equiv c_s^2 \delta\rho \,,
+\]
+where $c_s$ is the \textbf{sound speed} of the fluid. Equation (5.10) then takes the form
+\[
+\left( \frac{\partial^2}{\partial t^2} - c_s^2 \nabla^2 \right) \delta\rho = 0 \,.
+\]
+
+This is a wave equation and its solutions are \textbf{sound waves}
+\[
+\delta\rho(\mathbf{x}, t) = A_{\mathbf{k}} \sin(\omega t - \mathbf{k} \cdot \mathbf{x}) + B_{\mathbf{k}} \cos(\omega t - \mathbf{k} \cdot \mathbf{x}) \,, \tag{4.10}
+\]
+where $\mathbf{k}$ is the wavevector and $\omega = c_s |\mathbf{k}|$ is the frequency. The wavevector points in the direction of travel of the wave and its magnitude is inversely related to the wavelength $\lambda = 2\pi/|\mathbf{k}|$. Since the wave equation is linear, we can add solutions with different wavevectors $\mathbf{k}$.\\
+
+
+The more formal way of solving a partial differential equation (PDE) like the wave equation is to write $\delta\rho$ as a Fourier expansion
+\[
+\delta\rho(\mathbf{x}, t) = \int \frac{d^3k}{(2\pi)^3} \, e^{i \mathbf{k} \cdot \mathbf{x}} \delta\rho(\mathbf{k}, t) \,.
+\]
+
+Acting with a spatial derivative $\partial_i$ pulls down a factor of $i k_i$ from $e^{i \mathbf{k} \cdot \mathbf{x}}$ and the Laplacian becomes $-k^2$, with $k = |\mathbf{k}|$, in Fourier space. This turns the wave equation into an ordinary differential equation (ODE) for each Fourier mode
+\[
+\left( \frac{\partial^2}{\partial t^2} + c_s^2 k^2 \right) \delta\rho(\mathbf{k}, t) = 0 \,.
+\]
+
+The solution for each Fourier mode then is
+\[
+\delta\rho(\mathbf{k}, t) = C_{\mathbf{k}} \, e^{-i \omega_k t} + D_{\mathbf{k}} \, e^{i \omega_k t} \,,
+\]
+with $\omega_k \equiv c_s k$. Substituting this back into the Fourier expansion gives
+\[
+\delta\rho(\mathbf{x}, t) = \int \frac{d^3k}{(2\pi)^3} \left( C_{\mathbf{k}} e^{-i(\omega_k t - \mathbf{k} \cdot \mathbf{x})} + D_{\mathbf{k}} e^{i(\omega_k t + \mathbf{k} \cdot \mathbf{x})} \right)
+\]
+\[
+= \int \frac{d^3k}{(2\pi)^3} \left( C_{\mathbf{k}} e^{-i(\omega_k t - \mathbf{k} \cdot \mathbf{x})} + D_{-\mathbf{k}} e^{i(\omega_k t - \mathbf{k} \cdot \mathbf{x})} \right)
+\]
+\[
+= \int \frac{d^3k}{(2\pi)^3} \left( C_{\mathbf{k}} e^{-i(\omega_k t - \mathbf{k} \cdot \mathbf{x})} + C^*_{\mathbf{k}} e^{i(\omega_k t - \mathbf{k} \cdot \mathbf{x})} \right) \,,
+\]
+where we have sent $\mathbf{k} \to -\mathbf{k}$ in the second term of the second line and used $D_{-\mathbf{k}} = C^*_{\mathbf{k}}$ in the last line. The latter is required in order for $\delta\rho(\mathbf{x}, t)$ to be real. Defining $C_{\mathbf{k}} \equiv [B_{\mathbf{k}} + i A_{\mathbf{k}}]/2$, we can also write this as
+\[
+\delta\rho(\mathbf{x}, t) = \int \frac{d^3k}{(2\pi)^3} \left( A_{\mathbf{k}} \sin(\omega_k t - \mathbf{k} \cdot \mathbf{x}) + B_{\mathbf{k}} \cos(\omega_k t - \mathbf{k} \cdot \mathbf{x}) \right) \,, \tag{4.11}
+\]
+which shows that the most general solution to the wave equation is indeed a sum (or integral) over the plane wave solutions.
+
+
+
+\subsubsection{Perturbations In Presence Of gravity}
+
+Let us now turn on gravity, but still keep the spacetime static.
+The continuity equation remains unchanged, but the Euler equation(4.2) receives an extra force term:
+\[
+\rho \left( \frac{\partial}{\partial t} + \mathbf{u} \cdot \nabla \right) \mathbf{u} = -\nabla P - \rho \nabla \Phi \,, \tag{4.12}
+\]
+where $\Phi$ is the gravitational potential. This potential is determined by the local density through the \textbf{Poisson equation:}
+\[
+\nabla^2 \Phi = 4 \pi G \rho \,. \tag{4.13}
+\]
+
+
+The linearized continuity and Euler equations now are
+\[
+\partial_t \delta \rho = - \nabla \cdot (\bar{\rho} \mathbf{u}) \,,
+\]
+\[
+\bar{\rho} \, \partial_t \mathbf{u} = - \nabla \delta P - \bar{\rho} \, \nabla \delta \Phi \,,
+\]
+where $\delta \Phi = \Phi - \bar{\Phi}$, which satisfies
+\[
+\nabla^2 \delta \Phi = 4 \pi G \, \delta \rho \,.
+\]
+
+As before, these equations can be combined into a single equation for the density fluctuation:
+\[
+\left( \frac{\partial^2}{\partial t^2} - c_s^2 \nabla^2 - 4 \pi G \bar{\rho} \right) \delta \rho = 0 \,, \tag{4.14}
+\]
+so that each Fourier mode now obeys
+\[
+\left( \frac{\partial^2}{\partial t^2} + c_s^2 k^2 - 4 \pi G \bar{\rho} \right) \delta \rho(\mathbf{k}, t) = 0 \,.
+\]
+
+We see that there is a critical wavenumber, called the \textbf{Jeans scale}, for which the frequency of oscillations is zero:
+\[
+k_J \equiv \frac{\sqrt{4 \pi G \bar{\rho}}}{c_s} \,. \tag{4.15}
+\]
+
+The nature of the solution depends on the size of the wavenumber $k$ relative to $k_J$. For large wavenumbers (i.e., small wavelengths), $k \gg k_J$, the pressure dominates and we find the same oscillations as before. However, on large scales, $k < k_J$, gravity dominates and the equation becomes
+\[
+\left( \frac{\partial^2}{\partial t^2} - 4 \pi G \bar{\rho} \right) \delta \rho = 0 \,. \tag{4.16}
+\]
+
+The solutions to this equation take the form $\delta \rho \propto \exp(\pm t/\tau)$, where $\tau \equiv 1/\sqrt{4 \pi G \bar{\rho}}$. The exponential growth of the fluctuations is called the \textbf{Jeans instability}.
+
+
+\subsubsection{Perturbations In Expanding Spacetime}
+
+We interpret the coordinates appearing in the fluid equations in previous subsections as physical coordinates $\mathbf{r}$, and write them in terms of the comoving coordinates $\mathbf{x}$,
+\[
+\mathbf{r}(t) = a(t)\mathbf{x} \tag{4.17}
+\]
+
+By differentiating it, we get:\\
+
+\[\dot{\mathbf{r}}(t) = \dot{a}(t)\mathbf{x} + a(t)\dot{\mathbf{x}} \]
+
+The velocity field is then given by
+\[
+\mathbf{u}(t) = \dot{\mathbf{r}}(t) = H(t)\mathbf{r} + \mathbf{v}(t),
+\]
+
+
+where \( H\mathbf{r} \) is the \textit{Hubble flow} and \( \mathbf{v} = a\dot{\mathbf{x}} \) is the (physical) \textit{peculiar velocity}. Note that \(H=\frac{\dot{a}}{a}\)
+
+
+ In a static spacetime, the derivatives \( \partial_t \) and \( \nabla \) are independent, while in an expanding spacetime they are not. Consider, for example, the time derivative of a function \( f(t, \mathbf{r}) = f(t, a(t)\mathbf{x}) \) at fixed \( \mathbf{x} \),
+
+\[
+\left( \frac{\partial f}{\partial t} \right)_{\mathbf{x}} = \left( \frac{\partial f(t, a(t)\mathbf{x})}{\partial t} \right)_{\mathbf{x}} = \left( \frac{\partial f}{\partial t} \right)_{\mathbf{r}} + \frac{\partial (a(t)\mathbf{x})}{\partial t} \cdot \left( \nabla_{\mathbf{r}} f \right)_t = \left( \frac{\partial f}{\partial t} \right)_{\mathbf{r}} + H\mathbf{r} \cdot \nabla_{\mathbf{r}} f ,
+\]
+
+where \( \nabla_{\mathbf{r}} \) is the gradient with respect to \( \mathbf{r} \) at fixed \( t \). In terms of \( \nabla_{\mathbf{x}} \), the gradient with respect to \( \mathbf{x} \), we have \( \nabla_{\mathbf{r}} = a^{-1} \nabla_{\mathbf{x}} \). The above equation can also be written as
+
+\[
+\left( \frac{\partial f}{\partial t} \right)_{\mathbf{x}} = \left[ \left( \frac{\partial}{\partial t} \right)_{\mathbf{r}} - H\mathbf{x} \cdot \nabla_{\mathbf{x}} \right] f . \tag{4.18}
+\]
+
+With this in mind, let us look at the fluid equations in an expanding universe.
+
+\begin{itemize}
+    \item Applying these substitutions to the continuity equation, we get
+    \[
+    \left( \frac{\partial \rho}{\partial t} \right)_{\mathbf{x}} + \nabla_{\mathbf{x}} \cdot (\rho \mathbf{u}) = 0,
+    \]
+    \[
+    \left( \frac{\partial}{\partial t} - H\mathbf{x} \cdot \nabla_{\mathbf{x}} \right)\rho + \frac{1}{a} \nabla_{\mathbf{x}} \cdot (\rho \mathbf{u}) = 0,
+    \]
+    where we used the modified time derivative. Using \( \mathbf{u} = H\mathbf{r} + \mathbf{v} \), we then get
+    \[
+    \frac{\partial \rho}{\partial t} + 3H\rho + \frac{1}{a} \nabla \cdot (\rho \mathbf{v}) = 0 ,
+    \]
+    where we have dropped the subscripts \( \mathbf{x} \) and used \( \nabla \cdot \mathbf{x} = 3 \). In the following, all time derivatives will be at fixed \( \mathbf{x} \) and \( \nabla \) will always stand for \( \nabla_{\mathbf{x}} \).
+
+    \item Similar manipulations of the Euler equation lead to
+    \[
+    \left( \frac{\partial}{\partial t} + \frac{\mathbf{v}}{a} \cdot \nabla \right) \mathbf{u} = -\frac{1}{a} \frac{\nabla P}{\rho} - \frac{1}{a} \nabla \Phi ,
+    \]
+    where again the time derivative and velocity transformations have been used.
+
+    \item The Poisson equation simply becomes
+    \[
+    \nabla^2 \Phi = 4\pi G a^2 \rho , \tag{4.19}
+    \]
+    where the factor of \( a^2 \) accounts for the difference between physical and comoving distances.
+\end{itemize}
+
+Our task is to solve the coupled equations above. We again first find the background solution and then consider linear perturbations.\\
+
+
+\textbf{Background solution:} Setting \( v = 0 \) in the continuity and Euler equations, we get
+\[
+\frac{\partial \tilde{\rho}}{\partial t} = -3H\tilde{\rho},
+\]
+\[
+\frac{\partial \tilde{u}}{\partial t} = -\frac{1}{a}\nabla P - \frac{1}{a}\nabla \phi.
+\]
+
+Equation above is the familiar continuity equation for a homogeneous non-relativistic fluid. As expected, the background density therefore evolves as \( \tilde{\rho} \propto a^{-3} \). The Euler equation has the following solution
+\[
+\tilde{u} = H\alpha \mathbf{x}, \quad \tilde{P} = \text{const}, \quad \nabla \tilde{\phi} = -\alpha \mathbf{x}.
+\]
+
+This solution is now consistent with the Poisson equation, as long as the scale factor \( a(t) \) satisfies
+\[
+\frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\tilde{\rho},
+\]
+which is the acceleration equation found in Chapter 2.
+
+\textbf{Linearized equations:} Next, we introduce perturbations around the background solution
+\[
+\rho = \tilde{\rho}[1 + \delta], \quad \mathbf{u} = H\alpha \mathbf{x} + \mathbf{v}, \quad P = \tilde{P} + \delta P, \quad \phi = \tilde{\phi} + \delta\phi,
+\]
+where the \textbf{density contrast} is
+\[
+\delta \equiv \frac{\delta\rho}{\tilde{\rho}}.
+\]
+
+As long as \( \delta \ll 1 \), we can linearize the equations.
+
+Expanding the continuity equation to linear order in the fluctuations, we find
+\[
+\frac{\partial(\tilde{\rho}\delta)}{\partial t} + 3H\tilde{\rho}\delta + \frac{1}{a}\nabla \cdot (\tilde{\rho}\mathbf{v}) = 0.
+\]
+
+Using the background evolution \( \dot{\tilde{\rho}} = -3H\tilde{\rho} \), we obtain the following equation for the density contrast
+\[
+\boxed{\dot{\delta} = -\frac{1}{a}\nabla \cdot \mathbf{v}},
+\]
+where the overdot denotes a time derivative at fixed \( \mathbf{x} \). We see that the growth of the density perturbations is sourced by the divergence of the fluid velocity. At linear order, the vorticity of the fluid, \( \nabla \times \mathbf{u} \), therefore does not contribute. Similarly, linearizing the Euler equation gives
+\[
+\boxed{\dot{\mathbf{v}} + H\mathbf{v} = -\frac{1}{a}\nabla \delta P - \frac{1}{a}\nabla \delta \phi},
+\]
+where we have used that \( (\nabla \cdot \nabla)\mathbf{x} = \nabla \). In the absence of pressure and gravitational perturbations, this equation simply says that \( \mathbf{v} \propto a^{-1} \).
+
+Now
+
+\[
+\ddot{\delta} - \frac{H}{a}\nabla \cdot \mathbf{v} + \frac{1}{a}\nabla \cdot \dot{\mathbf{v}} = 0.
+\]
+
+Substituting the Euler equation for \( \dot{\mathbf{v}} \) and the continuity equation for \( \nabla \cdot \mathbf{v} \), this becomes
+\[
+\ddot{\delta} + 2H\dot{\delta} - \frac{1}{a^2}\left(\frac{1}{\rho}\nabla^2\delta P + \nabla^2\delta\phi\right) = 0.
+\]
+
+Next, we use \( \delta P = c_s^2 \tilde{\rho} \delta \) for the pressure perturbation and \( \nabla^2 \delta\phi = 4\pi G a^2 \tilde{\rho} \delta \) for the gravitational potential. The final evolution equation for the density contrast is
+\[
+\boxed{\ddot{\delta} + 2H\dot{\delta} - \left(\frac{c_s^2}{a^2}\nabla^2 + 4\pi G \tilde{\rho}\right)\delta = 0}. \tag{4.20}
+\]
+
+\underline{This is the main equation describing the growth of density fluctuations in an expanding universe.}
+
+\subsection{Growth Of Matter Perturbations}
+
+The Newtonian treatment of the previous section applies to non-relativistic fluids.
+Two important examples for such fluids are cold dark matter and baryons after
+decoupling. In this section, we will study the evolution of fluctuations in these
+fluids
+
+\subsubsection{Jeans Instability}
+
+
+%--- Derivation of Eq. (5.48) from Eq. (5.47) ---
+
+% Original real-space evolution equation (Eq. 5.47)
+We know that from equation (4.20)
+\[
+\ddot{\delta} + 2H\dot{\delta}
+      - \left( \frac{c_{s}^{2}}{a^{2}}\nabla^{2} + 4\pi G\bar\rho \right)\delta = 0
+
+\]
+
+ Fourier transform of the density contrast
+\[
+\delta(\mathbf x, t)=
+  \int\!\frac{d^{3}k}{(2\pi)^{3}}\,
+  \delta(\mathbf k, t)\,e^{i\mathbf k\!\cdot\!\mathbf x}.
+\]
+
+ Action of the Laplacian in Fourier space
+\[
+\nabla^{2}\delta \;\longrightarrow\; -k^{2}\,\delta(\mathbf k,t).
+\]
+
+ Substitute into Eq. (4.20)
+\[
+\ddot{\delta}(\mathbf k,t) + 2H\dot{\delta}(\mathbf k,t)
+  + \left( \frac{c_{s}^{2}k^{2}}{a^{2}} - 4\pi G\bar\rho \right)
+  \delta(\mathbf k,t) = 0.
+\]
+
+ Define the \textbf{Jeans wavenumber}
+\[
+k_{J}^{2} \equiv \frac{4\pi G\bar\rho\,a^{2}}{c_{s}^{2}}
+\quad\Longrightarrow\quad
+4\pi G\bar\rho = \frac{c_{s}^{2}k_{J}^{2}}{a^{2}}.
+\]
+
+Final Fourier-space evolution equation
+\[
+\boxed{
+\ddot{\delta}(\mathbf k,t) + 2H\dot{\delta}(\mathbf k,t)
+  + c_{s}^{2}\!\left( \frac{k^{2}}{a^{2}} - k_{J}^{2} \right)
+  \delta(\mathbf k,t) = 0
+}
+\tag{4.21}
+\]
+
+This is the wave equation in Fourier Space.
+Note that \[
+k_J^{\text{com}} = a k_J^{\text{phys}}=k_J
+\]
+
+On large scales, where \(\frac{k}{a} \ll k_J\), we can ignore the pressure term and the equation (4.20) becomes
+\[
+\ddot{\delta} + 2H\dot{\delta} - 4\pi G\bar{\rho}(t)\,\delta = 0. \tag{4.22}
+\]
+
+
+
+\begin{itemize}
+    \item For baryons, the sound speed and hence the Jeans scale is a strong function
+of time. Before recombination, the baryons are strongly coupled to the photons,
+forming a relativistic photon-baryon fluid with cs ≈ 1/√
+3. The Jeans scale is then
+of the order of the Hubble radius, so that there is no growth of baryonic fluctuations
+on subhorizon scales. After recombination, the sound speed of the baryon fluid drops
+drastically and its fluctuations start to grow.
+\item For cold dark matter, on the other hand, the sound speed is negligible at all times,
+so that subhorizon modes can start to grow earlier. The details of the growth depend
+on the evolution of the background density.
+\end{itemize}
+
+
+
+\subsubsection{Linear Growth Function}
+
+Since eq.(4.22) is a 2nd order differential equation,its solution will satisfy :\\
+\[
+\delta(\mathbf{k},t)=\delta_{+}(\mathbf{k})\,D_{+}(t)+\delta_{-}(\mathbf{k})\,D_{-}(t), \tag{4.23}
+\]
+
+Here , \(\delta_{\pm}(\mathbf{k})\) are the Fourier modes of the initial density field, and the \(k\)-independent functions \(D_{\pm}(t)\) describe the linear evolution.We refer to \(D_{+}(t)\) and \(D_{-}(t)\) as the growing and decaying modes, respectively.\\
+
+The functional form of \(D_{\pm}(t)\) will depend on the evolution of the background density.\\
+
+We are given that the scale factor in a flat matter-dominated universe evolves as:
+\[
+a(t) \propto t^{2/3}.
+\]
+
+
+
+The Hubble parameter is defined as:
+\[
+H(t) = \frac{\dot{a}(t)}{a(t)}.
+\]
+Since \( a(t) \propto t^{2/3} \), we compute:
+\[
+\dot{a}(t) = \frac{d}{dt}(t^{2/3}) = \frac{2}{3}t^{-1/3}, \quad a(t) = t^{2/3}.
+\]
+Therefore,
+\[
+H(t) = \frac{\frac{2}{3}t^{-1/3}}{t^{2/3}} = \frac{2}{3t}.
+\]
+ Mean matter density from Friedmann equation\\
+
+From the Friedmann equation in a flat universe:
+\[
+H^2 = \frac{8\pi G}{3} \bar{\rho}_m(t),
+\]
+we multiply both sides by \( \frac{3}{2} \) to get:
+\[
+4\pi G \bar{\rho}_m(t) = \frac{3}{2}H^2.
+\]
+Substitute \( H(t) = \frac{2}{3t} \) into the equation:
+\[
+4\pi G \bar{\rho}_m(t) = \frac{3}{2} \left( \frac{2}{3t} \right)^2 = \frac{3}{2} \cdot \frac{4}{9t^2} = \frac{2}{3t^2}.
+\]
+
+so finally we get:
+\[
+H(t) = \frac{2}{3t}  \tag{4.24}\]
+\[\qquad 4\pi G \bar{\rho}_m(t) = \frac{2}{3t^2}. \tag{4.25}
+\]
+
+using these,eqn.(4.22) reduces to
+\[
+\ddot{D} + \frac{4}{3t} \dot{D} - \frac{2}{3t^2} D = 0 \tag{4.26}
+\]
+
+The two solutions of this equation are
+\[
+D_{-}(t) \propto t^{-1} \propto a^{-3/2}, \quad
+D_{+}(t) \propto t^{2/3} \propto a,
+\]
+\underline{so that the density contrast grows in proportion to the scale factor, $\delta \propto a$}. Note that this means that the density fluctuation $\delta\rho$ is still decreasing, since $\delta\rho = \bar{\rho} \delta \propto a^{-2}$, but not as fast as the background density, $\bar{\rho} \propto a^{-3}$.\\
+
+
+
+*************\\
+
+Next, we want to determine how the dark matter fluctuations evolve during
+the radiation era.Equation for the dark matter density contrast is:\\
+\[
+\ddot{\delta}_c + 2H\dot{\delta}_c - 4\pi G \sum_a \bar{\rho}_a \delta_a = 0 \tag{4.27}
+\]
+
+During the radiation era, baryons are strongly coupled to the photons and are therefore included in the radiation fluid. The sum in (4.27) has two contributions—from dark matter and radiation:
+\[
+\bar{\rho}_c \delta_c + \bar{\rho}_r \delta_r.
+\]
+Since the radiation
+fluid has a large sound speed, we expect its fluctuations to oscillate on scales smaller 
+than the horizon.These oscillations imply that the time-averaged density contrast of the radiation vanishes. In this case, dark matter is the only clustering component and we can write eq.(4.27) as
+\[
+\ddot{\delta}_c + 2H \dot{\delta}_c - 4\pi G \bar{\rho}_c \delta_c = 0. \tag{4.28}
+\]
+
+The growth factor of the dark matter perturbations satisfies
+\[
+\ddot{D} + \frac{1}{t} \dot{D} = 0.
+\]
+
+The two solutions of this equation are
+\[
+D_{-}(t) \propto \text{const}, \quad D_{+}(t) \propto \ln t \propto \ln a.
+\]
+
+We see that the dark matter perturbations only grow logarithmically during the radiation era. This suppressed growth is called the \textbf{Mészáros effect}.\\
+
+**********\\
+
+Finally, let us show that the growth of perturbations stops when dark energy starts to dominate the universe. Since dark energy doesn’t cluster, it doesn’t contribute as a source in the Poisson equation. The evolution equation for matter fluctuations (dark matter and baryons) therefore is
+\[
+\ddot{\delta}_m + 2H\dot{\delta}_m - 4\pi G\bar{\rho}_m \delta_m = 0,
+\]
+where \( H \approx \text{const} \) during dark energy domination. Since \( 4\pi G \bar{\rho}_m \ll H^2 \), we can drop the last term and the equation for the growth function becomes
+\[
+\ddot{D} + 2H\dot{D} = 0.
+\]
+
+The two solutions of this equation are
+\[
+D_{-}(t) \propto a^{-2}, \quad D_{+}(t) \propto \text{const},
+\]
+which confirms that the growth of structure halts in the dark energy era.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
