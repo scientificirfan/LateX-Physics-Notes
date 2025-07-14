@@ -1,0 +1,346 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{abstract}
+
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+
+% ---- Page Style ----
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Scientificirfan}
+\lhead{}
+\rfoot{\thepage}
+
+
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize}{\thesubsection}{1em}{}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\LARGE \textbf{The Reissner–Nordström Black hole}}\\[2cm]
+    {\large Scientificirfan }\\[0.5cm]
+    {\large April 14, 2025}\\[2cm]
+
+    
+    \textbf{Introduction }:\\
+    
+  A Reissner-Nordström black hole is a theoretical type of black hole characterized by having mass and electric charge, but no spin . It is a static, spherically symmetric solution to the Einstein-Maxwell field equations, describing the gravitational field of a charged, non-rotating body . Discovered between 1916 and 1921, this model differs from a standard Schwarzschild black hole by possessing two horizons when its mass is greater than its charge: an outer event horizon and an inner Cauchy horizon . If the mass and charge are equal, the horizons merge to form an "extremal" black hole . However, if the charge were to exceed the mass, no event horizon could form, which would result in a naked singularity
+   
+    \end{abstract}
+    \end{onehalfspacing}
+\end{titlepage}
+
+% Table of Contents
+
+
+   \item \LARGE \textbf{ \quad Electrodynamics in Special Relativity}  
+    \begin{itemize}[leftmargin=1.5em,label={},itemsep=0.25em]
+       
+    \end{itemize}
+
+
+Maxwell’s equations describe the generation and interaction of electric and magnetic fields with each other and by charges and currents. With the electric field $\mathbf{E}$, magnetic field $\mathbf{B}$, charge density $\rho$ and current density $\mathbf{J}$, Maxwell’s equations are
+
+\begin{align}
+\nabla \cdot \mathbf{E} &= \frac{\rho}{\epsilon_0} \tag{} \\
+\nabla \cdot \mathbf{B} &= 0 \tag{} \\
+\nabla \times \mathbf{E} &= -\frac{\partial \mathbf{B}}{\partial t} \tag{} \\
+\nabla \times \mathbf{B} &= \mu_0 \mathbf{J} + \mu_0 \epsilon_0 \frac{\partial \mathbf{E}}{\partial t} \tag{}
+\end{align}
+
+The Maxwell's equations in covariant form are written as;
+
+\begin{align}
+F^{\alpha\beta}_{\ ,\beta} &= -\mu_0 j^{\alpha} \\
+F_{\alpha\beta,\gamma} + F_{\beta\gamma,\alpha} + F_{\gamma\alpha,\beta} &= 0
+\end{align} \\
+The em stress-energy tensor is given by
+\[
+T^{\alpha\beta} = \frac{1}{\mu_0} \left( \frac{1}{4} \eta^{\alpha\beta} F^{\mu\nu} F_{\mu\nu} - F^{\alpha\mu} F^{\beta}_{\ \mu} \right)
+\] \\
+The em field tensor is given in the matrix form as:
+F^{\alpha\beta} =
+\left(
+\begin{array}{cccc}
+0 & -E_x & -E_y & -E_z \\
+E_x & 0 & -B_z & B_y \\
+E_y & B_z & 0 & -B_x \\
+E_z & -B_y & B_x & 0
+\end{array}
+\right)
+
+The em field stress-energy tensor is given by\\
+T^{\alpha\beta} = \frac{1}{\mu_0} \left( \frac{1}{4} \eta^{\alpha\beta} F^{\mu\nu} F_{\mu\nu} - F^{\alpha\mu}F^{\beta\mu} \right)
+
+\textbf{Einstein' Field Equation}\\
+%R_{\alpha\beta }-\frac{1}{2}Rg_{\alpha\beta}=\frac{8\pi\G}{c^4}
+R_{\alpha\beta} - \frac{1}{2} R g_{\alpha\beta} = \frac{8\pi G}{c^4} T_{\alpha\beta}
+\newpage
+
+We can write this as also:
+R_{\alpha\beta}=\frac{8\pi G}{c^4} (T_{\alpha\beta}-\frac{1}{2}Tg_{\alpha\beta})\\
+
+\textbf{Derivation of Reissner-Nordstrom Metric :}\\
+In order to derive it,we all use the following assumptions:\\
+1. Static and spherically symmetric body of mass m.
+2. The body is charged with charge of Q.\\
+3. There is only an em field only and vacuum outside this mass.
+4. \text{The spacetime is asymptotically flat, which means} \quad \lim_{r \to \infty} g_{\mu\nu}(r) = \eta_{\mu\nu}.\\
+5. As \( Q \to 0 \), this metric reduces to the Schwarzschild metric.\\
+
+Let's assume the form of the spacetime metric for the charged blackhole is as follow:\\
+\[
+ds^2 = A(t, r)\,c^2\,dt^2 - B(t, r)\,dr^2 - r^2 \sin^2\theta\,d\phi^2
+\]
+
+The corresponding metric tensor \( g_{\alpha\beta} \) in coordinates \( (t, r, \theta, \phi) \) is:
+g_{\alpha\beta} =
+\left(
+\begin{array}{cccc}
+A(t, r)\,c^2 & 0 & 0 & 0 \\
+0 & -B(t, r) & 0 & 0 \\
+0 & 0 & -r^2 & 0 \\
+0 & 0 & 0 & -r^2 \sin^2\theta
+\end{array}
+\right)
+\section{Calculatiopn of Christoffel Symbols Components}
+In order to calculate the Christoffel symbolls ,we use the following equation:\\
+\[
+\Gamma^{\lambda}_{\alpha\beta} = \frac{1}{2} g^{\lambda\mu} \left(
+\partial_\alpha g_{\beta\mu} +
+\partial_\beta g_{\mu\alpha} -
+\partial_\mu g_{\alpha\beta}
+\right)
+\]
+
+To calculate \(\Gamma^{0}_{00}\), we use the general formula for Christoffel symbols:
+\[
+\Gamma^\lambda_{\mu\nu} = \frac{1}{2} g^{\lambda\rho} \left( \partial_\mu g_{\rho\nu} + \partial_\nu g_{\rho\mu} - \partial_\rho g_{\mu\nu} \right)
+\]
+
+Substituting \(\lambda = 0\), \(\mu = 0\), \(\nu = 0\), we get:
+\[
+\Gamma^0_{00} = \frac{1}{2} g^{0\rho} \left( \partial_0 g_{\rho 0} + \partial_0 g_{\rho 0} - \partial_\rho g_{00} \right)
+\]
+
+\[
+= \frac{1}{2} g^{0\rho} \left( 2 \partial_0 g_{\rho 0} - \partial_\rho g_{00} \right)
+\]
+
+Assuming a diagonal metric such that \(g_{\rho 0} = 0\) for \(\rho \neq 0\), and only \(g_{00} \neq 0\), we consider only \(\rho = 0\) term:
+\[
+\Gamma^0_{00} = \frac{1}{2} g^{00} \left( 2 \partial_0 g_{00} - \partial_0 g_{00} \right)
+= \frac{1}{2} g^{00} \partial_0 g_{00}
+\]
+
+\[
+\boxed{\Gamma^0_{00} = \frac{1}{2} g^{00} \partial_0 g_{00}} = \frac{1}{2} \frac{1}{A} {\frac{1}{c} \partial_t A} =\frac{\dot{A}}{2AC}
+
+
+\]
+ Similarly all other non-zero Christoffel symbolls can be calculated and they are written below:\\
+ \begin{multicols}{2}
+ 
+1. \boxed{\Gamma^0_{00} = \frac{\dot{A}}{2AC}\\
+2. \boxed{\Gamma^1_{01} =\boxed{\Gamma^1_{10} = \frac{\dot{B}}{2Bc}\\
+
+3. \boxed{\Gamma^0_{01} =\boxed{\Gamma^0_{10} = \frac{A'}{2A}\\
+
+4.  \boxed{\Gamma^2_{12} =\boxed{\Gamma^2_{21} = \frac{1}{r}\\
+
+5.  \boxed{\Gamma^3_{13} =\boxed{\Gamma^3_{31} =  \frac{1}{r}\\
+
+6.  \boxed{\Gamma^3_{23} =\boxed{\Gamma^3_{32}=   cot\theta \\
+
+7.  \boxed{\Gamma^2_{33}= -sin\theta cos\theta\\
+8.  \boxed{\Gamma^0_{11}=  \frac{\dot{B}}{2Ac}\\
+
+9.  \boxed{\Gamma^1_{00}=   \frac{A'}{2B}\\
+10.  \boxed{\Gamma^1_{11}=  \frac{B'}{2B}\\
+
+11.  \boxed{\Gamma^1_{22}=  \frac{-r}{B}\\
+12.   \boxed{\Gamma^1_{33}=  \frac{-rsin^2\theta}{B}  
+\end{multicols}
+Please note that prime(') represents derivative w.r.t. r and dot(.) represents derivative w.r.t. time t.
+
+\section{Calculation of Ricci tensor components}
+
+The Ricci Tensor is given by:\\
+R_{\alpha\beta} = \partial_\mu \Gamma^\mu_{\alpha\beta}
+           - \partial_\beta\Gamma^\mu_{\alpha\mu}
+           + \Gamma^\mu_{\nu\beta} \Gamma^\nu_{\alpha\beta}
+           - \Gamma^\mu_{\nu\beta} \Gamma^\nu_{\alpha\mu}\\
+           
+To Calculate R_{01}, \\
+
+R_{01}= \partial_\mu \Gamma^\mu_{01}-\partial_{1} \Gamma^\mu_{0\mu}+\Gamma^\mu_{\nu\mu}\Gamma^\nu_{01}-\Gamma^\mu_{\nu 1}\Gamma^\nu_{0\mu}\\
+
+Using non-zero values of Christofell symbols, we get\\
+
+R_{01}=\frac{\dot{B}}{Brc}\\
+
+similarly we  get all the non-zero components of the Ricci Tensor:\\
+
+R_{00}= -\frac{A'}{4B}(\frac{A'}{A}+\frac{B'}{B})+\frac{A''}{2B}+\frac{A''}{Br}-\frac{\ddot{B}}{4Bc^2}+\frac{\dot{B}}{4Bc^2}(\frac{\dot{A}}{A}-\frac{\dot{B}}{B})\\
+
+R_{11}=\frac{A'}{4A}(\frac{A'}{a}+\frac{B'}{B})-\frac{A''}{2A}+\frac{B'}{Br}-\frac{\ddot{B}}{2Ac^2}-\frac{\dot{B}}{4Ac^2}(\frac{\dot{A}}{A}-\frac{\dot{B}}{B})\\
+
+R_{22}=-\frac{r}{2B}(\frac{A'}{A}-\frac{B'}{B})-\frac{1}{B}+1\\
+
+R_{33}= R_{22}sin^2\theta\\
+
+R_{01}=R_{10}=\frac{\dot{B}}{Brc}\\
+
+Due to spherical symmetry,the electric field should have only radial component and so\\
+E_{r}=E_{1}=E_{1}(t,r)=cF_{01}=-cF_{10}\\
+
+All other components are zero since there are no currents or magnetic monopoles. Therefore,we have\\
+
+F_{\alpha\beta} =
+\left(
+\begin{array}{cccc}
+0 & \frac{E_r}{c} & 0 & 0 \\
+\frac{-E_r}{c} & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{array}
+\right)\\
+
+We know that \\
+
+T_{\alpha\beta}=\frac{1}{\mu_o}(\frac{1}{4}g_{\alpha\beta}F_{\mu\nu}F^{\mu\nu}-g_{\beta\nu}F_{\alpha\mu}F^{\nu\mu})\\
+
+Now we evaluate the following:\\
+
+
+\(\frac{1}{4} g_{\alpha\beta} F_{\mu\nu} F^{\mu\nu}\\
+=\frac{1}{4} g_{\alpha\beta} \left( F_{\mu 0} F^{\mu 0} + F_{\mu 1} F^{\mu 1} \right)\\
+=\frac{1}{4} g_{\alpha\beta} (F_{10}F^{10}+F_{01}F^{01})
+=\frac{1}{4} g_{\alpha\beta}(2F_{01}F^{01})
+=\frac{1}{2} g_{\alpha\beta} F_{01}F^{01}
+\)\\
+
+and also\\
+\(g_{\beta\nu} F_{\alpha\mu}F^{\nu\mu}= g_{\beta\1}F_{\alpha\0}F^{10}+g_{\beta 0}F_{\alpha 1}F^{\01}\\
+\)
+
+Now we evaluate the corresponding non-zero components of energy-momentum tensor:\\
+T_{\alpha\beta}= \frac{1}{\mu o} (\frac{1}{2}g_{\alpha\beta}F_{01}F^{01}-g_{\beta 1}F_{\alpha 0}F^{10}-g_{\beta 0}F_{\alpha 1}F^{01})
+
+
+T_{00}=-\frac{1}{2\mu o}AF_{01}F^{01}\\
+T_{11}= \frac{1}{2\mu o}BF_{01}F^{01}\\
+T_{22}= -\frac{1}{2\mu o}r^2F_{01}F^{01}\\
+T_{33}= T_{22}sin^2\theta\\
+
+Since T_{01}=0, R_{01}=R_{10}=0 \\
+
+and using a value of R_{10}, we have
+\frac{\dot{B}}{Brc}=0 => B=constant\\
+Also , \frac{T_{00}}{A}+\frac{T_{11}}{B}=0 => \frac{R_{00}}{A}+\frac{R_{11}}{B}=0 = \frac{1}{rB}(\frac{A'}{A}+\frac{B'}{B})=> \frac{A'}{A}+\frac{B'}{B}=0=> \frac{\partial}{\partial r}ln(AB)=0 => AB=const.=f(t) \\
+
+We have that A=g_{00}  and  B=-g_{00} => g_{00}=-\frac{f}{g_{11}}\\
+Since  F_{\mu\nu}=g_{\mu\alpha}g_{\nu\beta}F^{\alpha\beta}\\
+
+we have : F_{01}=g_{00}g_{11}F^{01}=-f(t)F^{01}\\
+
+We know that : F_{\alpha\beta};\gamma+F_{\beta\gamma};\alpha+F_{\gamma\alpha};\beta=0=>F_{01};0+F_{10};0+F_{00};1=0 => F_{01};0+F_{10};0=0\\
+
+We also know that F^{\alpha\beta};\beta=0  and T^{\alpha\beta};r = \partial_{r}T^{\alpha\beta}+\boxed{\Gamma^\alpha_{\mu\gamma}T^{\mu\beta}+\boxed{\Gamma^\beta_{\mu\beta}}T^{\alpha\mu} \\
+for \alpha=1 and \beta=0, we have : \\
+
+0= \partial_{0}F^{10}+CF^{\mu 0}+\boxed{\Gamma^0_{\mu 0}}F^{1 \mu}\\
+
+the second and the third terms vanish so that \\
+
+
+\partial_0 F^{10} = 0 \Rightarrow -\partial_0( \frac{E_r}{c}) = 0 \Rightarrow E = E(r)\\
+
+\quad \text{therefore, the electric field is  time independent} \\
+
+For \alpha=0  and \beta=1 ,we have:  \partial_{1}F^{01}+\boxed{\Gamma^0_{\mu \beta}F^{\mu\beta}+\boxed{\Gamma^\beta_{\mu \beta}F^{0 \mu}=0 ---- (1)\\
+2nd term vanishes as before but 3rd term doesn't;\\
+
+\boxed{\Gamma^\beta_{\mu \beta}F^{0 \mu}= \boxed{\Gamma^\beta_{1 \beta}F^{01=F^{01}(\boxed{\Gamma^0_{1 0}+\boxed{\Gamma^1_{11}+\boxed{\Gamma^2_{12}+\boxed{\Gamma^3_{13})\\
+=F^{01}(\frac{A'}{2A}+\frac{B'}{2B}+\frac{2}{r})=\frac{2}{r}F^{01}\\
+
+ and since\\
+ \(\frac{A'}{2A}+\frac{B'}{2B}=0 \)
+ 
+ using this in equation (1) we have\\
+ 
+\( \frac{\partial}{\partial_r}F^{01}=-\frac{2}{r}F^{01}=> F^{01}=\frac{E_{r}}{c}=\frac{C}{r^2},where C is const of integration \) 
+ By Gauss' law, E_{r}= \frac{Q}{4\pi\epsilon_{o}r^2}, therefore, C=\frac{Q}{4\pi\epsilon_{o}}\\
+  hence, \( E_{r}= \frac{Q}{4\pi\epsilon_{o}r^2} \)
+Now since T=0, we have : \( R_{\alpha\beta}=\frac{8\pi G}{c^4}T_{\alpha\beta} \)
+using values of R_{22} and T_{22}, and solving for A,we get: A=f(t)+\frac{GQ^2}{4\pi\epsilon_{o}c^4r^2}+\frac{C(t}{r}\\
+when Q = 0,\text{ the metric should reduce to the Schwarzschild metric, so} \\
+1-\frac{2GM}{rc^2}=f(t)+0+\frac{C(t)}{r} => f(t)=1 and C(t)=-\frac{2GM}{c^2}=-r_{s} \\
+So now we have; \\
+
+\(A= 1-\frac{r_{s}}{r}+ \frac{(r_{Q})^2}{r^2} \) and since AB=f(t)=1,we have the obtained the \textbf{ Reissner-Nordstrom metric}:\\
+
+
+g_{\alpha\beta} =
+\left(
+\begin{array}{cccc}
+1-\frac{r_{s}}{r}+ \frac{(r_{Q})^2}{r^2} & 0 & 0 & 0 \\
+0 & -(1-\frac{r_{s}}{r}+ \frac{(r_{Q})^2}{r^2})^{-1} & 0 & 0 \\
+0 & 0 & -r^2 & 0 \\
+0 & 0 & 0 & -r^2sin^2\theta
+\end{array}
+\right)\\
+
+
+\section{Applications of Reissner-Nordstrom Metric :}
+
+\textbf{1. Gravitaional Time Dialation}\\
+
+
+Consider some fixed point in space. With constant \( r, \theta \) and \( \phi \), we have that 
+\( dr, d\theta \) and \( d\phi \) is zero and the metric becomes
+\[
+ds^2 = \left(1 - \frac{r_s}{r} + \frac{r_Q^2}{r^2} \right)c^2 dt^2.
+\]
+
+Using that \( ds^2 = c^2 d\tau^2 \), we obtain
+\[
+d\tau = dt \sqrt{1 - \frac{r_s}{r} + \frac{r_Q^2}{r^2}}
+\]
+
+\noindent
+\( dt \) can be interpreted as an infinitesimal time interval measured by an observer that is infinitely far away from a gravitational body, while \( d\tau \) is the interval measured by an observer at a distance \( r \) from the center of the body. 
+
+\textcolor{blue}{We then have that \( d\tau < dt \). This means that the far-away observer will measure the clock that is closer to the body run slower by a factor of}
+\[
+\boxed{\sqrt{1 - r_s/r + r_Q^2/r^2}}.
+\]
+
+\textbf{2. Naked Singularity}\\
+
+
+Consider now the situation when $r_s < 2r_Q$. In this case there are no singularities when $r > 0$, and therefore no event horizons. The singularity at $r = 0$ does still exist, which means that there is no event horizon preventing someone far away from directly observing this singularity. A singularity with this property (i.e., no event horizon ``hiding'' it) is called a naked singularity. It is widely believed, but not proven, that no naked singularity (except maybe the one occurring in the Big Bang model) exists in the universe.\\
+
+
+\end{document}
+
+
+
+
+
+
+
