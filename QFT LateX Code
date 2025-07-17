@@ -1,0 +1,4726 @@
+\documentclass[12pt]{article}
+
+% ---- Packages ----
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage[table]{xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{simplewick}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{slashed}
+\usepackage{mathtools}
+
+
+
+% ---- Page Style ----
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Scientificirfan — QFT Notes}
+\lhead{}
+\rfoot{\thepage}
+
+% ---- Custom Commands ----
+\newcommand{\mpl}{M_{\text{Pl}}}
+\newcommand{\Hubble}{\mathcal{H}}
+
+% ---- Title ----
+\title{\huge{\textbf{Quantum Field Theory Notes}}\\
+\large \textit{Introduction to QFT}}
+\author{Scientificirfan}
+\date{\today}
+
+% ---- Document ----
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ---- Example Section ----
+\section{\huge \textbf{Classical Field Theory}}
+
+In this section we review some of the formalism of classical field theory that 
+will be necessary in our subsequent discussion of quantum field theory.
+
+\subsection{Lagrangian Field Theory}
+
+The action \mathbf{S} of a field \(\phi (x)\) is given by:
+\[
+S = \int L\,dt = \int \mathcal{L}(\phi, \partial_\mu \phi)\, d^4x. \tag{1.1}
+\]
+
+\textbf{Principle of Least Action},
+
+We begin with the variation of the action
+\[
+0 = \delta S
+   = \int d^4x \left\{
+       \frac{\partial\mathcal{L}}{\partial\phi}\,\delta\phi
+       + \frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)}\,
+         \delta(\partial_\mu\phi)
+     \right\}.
+\]
+
+Integrate the second term by parts and drop the boundary term\footnote{
+The boundary term vanishes if $\delta\phi$ (or at least its normal component) is set to zero at spatial and temporal infinity.}:
+\[
+0 = \int d^4x \left\{
+      \frac{\partial\mathcal{L}}{\partial\phi}\,\delta\phi
+      - \partial_\mu
+        \!\left( \frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)} \right)
+        \delta\phi
+    \right\}.
+\]
+
+Since the variation $\delta\phi$ is arbitrary inside the integration region, the integrand must vanish identically:
+
+\[
+\boxed{%
+\frac{\partial\mathcal{L}}{\partial\phi}
+\;-\;
+\partial_\mu
+\!\left(
+  \frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi)}
+\right)
+\,=\,0}, \tag{1.2}
+\]
+
+which is the \textbf{Euler–Lagrange equation} for a scalar field~$\phi$.
+
+\subsection{Hamiltonian Field Theory}
+
+
+\[
+p(\mathbf{x}) \equiv \frac{\partial \mathcal{L}}{\partial \dot{\phi}(\mathbf{x})}
+= \frac{\partial}{\partial \dot{\phi}(\mathbf{x})} \int \mathcal{L}(\phi(\mathbf{y}), \dot{\phi}(\mathbf{y}))\, d^3y
+\sim \frac{\partial}{\partial \dot{\phi}(\mathbf{x})} \sum_{\mathbf{y}} \mathcal{L}(\phi(\mathbf{y}), \dot{\phi}(\mathbf{y}))\, d^3y
+= \pi(\mathbf{x}) d^3x,
+\]
+
+where
+
+\[
+\pi(\mathbf{x}) \equiv \frac{\partial \mathcal{L}}{\partial \dot{\phi}(\mathbf{x})} \tag{1.3}
+\]
+
+is called the \textit{momentum density} conjugate to $\phi(\mathbf{x})$. Thus the Hamiltonian can be written
+
+\[
+H = \sum_{\mathbf{x}} p(\mathbf{x}) \dot{\phi}(\mathbf{x}) - \mathcal{L}. \tag{1.4}
+\]
+
+Passing to the continuum, this becomes
+
+\[
+H = \int d^3x \left[ \pi(\mathbf{x}) \dot{\phi}(\mathbf{x}) - \mathcal{L} \right] \equiv \int d^3x\, \mathcal{H}. \tag{1.5}
+\]
+
+We will rederive this expression for the Hamiltonian density $\mathcal{H}$ near the end of this section, using a different method.
+
+
+
+
+
+
+
+\subsection*{Derivation of the Klein-Gordon Equation}
+
+We begin with the Lagrangian density for a real scalar field $\phi(x)$:
+\[
+\mathcal{L} = \frac{1}{2} \partial^\mu \phi \, \partial_\mu \phi - \frac{1}{2} m^2 \phi^2 \tag{1.6}
+\]
+
+We apply the Euler-Lagrange equation for fields:
+\[
+\frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = 0
+\]
+
+We compute each term separately.
+
+First, compute the partial derivative with respect to $\phi$:
+\[
+\frac{\partial \mathcal{L}}{\partial \phi} = - m^2 \phi
+\]
+
+Second, compute the derivative with respect to $\partial_\mu \phi$:
+\[
+\frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} = \partial^\mu \phi
+\]
+\[
+\Rightarrow \quad \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = \partial_\mu \partial^\mu \phi = \Box \phi
+\]
+
+Substituting into the Euler-Lagrange equation:
+\[
+- m^2 \phi - \Box \phi = 0
+\quad \Rightarrow \quad
+\Box \phi + m^2 \phi = 0
+\]
+
+Thus, we arrive at the \textbf{Klein-Gordon equation}:
+\[
+\boxed{ \left( \Box + m^2 \right) \phi = 0 } \tag{1.7}
+\]
+
+In terms of time and space derivatives:
+\[
+\boxed{ \left( -\frac{\partial^2}{\partial t^2} + \nabla^2 - m^2 \right) \phi = 0 } \tag{1.8}
+\]
+
+
+
+\subsection*{Derivation of the Hamiltonian for a Real Scalar Field}
+
+We begin with the Lagrangian density:
+\[
+\mathcal{L} = \frac{1}{2} \dot{\phi}^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2} m^2 \phi^2
+\]
+
+The canonical momentum conjugate to $\phi$ is defined as:
+\[
+\pi(x) = \frac{\partial \mathcal{L}}{\partial \dot{\phi}} = \dot{\phi}
+\]
+
+The Hamiltonian density is then given by:
+\[
+\mathcal{H} = \pi \dot{\phi} - \mathcal{L}
+\]
+
+Substitute $\pi = \dot{\phi}$:
+\[
+\mathcal{H} = \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2
+\]
+
+Hence, the total Hamiltonian becomes:
+\[
+H = \int d^3x\, \mathcal{H} 
+= \int d^3x \left[ \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \right] \tag{1.9}
+\]
+
+
+
+\subsection{Noether's Theorem}
+
+It is the relationship between symmetries and conservation 
+laws.\\
+1.\textbf{Field Transformation:}\\
+
+
+This theorem concerns continuous transformations on the fields $\phi$, which in infinitesimal form can be written as
+\[
+\phi(x) \rightarrow \phi'(x) = \phi(x) + \alpha \, \Delta \phi(x), \tag{1.10}
+\]
+where $\alpha$ is an infinitesimal parameter, and $\Delta \phi(x)$ is a transformation of the field configuration.\\
+
+
+If the action S remains invariant under the transformation (1.10),then this a symmetry.\\
+
+
+
+
+
+
+Under this transformation, the Lagrangian $\mathcal{L}$ is generally not strictly invariant, but it is allowed to change by a total derivative (or 4-divergence):
+\[
+\mathcal{L}(x) \rightarrow \mathcal{L}'(x) = \mathcal{L}(x) + \alpha \, \partial_\mu J^\mu(x). \tag{1.11}
+\]
+
+Even though the Lagrangian changes, the action remains invariant because the change is a total derivative:
+\[
+S = \int d^4x \, \mathcal{L}(x) \rightarrow S' = \int d^4x \, \left[ \mathcal{L}(x) + \alpha \, \partial_\mu J^\mu(x) \right].
+\]
+
+Using Gauss's theorem, the integral of a total divergence over all spacetime becomes a boundary term:
+\[
+\int d^4x \, \partial_\mu J^\mu(x) = \int_{\partial (\text{spacetime})} J^\mu \, dS_\mu,
+\]
+which vanishes under the assumption that the fields vanish at spatial infinity. Therefore, the action remains invariant under the transformation.Now ,\\
+
+
+\begin{align*}
+\alpha \Delta \mathcal{L} &= \frac{\partial \mathcal{L}}{\partial \phi} (\alpha \Delta \phi) + \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \partial_\mu (\alpha \Delta \phi) \\
+&= \alpha \, \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \Delta \phi \right) + \alpha \left[ \frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) \right] \Delta \phi.
+\end{align*}
+
+
+The second term vanishes by the Euler-Lagrange equation(1.2). We set the remaining term equal to $\alpha \partial_\mu \mathcal{J}^\mu$ and find
+
+\[
+\partial_\mu j^\mu(x) = 0, \qquad \text{for} \qquad j^\mu(x) = \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \Delta \phi - \mathcal{J}^\mu. \tag{1.12}
+\]
+
+ This result states that the current $j^\mu(x)$ is conserved. \textbf{For each continuous symmetry of $\mathcal{L}$, we have such a conservation law.}
+
+The conservation law can also be expressed by saying that the charge
+\[
+Q \equiv \int_{\text{all space}} j^0 \, d^3 x \tag{1.13}
+\]
+is a constant in time.\\
+
+2.\textbf{Spacetime Transformation:}\\
+
+
+
+Noether's theorem can also be applied to spacetime transformations such as translations and rotations. We can describe the infinitesimal translation
+\[
+x^\mu \to x^\mu - a^\mu
+\]
+alternatively as a transformation of the field configuration
+\[
+\phi(x) \to \phi(x + a) = \phi(x) + a^\mu \partial_\mu \phi(x).
+\]
+
+
+
+The Lagrangian is also a scalar, so it must transform in the same way:
+\[
+\mathcal{L} \to \mathcal{L} + a^\mu \partial_\mu \mathcal{L} = \mathcal{L} + a^\nu \partial_\mu (\delta^\mu_\nu \mathcal{L}).
+\]
+
+Comparing this equation to (1.11), we see that we now have a nonzero $\mathcal{J}^\mu$. Taking this into account, we can apply the theorem to obtain four separately conserved currents:
+\[
+T^\mu_{\ \nu} \equiv \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \, \partial_\nu \phi - \mathcal{L} \delta^\mu_\nu. \tag{1.14}
+\]
+
+\textit{This is precisely the \textbf{stress-energy tensor}, also called the \textbf{energy-momentum tensor}, of the field $\phi$.} The conserved charge associated with time translations is the Hamiltonian:
+\[
+H = \int T^{00} \, d^3 x = \int \mathcal{H} \, d^3 x. \tag{1.15}
+\]
+
+ The conserved charges associated with spatial translations are
+\[
+P^i = \int T^{0i} \, d^3 x = - \int \pi \, \partial_i \phi \, d^3 x, \tag{1.16}
+\]
+and we naturally interpret this as the (physical) momentum carried by the field (not to be confused with the canonical momentum).
+
+
+\subsection{The Klein-Gordon Field as Harmonic Oscillators}
+
+For a discrete system of one or more particles in classical mechanics, the commutation relations are
+\[
+[q_i, p_j] = i \delta_{ij};
+\]
+\[
+[q_i, q_j] = [p_i, p_j] = 0.
+\]
+
+
+For a continuous system the generalization is quite natural; since $\pi(\mathbf{x})$ is the momentum \textit{density}, we get a Dirac delta function instead of a Kronecker delta:
+\[
+[\phi(\mathbf{x}), \pi(\mathbf{y})] = i \delta^{(3)}(\mathbf{x} - \mathbf{y}); \tag{1.17}
+\]
+\[
+[\phi(\mathbf{x}), \phi(\mathbf{y})] = [\pi(\mathbf{x}), \pi(\mathbf{y})] = 0. \tag{1.18}
+\]
+These are equal time commuation relations.\\
+
+
+If we expand the classical Klein-Gordon field as
+\[
+\phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} e^{i \mathbf{p} \cdot \mathbf{x}} \, \phi(\mathbf{p}, t) \tag{1.19}
+\]
+(with $\phi^*(\mathbf{p}) = \phi(-\mathbf{p})$ so that $\phi(\mathbf{x})$ is real), the Klein-Gordon equation becomes
+\[
+\left[ \frac{\partial^2}{\partial t^2} + (|\mathbf{p}|^2 + m^2) \right] \phi(\mathbf{p}, t) = 0. \tag{1.20}
+\]
+
+This is the same as the equation of motion for a simple harmonic oscillator with frequency
+\[
+\omega_p = \sqrt{|\mathbf{p}|^2 + m^2}. \tag{1.21}
+\]
+
+The simple harmonic oscillator is a system whose spectrum we already know how to find. Let us briefly recall how it is done. We write the Hamiltonian as
+\[
+H_{\text{SHO}} = \frac{1}{2} p^2 + \frac{1}{2} \omega^2 \phi^2. \tag{1.22}
+\]
+
+To find the eigenvalues of $H_{\text{SHO}}$, we write $\phi$ and $p$ in terms of ladder operators:
+\[
+\phi = \frac{1}{\sqrt{2\omega}} (a + a^\dagger); \qquad p = -i \sqrt{\frac{\omega}{2}} (a - a^\dagger). \tag{1.23}
+\]
+
+The canonical commutation relation $[\phi, p] = i$ is equivalent to
+\[
+[a, a^\dagger] = 1. \tag{1.24}
+\]
+
+The Hamiltonian can now be rewritten
+\[
+H_{\text{SHO}} = \omega \left( a^\dagger a + \frac{1}{2} \right). \tag{1.25}
+\]
+
+The state $|0\rangle$ such that $a|0\rangle = 0$ is an eigenstate of $H$ with eigenvalue $\frac{1}{2} \omega$, the zero-point energy. Furthermore, the commutators
+\[
+[H_{\text{SHO}}, a^\dagger] = \omega a^\dagger, \qquad [H_{\text{SHO}}, a] = -\omega a \tag{1.26}
+\]
+make it easy to verify that the states
+\[
+|n\rangle \equiv (a^\dagger)^n |0\rangle \tag{1.27}
+\]
+%here inserted
+
+are eigenstates of $H_{\text{SHO}}$ with eigenvalues $(n + \frac{1}{2})\omega$. These states exhaust the spectrum.
+
+We can find the spectrum of the Klein-Gordon Hamiltonian using the same trick, but now each Fourier mode of the field is treated as an independent oscillator with its own $a$ and $a^\dagger$. In analogy with (1.23) we write
+\[
+\phi(\mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_p}} \left( a_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} + a_{\mathbf{p}}^\dagger e^{-i \mathbf{p} \cdot \mathbf{x}} \right) \tag{1.28}
+\]
+\[
+\pi(\mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} (-i) \sqrt{\frac{\omega_p}{2}} \left( a_{\mathbf{p}} e^{i \mathbf{p} \cdot \mathbf{x}} - a_{\mathbf{p}}^\dagger e^{-i \mathbf{p} \cdot \mathbf{x}} \right) \tag{1.29}
+\]
+
+The inverse expressions for $a_{\mathbf{p}}$ and $a_{\mathbf{p}}^\dagger$ in terms of $\phi$ and $\pi$ are easy to derive but rarely needed. In the calculations below we will find it useful to rearrange the above as follows:
+\[
+\phi(\mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2\omega_p}} \left( a_{\mathbf{p}} + a_{\mathbf{p}}^\dagger \right) e^{i \mathbf{p} \cdot \mathbf{x}} \tag{1.29}
+\]
+\[
+\pi(\mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} (-i) \sqrt{\frac{\omega_p}{2}} \left( a_{\mathbf{p}} - a_{\mathbf{p}}^\dagger \right) e^{i \mathbf{p} \cdot \mathbf{x}} \tag{1.30}
+\]
+
+The commutation relation (1.24) becomes
+\[
+[a_{\mathbf{p}}, a_{\mathbf{p}'}^\dagger] = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{p}') \tag{1.31}
+\]
+from which you can verify that the commutator of $\phi$ and $\pi$ works out correctly:
+\[
+[\phi(\mathbf{x}), \pi(\mathbf{x}')] = \int \frac{d^3 p\, d^3 p'}{(2\pi)^6} \, \frac{-i}{2} \sqrt{\frac{\omega_p}{\omega_{p'}}} \left( [a_{\mathbf{p}}, a_{\mathbf{p}'}^\dagger] - [a_{\mathbf{p}}^\dagger, a_{\mathbf{p}'}] \right) e^{i \mathbf{p} \cdot \mathbf{x} + i \mathbf{p}' \cdot \mathbf{x}'}
+= i \delta^{(3)}(\mathbf{x} - \mathbf{x}')
+\]
+
+We are now ready to express the Hamiltonian in terms of ladder operators. Starting from the expressions above for $\phi$ and $\pi$, we have
+\[
+H = \int d^3 x \left\{ \frac{1}{2} \pi^2 + \frac{1}{2} (\nabla \phi)^2 + \frac{1}{2} m^2 \phi^2 \right\}
+\]
+\[
+= \int \frac{d^3 p}{(2\pi)^3} \omega_p \left( a_{\mathbf{p}}^\dagger a_{\mathbf{p}} + \frac{1}{2} [a_{\mathbf{p}}, a_{\mathbf{p}}^\dagger] \right) \tag{1.32}
+\]
+
+\textbf{The second term is proportional to $\delta(0)$, an infinite c-number.} It is simply the sum over all modes of the zero-point energies $\omega_p/2$, so its presence is completely expected, if somewhat disturbing. Fortunately, this infinite energy shift cannot be detected experimentally, since experiments measure only energy differences from the ground state of H. We will therefore ignore this 
+infinite constant term in all of our calculations.\\
+
+
+
+Using this expression for the Hamiltonian in terms of $a_{\mathbf{p}}$ and $a_{\mathbf{p}}^\dagger$, it is easy to evaluate the commutators
+\[
+[H, a_{\mathbf{p}}^\dagger] = \omega_p a_{\mathbf{p}}^\dagger; \qquad [H, a_{\mathbf{p}}] = -\omega_p a_{\mathbf{p}}. \tag{1.33}
+\]
+
+We can now write down the spectrum of the theory, just as for the harmonic oscillator. The state $|0\rangle$ such that $a_{\mathbf{p}} |0\rangle = 0$ for all $\mathbf{p}$ is the ground state or \textit{vacuum}, and has $E = 0$ after we drop the infinite constant in (1.32). All other energy eigenstates can be built by acting on $|0\rangle$ with creation operators. In general, the state $a_{\mathbf{p}}^\dagger a_{\mathbf{q}}^\dagger \cdots |0\rangle$ is an eigenstate of $H$ with energy $\omega_p + \omega_q + \cdots$. These states exhaust the spectrum.
+
+we can write down the total momentum operator,
+\[
+\mathbf{P} = -\int d^3 x\, \pi(\mathbf{x}) \nabla \phi(\mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} \mathbf{p}\, a_{\mathbf{p}}^\dagger a_{\mathbf{p}}. \tag{1.34}
+\]
+
+So the operator $a_{\mathbf{p}}^\dagger$ creates momentum $\mathbf{p}$ and energy $\omega_p = \sqrt{|\mathbf{p}|^2 + m^2}$. Similarly, the state $a_{\mathbf{p}}^\dagger a_{\mathbf{q}}^\dagger \cdots |0\rangle$ has momentum $\mathbf{p} + \mathbf{q} + \cdots$. \textbf{It is quite natural to call these excitations \textit{particles}, since they are discrete entities that have the proper relativistic energy-momentum relation.} (By a \textit{particle} we do not mean something that must be localized in space; $a_{\mathbf{p}}^\dagger$ creates particles in momentum eigenstates.) From now on we will refer to $\omega_p$ as $E_p$ (or simply $E$), since it really is the energy of a particle. Note, by the way, that the energy is always positive: $E_p = \sqrt{|\mathbf{p}|^2 + m^2}$.\\
+
+
+
+This formalism also allows us to determine the statistics of our particles. 
+Consider the two-particle state $a_{\mathbf{p}}^\dagger a_{\mathbf{q}}^\dagger |0\rangle$. Since $a_{\mathbf{p}}^\dagger$ and $a_{\mathbf{q}}^\dagger$ commute, this state is identical to the state $a_{\mathbf{q}}^\dagger a_{\mathbf{p}}^\dagger |0\rangle$ in which the two particles are interchanged. 
+Moreover, a single mode $\mathbf{p}$ can contain arbitrarily many particles (just as a simple harmonic oscillator can be excited to arbitrarily high levels). 
+Thus we conclude that Klein-Gordon particles obey Bose-Einstein statistics.\\
+
+We naturally choose to normalize the vacuum state so that $\langle 0 | 0 \rangle = 1$. 
+The one-particle states $|\mathbf{p}\rangle \propto a_{\mathbf{p}}^\dagger |0\rangle$ will also appear quite often, and it is worthwhile to adopt a convention for their normalization.\\
+
+We therfore define:
+\[
+|\mathbf{p}\rangle = \sqrt{2 E_{\mathbf{p}}} \, a_{\mathbf{p}}^\dagger |0\rangle \tag{1.35}
+\]
+so that
+\[
+\langle \mathbf{p} | \mathbf{q} \rangle = 2 E_{\mathbf{p}} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}). \tag{1.36}
+\]
+
+
+With this normalization we must divide by $2E_{\mathbf{p}}$ in other places. For example, \textit{the completeness relation for the one-particle states} is
+\[
+(\mathbf{1})_{\text{1-particle}} = \int \frac{d^3 p}{(2\pi)^3} \, |\mathbf{p}\rangle \frac{1}{2E_{\mathbf{p}}} \langle \mathbf{p}|, \tag{1.37}
+\]
+where the operator on the left is simply the identity within the subspace of one-particle states, and zero in the rest of the Hilbert space.The integral
+\[
+\int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} = \int \frac{d^4 p}{(2\pi)^4} (2\pi) \delta(p^2 - m^2) \Big|_{p^0 > 0} \tag{1.38}
+\]
+is a Lorentz-invariant 3-momentum integral, in the sense that if $f(p)$ is Lorentz-invariant, so is $\int d^3 p\, f(p)/(2E_{\mathbf{p}})$.
+
+
+Finally let us consider the interpretation of the state $\phi(\mathbf{x})|0\rangle$,
+\[
+\phi(\mathbf{x})|0\rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-i\mathbf{p}\cdot\mathbf{x}} |\mathbf{p}\rangle \tag{1.39}
+\]
+is a linear superposition of single-particle states that have well-defined momentum.We will therefore put forward the same interpretation, and claim that the operator $\phi(\mathbf{x})$, acting on the vacuum, \textit{creates a particle at position} $\mathbf{x}$. This interpretation is further confirmed when we compute
+\[
+\langle 0| \phi(\mathbf{x}) | \mathbf{p} \rangle = \langle 0| \int \frac{d^3 p'}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}'}}} \left( a_{\mathbf{p}'} e^{i\mathbf{p}'\cdot\mathbf{x}} + a_{\mathbf{p}'}^\dagger e^{-i\mathbf{p}'\cdot\mathbf{x}} \right) \sqrt{2E_{\mathbf{p}}} a_{\mathbf{p}}^\dagger |0\rangle
+= e^{i\mathbf{p}\cdot\mathbf{x}}. \tag{1.40}
+\]
+We can interpret this as the position-space representation of the single-particle wavefunction of the state $|\mathbf{p}\rangle$, just as in nonrelativistic quantum mechanics $\langle \mathbf{x} | \mathbf{p} \rangle \propto e^{i\mathbf{p}\cdot\mathbf{x}}$ is the wavefunction of the state $|\mathbf{p}\rangle$.Also we can now write:\\
+
+\[
+\phi(\mathbf{x}, t) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2 E_{\mathbf{p}}}}
+\left(
+a_{\mathbf{p}} e^{-i p \cdot x} + a_{\mathbf{p}}^\dagger e^{i p \cdot x}
+\right) \Bigg|_{p^0 = E_{\mathbf{p}}}
+\]
+
+\[
+\pi(\mathbf{x}, t) = \frac{\partial}{\partial t} \phi(\mathbf{x}, t)
+\]
+
+
+
+\subsection{The Klein-Gordon Field in Space-Time}
+
+\text{In the Heisenberg picture, we make the operators } \phi \text{ and } \pi \text{ time-dependent in the usual way:}
+
+\[
+\phi(x) = \phi(\mathbf{x}, t) = e^{iHt} \phi(\mathbf{x}) e^{-iHt}, \tag{1.41}
+\]
+and similarly for $\pi(x) = \pi(\mathbf{x}, t)$. The Heisenberg equation of motion,
+\[
+i \frac{\partial}{\partial t} \mathcal{O} = [\mathcal{O}, H], \tag{1.42}
+\]
+allows us to compute the time dependence of $\phi$ and $\pi$:
+\[
+i \frac{\partial}{\partial t} \phi(\mathbf{x}, t) = \left[ \phi(\mathbf{x}, t), \int d^3 x' \left\{ \frac{1}{2} \pi^2(\mathbf{x}', t) + \frac{1}{2} (\nabla \phi(\mathbf{x}', t))^2 + \frac{1}{2} m^2 \phi^2(\mathbf{x}', t) \right\} \right]
+\]
+\[
+= \int d^3 x' \left( i \delta^{(3)}(\mathbf{x} - \mathbf{x}') \pi(\mathbf{x}', t) \right)
+= i \pi(\mathbf{x}, t);
+\]
+\[
+i \frac{\partial}{\partial t} \pi(\mathbf{x}, t) = \left[ \pi(\mathbf{x}, t), \int d^3 x' \left\{ \frac{1}{2} \pi^2(\mathbf{x}', t) + \frac{1}{2} \phi(\mathbf{x}', t) (-\nabla^2 + m^2) \phi(\mathbf{x}', t) \right\} \right]
+\]
+\[
+= \int d^3 x' \left( -i \delta^{(3)}(\mathbf{x} - \mathbf{x}') (-\nabla^2 + m^2) \phi(\mathbf{x}', t) \right)
+= -i (-\nabla^2 + m^2) \phi(\mathbf{x}, t).
+\]
+Combining the two results gives
+\[
+\frac{\partial^2}{\partial t^2} \phi = (\nabla^2 - m^2) \phi, \tag{1.43}
+\]
+which is just the \textbf{Klein-Gordon equation}.
+
+
+
+
+\textbf{We aim to prove the identity}:
+\[
+H a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}})
+\]
+and consequently,
+\[
+H^n a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}})^n
+\]
+
+
+
+In quantum field theory for a free scalar field, the Hamiltonian is given by
+\[
+H = \int d^3p \, E_{\mathbf{p}} \, a_{\mathbf{p}}^\dagger a_{\mathbf{p}},
+\]
+which leads to the commutation relation:
+\[
+[H, a_{\mathbf{p}}] = -E_{\mathbf{p}} a_{\mathbf{p}}.
+\]
+
+
+
+We write:
+\[
+H a_{\mathbf{p}} = [H, a_{\mathbf{p}}] + a_{\mathbf{p}} H.
+\]
+Substitute the commutator:
+\[
+H a_{\mathbf{p}} = -E_{\mathbf{p}} a_{\mathbf{p}} + a_{\mathbf{p}} H = a_{\mathbf{p}} H - E_{\mathbf{p}} a_{\mathbf{p}}.
+\]
+Factor out \( a_{\mathbf{p}} \):
+\[
+H a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}}). \tag{1.44}
+\]
+
+
+
+We now prove:
+\[
+H^n a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}})^n
+\]
+by induction.\\
+
+Base Case: \( n = 1 \)
+Already shown:
+\[
+H a_{\mathbf{p}} = a_{\mathbf{p}}(H - E_{\mathbf{p}})
+\]
+
+
+Assume:
+\[
+H^k a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}})^k
+\]
+Then:
+\[
+H^{k+1} a_{\mathbf{p}} = H(H^k a_{\mathbf{p}}) = H \left[ a_{\mathbf{p}} (H - E_{\mathbf{p}})^k \right]
+\]
+
+Using \( H a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}}) \), we get:
+\[
+H a_{\mathbf{p}} f(H) = a_{\mathbf{p}} (H - E_{\mathbf{p}}) f(H)
+\]
+So:
+\[
+H^{k+1} a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}})(H - E_{\mathbf{p}})^k = a_{\mathbf{p}} (H - E_{\mathbf{p}})^{k+1}
+\]
+
+Hence, by induction,
+\[
+H^n a_{\mathbf{p}} = a_{\mathbf{p}} (H - E_{\mathbf{p}})^n \quad \text{for all } n \in \mathbb{N}. \tag{1.45}
+\]
+
+
+A similar relation (with — replaced by +) holds for \(a^\dagger\).
+Thus we have derived the identities
+\[
+e^{iHt} a_{\mathbf{p}} e^{-iHt} = a_{\mathbf{p}} e^{-iE_{\mathbf{p}} t}, \qquad
+e^{iHt} a_{\mathbf{p}}^\dagger e^{-iHt} = a_{\mathbf{p}}^\dagger e^{iE_{\mathbf{p}} t}, \tag{1.46}
+\]
+
+
+
+It is worth mentioning that we can perform the same manipulations with $\mathbf{P}$ instead of $H$ to relate $\phi(x)$ to $\phi(0)$. In analogy with (1.46), one can show
+\[
+e^{-i\mathbf{P} \cdot \mathbf{x}} a_{\mathbf{p}} e^{i\mathbf{P} \cdot \mathbf{x}} = a_{\mathbf{p}} e^{i\mathbf{p} \cdot \mathbf{x}}, \qquad
+e^{-i\mathbf{P} \cdot \mathbf{x}} a_{\mathbf{p}}^\dagger e^{i\mathbf{P} \cdot \mathbf{x}} = a_{\mathbf{p}}^\dagger e^{-i\mathbf{p} \cdot \mathbf{x}}, \tag{1.47}
+\]
+and therefore
+\[
+\phi(x) = e^{i(Ht - \mathbf{P} \cdot \mathbf{x})} \phi(0) e^{-i(Ht - \mathbf{P} \cdot \mathbf{x})}
+= e^{i\mathbf{P} \cdot \mathbf{x}} \phi(0) e^{-i\mathbf{P} \cdot \mathbf{x}}, \tag{1.48}
+\]
+
+where \(P^\mu=(H,\mathbf{P})\).
+
+For a one-particle state of well-defined momentum, \(\mathbf{p}\) is the eigenvalue of \(\mathbf{P}\).
+
+
+\subsubsection{Causality}
+
+
+ In our present formalism, still working in the Heisenberg picture, the amplitude for a particle to propagate from $y$ to $x$ is $\langle 0 | \phi(x) \phi(y) | 0 \rangle$. We will call this quantity $D(x - y)$. Each operator $\phi$ is a sum of $a$ and $a^\dagger$ operators, but only the term $\langle 0 | a_{\mathbf{p}} a_{\mathbf{q}}^\dagger | 0 \rangle = (2\pi)^3 \delta^3(\mathbf{p} - \mathbf{q})$ survives in this expression. It is easy to check that we are left with
+\[
+D(x-y) = \langle 0 | \phi(x) \phi(y) | 0 \rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-ip \cdot (x-y)}. \tag{1.49}
+\]
+
+The simplest thing we could try to measure is the field $\phi(x)$, so we should compute the commutator $[\phi(x), \phi(y)]$. If this commutator vanishes, one measurement cannot affect the other.
+
+In fact, if the commutator vanishes for $(x - y)^2 < 0$, causality is preserved quite generally, since commutators involving any function of $\phi(x)$, including $\pi(x) = \partial \phi / \partial t$, would also have to vanish.
+
+
+We conclude that no measurement in the Klein-Gordon theory can affect another measurement outside the light-cone.\\
+
+\[
+\begin{aligned}
+[\phi(x), \phi(y)] &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}}
+    \int \frac{d^3 q}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{q}}}} \\
+    &\quad \times \left[ \left(a_{\mathbf{p}} e^{-ip \cdot x} + a_{\mathbf{p}}^\dagger e^{ip \cdot x}\right), 
+    \left(a_{\mathbf{q}} e^{-iq \cdot y} + a_{\mathbf{q}}^\dagger e^{iq \cdot y}\right) \right] \\
+    &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} 
+    \left( e^{-ip \cdot (x-y)} - e^{ip \cdot (x-y)} \right) \\
+    &= D(x-y) - D(y-x)
+\end{aligned} \tag{1.50}
+\]
+
+
+When the complex scalar field theory is quantized,\(\phi(x) \)will create positively charged particles and destroy negatively 
+charged ones, while \(\phi^\dagger(x )\) will perform the opposite operations. Then the commutator \([\phi(x),\phi^\dagger(y)]\) will have nonzero contributions, which must delicately 
+cancel outside the light-cone to preserve causality.
+
+
+\subsubsection{The Klein-Gordon Propagator}
+
+Since the commutator \([\phi(x), \phi(y)]\) is a c-number, we can write
+\[
+[\phi(x), \phi(y)] = \langle 0 | [\phi(x), \phi(y)] | 0 \rangle. \tag{1.51}
+\]
+This can be rewritten as a four-dimensional integral as follows, assuming for now that \(x^0 > y^0\):
+\[
+\langle 0 | [\phi(x), \phi(y)] | 0 \rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2 E_{\mathbf{p}}} \left( e^{-i p \cdot (x-y)} - e^{i p \cdot (x-y)} \right)
+\]
+
+\[
+= \int \frac{d^3 p}{(2\pi)^3} \left\{
+    \left. \frac{1}{2E_{\mathbf{p}}} e^{-ip \cdot (x-y)} \right|_{p^0 = E_{\mathbf{p}}}
+    + \left. \frac{1}{-2E_{\mathbf{p}}} e^{-ip \cdot (x-y)} \right|_{p^0 = -E_{\mathbf{p}}}
+\right\}
+\]
+\[
+= \int \frac{d^3 p}{(2\pi)^3} \int \frac{dp^0}{2\pi i} \frac{-1}{p^2 - m^2} e^{-ip \cdot (x-y)}, \quad x^0 > y^0 \tag{1.52}
+\]
+
+For \(x^0 > y^0\) we can close the contour below, picking up both poles. For \(x^0 < y^0\) we may close the contour above, giving zero. Thus the last line of (1.52), together with the prescription for going around the poles, is an expression for what we will call
+\[
+D_R(x-y) \equiv \theta(x^0 - y^0) \langle 0 | [\phi(x), \phi(y)] | 0 \rangle. \tag{1.53}
+\]
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-07-08 065744.png}
+    \caption{To evaluate \(p^{0}\) integralo for KG propagator}
+    \label{fig:enter-label}
+\end{figure}
+
+
+To understand this quantity better, let’s do another computation:
+\begin{align*}
+(\partial^2 + m^2) D_R(x - y) &= (\partial^2 \theta(x^0 - y^0)) \left\langle 0 \middle| [\phi(x), \phi(y)] \middle| 0 \right\rangle \\
+&\quad + 2 (\partial_\mu \theta(x^0 - y^0)) (\partial^\mu \left\langle 0 \middle| [\phi(x), \phi(y)] \middle| 0 \right\rangle) \\
+&\quad + \theta(x^0 - y^0) (\partial^2 + m^2) \left\langle 0 \middle| [\phi(x), \phi(y)] \middle| 0 \right\rangle \\
+&= -\delta(x^0 - y^0) \left\langle 0 \middle| [\pi(x), \phi(y)] \middle| 0 \right\rangle \\
+&\quad + 2\delta(x^0 - y^0) \left\langle 0 \middle| [\pi(x), \phi(y)] \middle| 0 \right\rangle + 0 \\
+&= -i \delta^{(4)}(x - y).
+\end{align*}
+
+This says that \textbf{ \( D_R(x - y) \) is a Green’s function of the Klein-Gordon operator}.  
+Since it vanishes for \( x^0 < y^0 \), it is the \textit{retarded} Green’s function.\\
+
+
+
+\textbf{Klein-Gordon opertor using Fourier transform:}\\
+
+\[
+D_R(x-y) = \int \frac{d^4 p}{(2\pi)^4} e^{-ip \cdot (x-y)} \widetilde{D}_R(p),
+\]
+we obtain an algebraic expression for \(\widetilde{D}_R(p)\):
+\[
+(-p^2 + m^2) \widetilde{D}_R(p) = -i.
+\]
+Thus we immediately arrive at the result
+\[
+D_R(x-y) = \int \frac{d^4 p}{(2\pi)^4} \frac{i}{p^2 - m^2} e^{-ip \cdot (x-y)}. \tag{1.54}
+\]
+
+\subsubsection{Feynman Propagator}
+
+To arrive at the Feynman propagator,we evaluate \(p^{0}\) integral along the following counter:
+
+
+\[
+D_F(x-y) \equiv \int \frac{d^4 p}{(2\pi)^4} \frac{i}{p^2 - m^2 + i\epsilon} e^{-ip \cdot (x-y)}, \tag{1.55}
+\]
+since the poles are then at \( p^0 = \pm (E_p - i\epsilon) \), displaced properly above and below the real axis. When \( x^0 > y^0 \) we can perform the \( p^0 \) integral by closing the contour below, obtaining exactly the propagation amplitude \( D(x-y) \). When \( x^0 < y^0 \) we close the contour above, obtaining the same expression but with \( x \) and \( y \) interchanged. Thus we have
+\[
+D_F(x-y) = 
+\begin{cases}
+D(x-y) & \text{for } x^0 > y^0 \\
+D(y-x) & \text{for } x^0 < y^0
+\end{cases}
+\]
+\[
+= \theta(x^0 - y^0) \langle 0 | \phi(x) \phi(y) | 0 \rangle + \theta(y^0 - x^0) \langle 0 | \phi(y) \phi(x) | 0 \rangle
+\]
+\[
+\equiv \langle 0 | T \phi(x) \phi(y) | 0 \rangle. \tag{1.56}
+\]
+By applying \( (\Box^2 + m^2) \) to the last line, you can verify directly that \( D_F \) is a Green's function of the Klein-Gordon operator.
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-07-08 071308.png}
+    \caption{To evaluate \(p^0\) integral for Feynman propagator}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{Time-ordering}
+
+
+
+
+
+In quantum field theory, the \textbf{time-ordered product} of field operators is a crucial concept used to preserve causality in calculations. The time-ordered product of two fields \( \phi(x) \) and \( \phi(y) \) is denoted by
+\[
+T\{\phi(x)\phi(y)\},
+\]
+and it means:
+\[
+T\{\phi(x)\phi(y)\} = 
+\begin{cases}
+\phi(x)\phi(y), & \text{if } x^0 > y^0, \\
+\phi(y)\phi(x), & \text{if } y^0 > x^0.
+\end{cases} \tag{1.57}
+\]
+
+That is, the operator with the later time appears to the left.
+
+
+\subsection*{Vacuum Expectation Value}
+
+The vacuum expectation value (VEV) of the time-ordered product is one of the most fundamental quantities in QFT:
+\[
+\langle 0 | T\{ \phi(x)\phi(y) \} | 0 \rangle.
+\]
+This is called the \textbf{Feynman propagator} and it describes the amplitude for a particle to propagate from point \( y \) to point \( x \).
+
+\subsection*{Summary}
+
+\begin{itemize}
+    \item The time-ordering operator \( T \) arranges field operators in increasing time order (later times to the left).
+    \item It is essential for defining causal Green’s functions in QFT.
+    \item The time-ordered VEV \( \langle 0 | T\{ \phi(x)\phi(y) \} | 0 \rangle \) gives the Feynman propagator.
+\end{itemize}
+
+
+\subsection{Interacting Klein-Gordon Field}
+
+Consider a Klein-Gordon field coupled to an external, classical source field \( j(x) \). That is, consider the field equation
+\[
+(\partial^2 + m^2)\phi(x) = j(x), \tag{1.58}
+\]
+ If we start in the vacuum state, what will we find after \( j(x) \) has been turned on and off again?
+
+The field equation follows from the Lagrangian
+\[
+\mathcal{L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2\phi^2 + j(x)\phi(x). \tag{1.59}
+\]
+
+Before \( j(x) \) is turned on, \( \phi(x) \) has the form
+\[
+\phi_0(x) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \left( a_{\mathbf{p}} e^{-ip \cdot x} + a_{\mathbf{p}}^\dagger e^{ip \cdot x} \right).
+\]
+
+If there were no source, this would be the solution for all time. With a source, the solution of the equation of motion can be constructed using the retarded Green's function:
+\[
+\phi(x) = \phi_0(x) + i \int d^4 y \, D_R(x-y) j(y)
+\]
+\[
+= \phi_0(x) + i \int d^4 y \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} \theta(x^0 - y^0) \left( e^{-ip \cdot (x-y)} - e^{ip \cdot (x-y)} \right) j(y).
+\]
+
+If we wait until all of \( j \) is in the past, the theta function equals 1 in the whole domain of integration. Then \( \phi(x) \) involves only the Fourier transform of \( j \),
+\[
+\bar{j}(p) = \int d^4 y \, e^{ip \cdot y} j(y),
+\]
+evaluated at 4-momenta \( p \) such that \( p^2 = m^2 \). It is natural to group the positive-frequency terms together with \( a_{\mathbf{p}} \) and the negative-frequency terms with \( a_{\mathbf{p}}^\dagger \); this yields the expression
+\[
+\phi(x) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \left\{ \left( a_{\mathbf{p}} + \frac{i}{\sqrt{2E_{\mathbf{p}}}} \bar{j}(p) \right) e^{-ip \cdot x} + \text{h.c.} \right\}.
+\]
+
+We can now guess (or compute) the form of the Hamiltonian after \( j(x) \) has acted: Just replace \( a_{\mathbf{p}} \) with \( (a_{\mathbf{p}} + i \bar{j}(p)/\sqrt{2E_{\mathbf{p}}}) \) to obtain
+\[
+H = \int \frac{d^3 p}{(2\pi)^3} E_{\mathbf{p}} \left( a_{\mathbf{p}}^\dagger - \frac{i}{\sqrt{2E_{\mathbf{p}}}} \bar{j}^*(p) \right) \left( a_{\mathbf{p}} + \frac{i}{\sqrt{2E_{\mathbf{p}}}} \bar{j}(p) \right).
+\]
+
+
+The energy of the system after the source has been turned off is
+\[
+\langle 0 | H | 0 \rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2} |\bar{j}(p)|^2,
+\]
+where \( |0\rangle \) still denotes the ground state of the free theory. We can interpret these results in terms of particles by identifying \( |\bar{j}(p)|^2 / 2E_{\mathbf{p}} \) as the probability density for creating a particle in the mode \( p \). Then the total number of particles produced is
+\[
+\int dN = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} |\bar{j}(p)|^2.
+\]
+Only those Fourier components of \( j(x) \) that are in resonance with on-mass-shell (i.e., \( p^2 = m^2 \)) Klein-Gordon waves are effective at creating particles.
+
+\newpage
+
+
+\section{\huge \textbf{Dirac Equation And  Dirac Field}}
+
+\subsection{Derivation of Dirac Equation }
+
+Let us recall that the Einstein relation gives
+
+\[
+E^2 = \mathbf{p}^2 + m^2 \tag{2.1}
+\]
+
+The positive square root of this gives
+
+\[
+E = \sqrt{\mathbf{p}^2 + m^2} \tag{2.2}
+\]
+
+which is far from a linear relation.
+
+Although the naive square root of the Einstein relation does not lead to a linear relation between the energy and the momentum variables, a matrix square root may, in fact, lead to such a relation. Let us write the Einstein relation as
+
+\[
+E^2 - \mathbf{p}^2 = m^2
+\]
+or,
+\[
+p^2 = p^\mu p_\mu = m^2 \tag{2.3}
+\]
+
+ Let us further assume that there exist four linearly independent $n \times n$ matrices $\gamma^\mu$, $\mu = 0,1,2,3$, which are space-time independent such that
+
+\[
+\not{p} = \gamma^\mu p_\mu,
+\]
+
+represents the matrix square root of $p^2$. If this is true, then, by definition, we have
+
+\[
+\not{p}\not{p} = p^2 \mathbb{I}
+\]
+
+or,
+\[
+\gamma^\mu p_\mu \gamma^\nu p_\nu = p^2 \mathbb{I},
+\]
+or,
+\[
+\gamma^\mu \gamma^\nu p_\mu p_\nu = p^2 \mathbb{I},
+\]
+or,
+\[
+\frac{1}{2} (\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu) p_\mu p_\nu = p^2 \mathbb{I}.
+\]
+
+ For the relation above to be true, it is clear that the matrices, $\gamma^\mu$, have to satisfy the algebra ($\mu = 0,1,2,3$)
+
+\[
+\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = \left[ \gamma^\mu, \gamma^\nu \right]_+ = 2 \eta^{\mu \nu} \mathbb{I}. \tag{2.4}
+\]
+
+ This algebra is known as the \textbf{ Clifford algebra}.
+
+
+
+\[
+\not{p} \psi = m \psi,
+\]
+
+would automatically satisfy the Einstein relation. Namely,
+
+\[
+\not{p} (\not{p} \psi) = m \not{p} \psi,
+\]
+or,
+\[
+p^2 \psi = m^2 \psi.
+\]
+
+ The equation above (or its coordinate representation) is known as \textbf{the Dirac equation}.\\
+
+To determine the matrices, $\gamma^\mu$, and their dimensionality, let us note that the Clifford algebra
+
+\[
+[\gamma^\mu, \gamma^\nu]_+ = 2 \eta^{\mu\nu} \mathbb{I}, \quad \mu = 0, 1, 2, 3,
+\]
+
+can be written out explicitly as
+
+\[
+(\gamma^0)^2 = 1,
+\]
+\[
+(\gamma^i)^2 = -1, \quad \text{for any fixed } i = 1, 2, 3,
+\]
+\[
+\gamma^0 \gamma^i + \gamma^i \gamma^0 = 0,
+\]
+\[
+\gamma^i \gamma^j + \gamma^j \gamma^i = 0, \quad i \neq j.
+\]
+
+We can choose any one of the matrices to be diagonal and without loss of generality, let us choose
+
+\[
+\gamma^0 = \begin{pmatrix}
+b_1 & 0 & \cdots & 0 \\
+0 & b_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & b_n
+\end{pmatrix}.
+\]
+
+From the fact that $(\gamma^0)^2 = 1$, we conclude that each of the diagonal elements in $\gamma^0$ must be $\pm 1$, namely,
+
+
+b_\alpha = \pm 1, \quad \alpha = 1, 2, \cdots, n.
+
+Let us note next that using the relations from the Clifford algebra, for a fixed $i$, we obtain
+
+\[
+\operatorname{Tr} \gamma^i \gamma^0 \gamma^i = \operatorname{Tr} \gamma^i (-\gamma^i \gamma^0) = -\operatorname{Tr} (\gamma^i)^2 \gamma^0 = \operatorname{Tr} \gamma^0,
+\]
+
+where “Tr” denotes trace over the matrix indices. On the other hand, the cyclicity property of the trace, namely,
+
+\[
+\operatorname{Tr} ABC = \operatorname{Tr} CAB,
+\]
+
+leads to
+
+\[
+\operatorname{Tr} \gamma^i \gamma^0 \gamma^i = \operatorname{Tr} (\gamma^i)^2 \gamma^0 = -\operatorname{Tr} \gamma^0.
+\]
+
+Thus, comparing the above equations, we obtain
+
+\[
+\operatorname{Tr} \gamma^i \gamma^0 \gamma^i = \operatorname{Tr} \gamma^0 = -\operatorname{Tr} \gamma^0,
+\]
+or,
+\[
+\operatorname{Tr} \gamma^0 = 0. \tag{2.5}
+\]
+
+For this to be true, we conclude that $\gamma^0$ must have as many diagonal elements with value $+1$ as with $-1$. Consequently, the $\gamma^\mu$ matrices must be even dimensional.
+
+
+The next choice is $N = 2$ for which the matrices will be four dimensional ($4 \times 4$ matrices). A particular choice of these matrices, for example, has the form
+
+\[
+\gamma^0 = \begin{pmatrix}
+\mathbb{I} & 0 \\
+0 & -\mathbb{I}
+\end{pmatrix}, \qquad
+\gamma^i = \begin{pmatrix}
+0 & \sigma_i \\
+-\sigma_i & 0
+\end{pmatrix}, \qquad i = 1, 2, 3, \tag{2.6}
+\]
+
+where each element of the $4 \times 4$ matrices represents a $2 \times 2$ matrix and the $\sigma_i$ correspond to the three Pauli matrices. This particular choice of the Dirac matrices is commonly known as \textbf{the Pauli-Dirac representation}.
+
+ if
+
+\begin{align}
+[\gamma^\mu, \gamma^\nu]_+ &= 2\eta^{\mu\nu} \mathbb{I}, \tag{2.7}\\
+[\gamma'^\mu, \gamma'^\nu]_+ &= 2\eta^{\mu\nu} \mathbb{I}. \tag{2.8}
+\end{align}
+
+
+then, there exists a constant, nonsingular matrix $S$ such that (in fact, the similarity transformation is really a unitary transformation if we take the Hermiticity properties of the $\gamma$-matrices)
+
+\[
+\gamma'^\mu = S\gamma^\mu S^{-1}.
+\]
+
+Therefore, given the equation
+
+\[
+(\gamma'^\mu p_\mu - m)\psi' = 0,
+\]
+
+we obtain
+
+
+\[
+(S\gamma^\mu S^{-1} p_\mu - m)\psi' = 0,
+\]
+or,
+\[
+S(\gamma^\mu p_\mu - m)S^{-1}\psi' = 0,
+\]
+or,
+\[
+(\gamma^\mu p_\mu - m)S^{-1}\psi' = 0,
+\]
+or,
+\[
+(\gamma^\mu p_\mu - m)\psi = 0, \tag{2.9}
+\]
+
+with $\psi = S^{-1}\psi'$. (The matrix $S^{-1}$ can be moved past the momentum operator since it is assumed to be constant.)
+To obtain the Hamiltonian for the Dirac equation, let us go to the coordinate representation where the Dirac equation takes the form (remember $\hbar = 1$)
+
+\[
+(i\not{\partial} - m)\psi = (i\gamma^\mu \partial_\mu - m)\psi = 0,
+\]
+or,
+\[
+(i\gamma^0 \partial_0 + i\gamma \cdot \nabla - m)\psi = 0. \tag{2.10}
+\]
+
+Multiplying with $\gamma^0$ from the left and using the fact that $(\gamma^0)^2 = 1$, we obtain
+
+\[
+i\frac{\partial \psi}{\partial t} = (-i\gamma^0 \gamma \cdot \nabla + m\gamma^0)\psi.
+\]
+
+Conventionally, one denotes
+
+\[
+\beta = \gamma^0, \qquad \alpha = \gamma^0 \gamma.
+\]
+
+In terms of these matrices, then, we can write as
+
+\[
+i\frac{\partial \psi}{\partial t} = (-i\alpha \cdot \nabla + m\beta)\psi = (\alpha \cdot \mathbf{p} + \beta m)\psi.
+\]
+
+This is a first order equation (in time derivative) like the Schrödinger equation and we can identify the Hamiltonian for the Dirac equation with
+
+\[
+H = \boldsymbol{\alpha} \cdot \mathbf{p} + \beta m. \tag{2.11}
+\]
+
+In the particular representation of the $\gamma^\mu$ matrices in (1.91), we note that
+
+\[
+\beta = \gamma^0 = 
+\begin{pmatrix}
+\mathbb{I} & 0 \\
+0 & -\mathbb{I}
+\end{pmatrix}, \quad
+\boldsymbol{\alpha} = \gamma^0 \boldsymbol{\gamma} = 
+\begin{pmatrix}
+\mathbb{I} & 0 \\
+0 & -\mathbb{I}
+\end{pmatrix}
+\begin{pmatrix}
+0 & \boldsymbol{\sigma} \\
+- \boldsymbol{\sigma} & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & \boldsymbol{\sigma} \\
+\boldsymbol{\sigma} & 0
+\end{pmatrix}.
+\]
+ the matrices $\boldsymbol{\alpha}, \beta$ satisfy the anti-commutation relations
+
+\[
+[\alpha^i, \alpha^j]_+ = 2 \delta^{ij} \mathbb{I}, \quad
+[\alpha^i, \beta]_+ = 0,
+\]
+
+with $\beta^2 = \mathbb{1}$. We can, of course, directly check from this explicit representation that both $\beta$ and $\boldsymbol{\alpha}$ are Hermitian matrices. But, independently, we also note from the form of the Hamiltonian in (1.100) that, in order for it to be Hermitian, we must have
+
+\[
+\beta^\dagger = \beta, \quad
+\boldsymbol{\alpha}^\dagger = \boldsymbol{\alpha}. \tag{2.12}
+\]
+
+In terms of the $\gamma^\mu$ matrices, this translates to
+
+\[
+\beta = \gamma^0 = (\gamma^0)^\dagger = \beta^\dagger, \quad
+\boldsymbol{\alpha} = \gamma^0 \boldsymbol{\gamma} = (\gamma^0 \boldsymbol{\gamma})^\dagger = \boldsymbol{\alpha}^\dagger. \tag{2.13}
+\]
+
+Equivalently, we can write
+
+\[
+(\gamma^0)^{\dagger} = \gamma^0 ,  \tag{2.14}
+\qquad 
+(\gamma^i)^{\dagger} = -\,\gamma^i . 
+\]
+
+Independent of the representation, the $\gamma^{\mu}$ matrices must satisfy these Hermiticity conditions.\\
+
+We are now ready to write down the Dirac equation:\\
+\[
+(i \gamma^\mu \partial_\mu - m) \psi(x) = 0. \tag{2.15}
+\]
+
+\subsection{Derivation of KG Eqn from Dirac Eqn}
+
+
+To show that the Dirac equation implies the Klein-Gordon equation, start from the Dirac equation:
+\[
+(i \gamma^\mu \partial_\mu - m) \psi = 0.
+\]
+
+Now act on the left with the operator \( (i \gamma^\nu \partial_\nu + m) \):
+\[
+(i \gamma^\nu \partial_\nu + m)(i \gamma^\mu \partial_\mu - m) \psi = 0.
+\]
+
+Expanding the product:
+\[
+(i \gamma^\nu \partial_\nu)(i \gamma^\mu \partial_\mu) \psi - m(i \gamma^\nu \partial_\nu) \psi + m(i \gamma^\mu \partial_\mu) \psi - m^2 \psi = 0.
+\]
+
+Observe that the two cross terms cancel:
+\[
+- m(i \gamma^\nu \partial_\nu) \psi + m(i \gamma^\mu \partial_\mu) \psi = 0.
+\]
+
+We are left with:
+\[
+- \gamma^\nu \gamma^\mu \partial_\nu \partial_\mu \psi - m^2 \psi = 0.
+\]
+
+Now, since the partial derivatives commute, we can write:
+\[
+\gamma^\nu \gamma^\mu \partial_\nu \partial_\mu = \frac{1}{2} \left( \gamma^\nu \gamma^\mu + \gamma^\mu \gamma^\nu \right) \partial_\nu \partial_\mu = \frac{1}{2} \{ \gamma^\nu, \gamma^\mu \} \partial_\nu \partial_\mu.
+\]
+
+Using the Clifford algebra identity:
+\[
+\{ \gamma^\mu, \gamma^\nu \} = 2 \eta^{\mu\nu} \mathbb{1},
+\]
+we get:
+\[
+\gamma^\nu \gamma^\mu \partial_\nu \partial_\mu = \eta^{\mu\nu} \partial_\mu \partial_\nu = \Box.
+\]
+
+Therefore, the expression becomes:
+\[
+(-\Box + m^2) \psi = 0,
+\]
+which is the \textbf{Klein-Gordon equation} for each component of the Dirac spinor:
+\[
+(\Box + m^2) \psi = 0. \tag{2.16}
+\]
+
+\subsection{Dirac Lagrangian}
+
+We first define \textbf{adjoint Dirac spinor} as \[\bar{\psi} =\psi^\dagger\gamma^{0} \tag{2.17}\]
+
+
+The correct, Lorentz-invariant Dirac Lagrangian is therefore
+\[
+\boxed{\mathcal{L}_{\text{Dirac}} = \overline{\psi} (i \gamma^\mu \partial_\mu - m) \psi }\tag{2.18}
+\]
+
+
+
+
+
+
+We treat $\psi$ and $\bar{\psi} = \psi^\dagger \gamma^0$ as independent fields. The Euler-Lagrange equation for a generic field $\phi$ is:
+\begin{equation}
+\frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial(\partial_\mu \phi)} \right) = 0 \tag{2.19}
+\end{equation}
+
+
+We compute:
+\[
+\frac{\partial \mathcal{L}}{\partial \bar{\psi}} = (i \gamma^\mu \partial_\mu - m)\psi
+\quad \text{and} \quad
+\frac{\partial \mathcal{L}}{\partial (\partial_\mu \bar{\psi})} = 0
+\]
+
+Substituting into the Euler-Lagrange equation:
+\[
+(i \gamma^\mu \partial_\mu - m)\psi = 0
+\]
+
+This is the \textbf{Dirac equation}.
+
+
+We compute:
+\[
+\frac{\partial \mathcal{L}}{\partial \psi} = \bar{\psi}(-m)
+\quad \text{and} \quad
+\frac{\partial \mathcal{L}}{\partial (\partial_\mu \psi)} = \bar{\psi}(i \gamma^\mu)
+\]
+
+Substituting into the Euler-Lagrange equation:
+\[
+\bar{\psi}(-m) - \partial_\mu(\bar{\psi} i \gamma^\mu) = 0
+\quad \Rightarrow \quad
+-i \partial_\mu \bar{\psi} \gamma^\mu - m \bar{\psi} = 0
+\]
+
+This is the \textbf{Hermitian conjugate form of the Dirac equation}.
+
+\subsection*{Summary}
+
+\begin{itemize}
+    \item Dirac Equation (from $\bar{\psi}$ variation):
+    \[
+    (i \gamma^\mu \partial_\mu - m)\psi = 0
+    \]
+    
+    \item Hermitian-Conjugate Dirac Equation (from $\psi$ variation):
+    \[
+    -i \partial_\mu \bar{\psi} \gamma^\mu - m \bar{\psi} = 0
+    \]
+\end{itemize}
+
+
+\subsection{Free-Particle Solutions of the Dirac Equation}
+
+
+The Dirac equation in the momentum representation
+\[
+(\not{p} - m)\psi = (\gamma^\mu p_\mu - m)\psi = 0, \tag{2.20}
+\]
+or in the coordinate representation
+\[
+(i\not{\partial} - m)\psi = (i\gamma^\mu \partial_\mu - m)\psi = 0, \tag{2.21}
+\]
+defines a set of matrix equations. Since the Dirac matrices, $\gamma^\mu$, are $4 \times 4$ matrices, the wave functions, in this case, are four component column matrices (column vectors).
+
+
+Let us denote the four component wave function as (where \( x \) stands for both space and time)
+\[
+\psi(x) = 
+\begin{pmatrix}
+\psi_1(x) \\
+\psi_2(x) \\
+\psi_3(x) \\
+\psi_4(x)
+\end{pmatrix} \tag{2.22}
+\]
+
+with
+\[
+\psi_\alpha(x) = e^{-ip \cdot x} u_\alpha(p), \quad \alpha = 1, 2, 3, 4. \tag{2.23}
+\]
+
+Substituting this back into the Dirac equation, we obtain (we define $\slashed{A} = \gamma^\mu A_\mu$ for any four vector $A_\mu$)
+\[
+(i\gamma^\mu \partial_\mu - m)\psi(x) = 0,
+\]
+or,
+\[
+(i\gamma^\mu(-ip_\mu) - m)u(p) = 0,
+\]
+or,
+\[
+(\slashed{p} - m)u(p) = 0.
+\]
+
+where the four component function, $u(p)$, has the form
+\[
+u(p) = 
+\begin{pmatrix}
+u_1(p) \\
+u_2(p) \\
+u_3(p) \\
+u_4(p)
+\end{pmatrix}. \tag{2.24}
+\]
+
+Let us simplify the calculation by restricting to motion along the $z$-axis. In other words, let us set
+\[
+p_1 = p_2 = 0.
+\]
+
+In this case, the equation takes the form
+\[
+(\gamma^0 p_0 + \gamma^3 p_3 - m)u(p) = 0. \tag{2.25}
+\]
+
+Taking the particular representation of the $\gamma^\mu$ matrices in (1.91), we can write this explicitly as
+\[
+\begin{pmatrix}
+p_0 - m & 0 & p_3 & 0 \\
+0 & p_0 - m & 0 & -p_3 \\
+-p_3 & 0 & -(p_0 + m) & 0 \\
+0 & p_3 & 0 & -(p_0 + m)
+\end{pmatrix}
+\begin{pmatrix}
+u_1(p) \\
+u_2(p) \\
+u_3(p) \\
+u_4(p)
+\end{pmatrix} = 0. \tag{2.26}
+\]
+
+This is a set of four linear homogeneous equations and a nontrivial solution exists only if the determinant of the coefficient matrix vanishes. Thus, requiring,
+
+\[
+\det \begin{pmatrix}
+p_0 - m & 0 & p_3 & 0 \\
+0 & p_0 - m & 0 & -p_3 \\
+-p_3 & 0 & -(p_0 + m) & 0 \\
+0 & p_3 & 0 & -(p_0 + m)
+\end{pmatrix} = 0,
+\]
+
+we obtain,
+
+\[
+(p_0 - m) \left[(p_0 - m)(p_0 + m)^2 - p_3^2(p_0 + m)\right]
+\]
+\[
++ p_3 \left[p_3^3 + (p_0 - m)(-p_3(p_0 + m))\right] = 0,
+\]
+
+or,
+\[
+(p_0^2 - m^2)^2 - 2p_3^2(p_0^2 - m^2) + p_3^4 = 0,
+\]
+
+or,
+\[
+(p_0^2 - p_3^2 - m^2)^2 = 0,
+\]
+
+or,
+\[
+p_0^2 - p_3^2 - m^2 = 0.
+\]
+
+Thus, we see that a nontrivial plane wave solution of the Dirac equation exists only for the energy values
+
+\[
+p_0 = \pm E = \pm \sqrt{p_3^2 + m^2}. \tag{2.27}
+\]
+
+Furthermore, each of these energy values is doubly degenerate. Of course, we would expect the positive and the negative energy roots in (2.27) from Einstein's relation. However, the double degeneracy seems to be a reflection of the nontrivial spin structure of the wave function as we will see shortly.
+
+The energy eigenvalues can also be obtained in a simpler fashion by noting that
+
+\[
+\det(\gamma^\mu p_\mu - m) = 0,
+\]
+
+or,
+\[
+\det \begin{pmatrix}
+(p_0 - m)\mathbb{I} & \sigma_3 p_3 \\
+-\sigma_3 p_3 & -(p_0 + m)\mathbb{I}
+\end{pmatrix} = 0,
+\]
+
+or,
+\[
+\det \left( -(p_0^2 - m^2)\mathbb{I} + p_3^2\mathbb{I} \right) = 0,
+\]
+
+or,
+\[
+\det \left( -(p_0^2 - p_3^2 - m^2)\mathbb{I} \right) = 0,
+\]
+
+or,
+\[
+p_0^2 - p_3^2 - m^2 = 0.
+\]
+
+
+
+We introduce two component wave functions $\tilde{u}(p)$ and $\tilde{v}(p)$ and write
+
+\[
+u(p) = \begin{pmatrix}
+\tilde{u}(p) \\
+\tilde{v}(p)
+\end{pmatrix}, \tag{2.28}
+\]
+
+where
+
+\[
+\tilde{u}(p) = \begin{pmatrix}
+u_1(p) \\
+u_2(p)
+\end{pmatrix}, \quad
+\tilde{v}(p) = \begin{pmatrix}
+u_3(p) \\
+u_4(p)
+\end{pmatrix}. \tag{2.29}
+\]
+
+We note that for the positive energy solutions
+
+\[
+p_0 = E_+ = E = \sqrt{p_3^2 + m^2}, \tag{2.30}
+\]
+
+the set of coupled equations takes the form
+
+\[
+(\gamma^\mu p_\mu - m) u(p) = 0,
+\]
+
+or,
+
+\[
+\begin{pmatrix}
+(E_+ - m)\mathbb{I} & \sigma_3 p_3 \\
+-\sigma_3 p_3 & -(E_+ + m)\mathbb{I}
+\end{pmatrix}
+\begin{pmatrix}
+\tilde{u}(p) \\
+\tilde{v}(p)
+\end{pmatrix} = 0. \tag{2.31}
+\]
+
+Writing out explicitly, (2.31) leads to
+
+\[
+(E_+ - m)\tilde{u}(p) + \sigma_3 p_3 \tilde{v}(p) = 0,
+\]
+\[
+\sigma_3 p_3 \tilde{u}(p) + (E_+ + m)\tilde{v}(p) = 0. \tag{2.32}
+\]
+
+The two component function $\tilde{v}(p)$ can be solved in terms of $\tilde{u}(p)$ and we obtain from the second relation in (2.32)
+
+\[
+\tilde{v}(p) = -\frac{\sigma_3 p_3}{E_+ + m} \tilde{u}(p).
+\]
+
+Let us note here parenthetically that the first relation in (2.32) also leads to the same relation (as it should), namely,
+
+\[
+\tilde{v}(p) = -\frac{(E_+ - m)}{p_3} \sigma_3 \tilde{u}(p)
+\]
+\[
+= -\frac{(E_+ - m)(E_+ + m)}{p_3(E_+ + m)} \sigma_3 \tilde{u}(p)
+\]
+\[
+= -\frac{(E_+^2 - m^2)}{p_3(E_+ + m)} \sigma_3 \tilde{u}(p)
+\]
+\[
+= -\frac{p_3^2}{p_3(E_+ + m)} \sigma_3 \tilde{u}(p) = -\frac{\sigma_3 p_3}{E_+ + m} \tilde{u}(p),
+\]
+
+where we have used the property of the Pauli matrices, namely, $\sigma_3^2 = \mathbb{I}$. 
+Choosing the two independent solutions for $\tilde{u}$ as
+
+\[
+\tilde{u}(p) = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad \tilde{u}(p) = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \tag{2.33}
+\]
+
+we obtain respectively
+
+
+\[
+\tilde{v}(p) = -\frac{\sigma_3 p_3}{E_+ + m} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} -\frac{p_3}{E_+ + m} \\ 0 \end{pmatrix}, \tag{2.34}
+\]
+
+and
+
+\[
+\tilde{v}(p) = -\frac{\sigma_3 p_3}{E_+ + m} \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ \frac{p_3}{E_+ + m} \end{pmatrix}. \tag{2.35}
+\]
+
+This determines the two positive energy solutions of the Dirac equation ( the energy eigenvalues are doubly degenerate).
+
+Similarly, for the negative energy solutions we write
+
+\[
+p_0 = E_- = -E = -\sqrt{p_3^2 + m^2}, \tag{2.36}
+\]
+
+and the set of equations (2.26) becomes
+
+\[
+(E_- - m)\tilde{u}(p) + \sigma_3 p_3 \tilde{v}(p) = 0,
+\]
+\[
+\sigma_3 p_3 \tilde{u}(p) + (E_- + m)\tilde{v}(p) = 0. \tag{2.37}
+\]
+
+We can solve these as
+
+\[
+\tilde{u}(p) = -\frac{\sigma_3 p_3}{E_- - m} \tilde{v}(p). \tag{2.38}
+\]
+
+Choosing the independent solutions as
+
+\[
+\tilde{v}(p) = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad \tilde{v}(p) = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \tag{2.39}
+\]
+
+we obtain respectively
+
+\[
+\tilde{u}(p) = -\frac{\sigma_3 p_3}{E_- - m} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \begin{pmatrix} -\frac{p_3}{E_- - m} \\ 0 \end{pmatrix}, \tag{2.40}
+\]
+
+and
+
+\[
+\tilde{u}(p) = -\frac{\sigma_3 p_3}{E_- - m} \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} 0 \\ \frac{p_3}{E_- - m} \end{pmatrix}, \tag{2.41}
+\]
+
+and these determine the two negative energy solutions of the Dirac equation.
+
+We can write
+
+\[
+u_+(p) = \begin{pmatrix} \tilde{u}(p) \\ -\frac{\sigma_3 p_3}{E_+ + m} \tilde{u}(p) \end{pmatrix}, \quad u_-(p) = \begin{pmatrix} -\frac{\sigma_3 p_3}{E_- - m} \tilde{v}(p) \\ \tilde{v}(p) \end{pmatrix}, \tag{2.42}
+\]
+
+the positive and the negative energy solutions have the explicit forms
+
+\[
+u_+^1(p) = \begin{pmatrix} 1 \\ 0 \\ -\frac{p_3}{E_+ + m} \\ 0 \end{pmatrix}, \quad u_+^2 = \begin{pmatrix} 0 \\ 1 \\ 0 \\ \frac{p_3}{E_+ + m} \end{pmatrix}, \tag{2.43}
+\]
+
+\[
+u_-^1(p) = \begin{pmatrix} -\frac{p_3}{E_- - m} \\ 0 \\ 1 \\ 0 \end{pmatrix}, \quad u_-^2 = \begin{pmatrix} 0 \\ \frac{p_3}{E_- - m} \\ 0 \\ 1 \end{pmatrix}. \tag{2.44}
+\]
+
+
+The notation is suggestive and implies that the wave function corresponds to that of a spin \(\frac{1}{2}\)-particle.\\
+
+It is because of the presence of negative
+energy solutions that the wave function becomes a four component
+column matrix as opposed to the two component spinor we expect
+in non-relativistic systems.\\
+
+The correct counting for the number of
+components of the wave function for a massive, relativistic particle of
+spin s in the presence of both positive and negative energies follows
+to be 2(2s + 1), unlike the nonrelativistic counting (2s + 1).\\
+
+From the structure of the wave function, it is also clear that, for the case of general motion, where
+
+\[
+p_1 \neq p_2 \neq 0,
+\]
+
+the solutions take the forms (with $p_0 = E_\pm = \pm\sqrt{\mathbf{p}^2 + m^2}$)
+
+\[
+u_+(p) = \begin{pmatrix}
+\tilde{u}(p) \\
+\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E_+ + m} \tilde{u}(p)
+\end{pmatrix}, \quad u_-(p) = \begin{pmatrix}
+\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E_- - m} \tilde{v}(p) \\
+\tilde{v}(p)
+\end{pmatrix}, \tag{2.45}
+\]
+
+which can be explicitly verified. (The change in the sign in the dependent components comes from raising the index of the momentum, namely, $p_i = -p^i$.)
+
+\subsubsection{Normalization of the wave function}
+
+Let us note that if we define
+
+\[
+E = E_+ = \sqrt{p^2 + m^2} = -E_-,
+\]
+
+then, we can write the solutions for motion along a general direction as
+
+\[
+u_+(p) = \alpha \begin{pmatrix}
+\tilde{u}(p) \\
+\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \tilde{u}(p)
+\end{pmatrix}, \quad u_-(p) = \beta \begin{pmatrix}
+-\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \tilde{v}(p) \\
+\tilde{v}(p)
+\end{pmatrix}. \tag{2.46}
+\]
+
+Here $\alpha$ and $\beta$ are normalization constants to be determined. The two
+
+
+\[
+\tilde{u}^\dagger(p)\tilde{u}(p) = 1 = \tilde{v}^\dagger(p)\tilde{v}(p). \tag{2.47}
+\]
+
+For different spin components, this product vanishes.\\
+Given this, we can now calculate
+
+\[
+u_+^\dagger(p)u_+(p) = \alpha^*\alpha \left( \tilde{u}^\dagger(p) \quad \tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \right) \begin{pmatrix}
+\tilde{u}(p) \\
+\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m}\tilde{u}(p)
+\end{pmatrix}
+\]
+
+\[
+= |\alpha|^2 \left( \tilde{u}^\dagger(p)\tilde{u}(p) + \tilde{u}^\dagger(p)\frac{(\boldsymbol{\sigma} \cdot \mathbf{p})(\boldsymbol{\sigma} \cdot \mathbf{p})}{(E + m)^2} \tilde{u}(p) \right)
+\]
+
+\[
+= |\alpha|^2 \left( 1 + \frac{\mathbf{p}^2}{(E + m)^2} \right) \tilde{u}^\dagger(p)\tilde{u}(p)
+\]
+
+\[
+= |\alpha|^2 \left( \frac{E^2 + m^2 + 2Em + \mathbf{p}^2}{(E + m)^2} \right) \tilde{u}^\dagger(p)\tilde{u}(p)
+\]
+
+\[
+= |\alpha|^2 \frac{2E(E + m)}{(E + m)^2} \tilde{u}^\dagger(p)\tilde{u}(p)
+\]
+
+\[
+= \frac{2E}{E + m} |\alpha|^2 \tilde{u}^\dagger(p)\tilde{u}(p),
+\]
+
+where we have used the familiar identity satisfied by the \textbf{Pauli matrices}
+
+\[
+(\boldsymbol{\sigma} \cdot \mathbf{A})(\boldsymbol{\sigma} \cdot \mathbf{B}) = \mathbf{A} \cdot \mathbf{B} + i\boldsymbol{\sigma} \cdot (\mathbf{A} \times \mathbf{B}). \tag{2.48}
+\]
+
+Similarly, for the negative energy solutions we have
+
+\[
+u_-^\dagger(p)u_-(p) = \beta^*\beta \left( -\tilde{v}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \quad \tilde{v}^\dagger(p) \right) \begin{pmatrix}
+-\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m}\tilde{v}(p) \\
+\tilde{v}(p)
+\end{pmatrix}
+\]
+
+\[
+= |\beta|^2 \left( \tilde{v}^\dagger(p)\frac{(\boldsymbol{\sigma} \cdot \mathbf{p})(\boldsymbol{\sigma} \cdot \mathbf{p})}{(E + m)^2} \tilde{v}(p) + \tilde{v}^\dagger(p)\tilde{v}(p) \right)
+\]
+
+\[
+= |\beta|^2 \left( \frac{\mathbf{p}^2}{(E + m)^2} + 1 \right) \tilde{v}^\dagger(p)\tilde{v}(p)
+\]
+
+\[
+= \frac{2E}{E + m} |\beta|^2 \tilde{v}^\dagger(p)\tilde{v}(p).
+\]
+
+
+In dealing with the Dirac equation, another wave function (known as the adjoint spinor) that plays an important role is defined to be
+
+\[
+\overline{u}(p) = u^\dagger(p)\gamma^0. \tag{2.49}
+\]
+
+Thus, for example,
+
+\[
+\overline{u}_+(p) = \alpha^* \left( \tilde{u}^\dagger(p) \quad \tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \right) \begin{pmatrix}
+\mathbb{I} & 0 \\
+0 & -\mathbb{I}
+\end{pmatrix}
+\]
+
+\[
+= \alpha^* \left( \tilde{u}^\dagger(p) \quad -\tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \right),
+\]
+
+\[
+\overline{u}_-(p) = \beta^* \left( -\tilde{v}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \quad \tilde{v}^\dagger(p) \right) \begin{pmatrix}
+\mathbb{I} & 0 \\
+0 & -\mathbb{I}
+\end{pmatrix}
+\]
+
+\[
+= \beta^* \left( -\tilde{v}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \quad -\tilde{v}^\dagger(p) \right).
+\]
+
+Thus, we see that the difference between the hermitian conjugate $u^\dagger$ and $\overline{u}$ is in the relative sign in the second of the two-component spinors.
+
+We can also calculate the product
+
+\[
+\overline{u}_+(p)u_+(p) = \alpha^*\alpha \left( \tilde{u}^\dagger(p) \quad -\tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \right) \begin{pmatrix}
+\tilde{u}(p) \\
+\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m}\tilde{u}(p)
+\end{pmatrix}
+\]
+
+\[
+= |\alpha|^2 \left( \tilde{u}^\dagger(p)\tilde{u}(p) - \tilde{u}^\dagger(p)\frac{(\boldsymbol{\sigma} \cdot \mathbf{p})(\boldsymbol{\sigma} \cdot \mathbf{k})}{(E + m)^2}\tilde{u}(p) \right)
+\]
+
+\[
+= |\alpha|^2 \left( 1 - \frac{\mathbf{p}^2}{(E + m)^2} \right) \tilde{u}^\dagger(p)\tilde{u}(p)
+\]
+
+\[
+= |\alpha|^2 \left( \frac{E^2 + m^2 + 2Em - \mathbf{p}^2}{(E + m)^2} \right) \tilde{u}^\dagger(p)\tilde{u}(p)
+\]
+
+
+
+\[
+= |\alpha|^2 \frac{2m(E + m)}{(E + m)^2} \tilde{u}^\dagger(p)\tilde{u}(p)
+\]
+
+\[
+= \frac{2m}{E + m} |\alpha|^2 \tilde{u}^\dagger(p)\tilde{u}(p).
+\]
+
+Similarly, we can show that
+
+\[
+\overline{u}_-(p)u_-(p) = -\frac{2m}{E + m} |\beta|^2 \tilde{v}^\dagger(p)\tilde{v}(p).
+\]
+
+
+relativistically covariant normalization would be to require (for the same spin components)
+
+\[
+u_+^\dagger(p)u_+(p) = \frac{E}{m} = u_-^\dagger(p)u_-(p).
+\]
+This will correspond to the probability density and, therefore, must be positive, in the rest frame of the particle, this will reduce to $u_-^\dagger u_- = 1$ which corresponds to the non-relativistic normalization. The independent wave functions for a free particle, $\psi_p(x) = e^{-ikx}u(p)$ with $p_0 = \pm E$, with this normalization condition, 
+
+\[
+\int d^3x \psi_p^\dagger(x)\psi_{p'}(x) = \frac{E}{m} (2\pi)^3 \delta^3(p - p').
+\]
+
+\[
+u_+^\dagger(p)u_+(p) = \frac{2E}{E + m} |\alpha|^2 = \frac{E}{m},
+\]
+
+or,
+\[
+\alpha = \alpha^* = \sqrt{\frac{E + m}{2m}},
+\]
+
+\[
+u_-^\dagger(p)u_-(p) = \frac{2E}{E + m} |\beta|^2 = \frac{E}{m},
+\]
+
+or,
+\[
+\beta = \beta^* = \sqrt{\frac{E + m}{2m}}.
+\]
+
+Therefore, with this normalization, we can write the normalized positive and negative energy solutions of the Dirac equation to be
+
+\[
+u_+(p) = \sqrt{\frac{E + m}{2m}} \begin{pmatrix}
+\tilde{u}(p) \\
+\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \tilde{u}(p) \tag{2.50}
+\end{pmatrix},
+\]
+
+\[
+u_-(p) = \sqrt{\frac{E + m}{2m}} \begin{pmatrix}
+-\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \tilde{v}(p) \\
+\tilde{v}(p)
+\end{pmatrix}. \tag{2.51}
+\]
+Now we can that
+\[
+\overline{u}_+(p)u_+(p) = \frac{2m}{E + m} |\alpha|^2 = 1,
+\]
+
+\[
+\overline{u}_-(p)u_-(p) = -\frac{2m}{E + m} |\beta|^2 = -1. \tag{2.52}
+\]
+
+This particular product, therefore, appears to be a Lorentz invariant (scalar).\\
+
+Note that the positive and the
+negative energy solutions are orthogonal.\\
+
+\[
+u_+^\dagger(p)u_-(p) = \alpha^*\beta \left( \tilde{u}^\dagger(p) \quad \tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \right) \begin{pmatrix}
+-\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m}\tilde{v}(p) \\
+\tilde{v}(p)
+\end{pmatrix}
+\]
+
+\[
+= \alpha^*\beta \left( -\tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m}\tilde{v}(p) + \tilde{u}^\dagger(p)\frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m}\tilde{v}(p) \right)
+\]
+
+\[
+= 0. \tag{2.53}
+\]
+
+Note however, that
+
+\[
+\overline{u}_+(p)u_-(p) = -2\alpha^* \beta \tilde{u}^\dagger(p) \frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \tilde{v}(p) \neq 0,
+\]
+
+\[
+\overline{u}_-(p)u_+(p) = -2\beta^* \alpha \tilde{v}^\dagger(p) \frac{\boldsymbol{\sigma} \cdot \mathbf{p}}{E + m} \tilde{u}(p) \neq 0. \tag{2.54}
+\]
+
+
+While we will be using this particular normalization for massive
+particles, let us note that it becomes meaningless for massless particles. (There is no rest frame for a massless particle.)\\
+
+An alternative normalization which works well for both massive and massless particles is given by
+
+\[
+u_+^\dagger(p)u_+(p) = E = u_-^\dagger(p)u_-(p).
+\]
+
+This still behaves like the time component of a four vector ($m$ is a Lorentz scalar). In this case,
+\[
+u_+^\dagger(p)u_+(p) = \frac{2E}{E + m} |\alpha|^2 = E,
+\]
+
+or, \quad $\alpha = \alpha^* = \sqrt{\frac{E + m}{2}}$,
+
+\[
+u_-^\dagger(p)u_-(p) = \frac{2E}{E + m} |\beta|^2 = E,
+\]
+
+or, \quad $\beta = \beta^* = \sqrt{\frac{E + m}{2}}$.
+
+Correspondingly, in this case, we obtain
+
+\[
+\overline{u}_+(p)u_+(p) = \frac{2m}{E + m} |\alpha|^2 = m,
+\]
+
+\[
+\overline{u}_-(p)u_-(p) = -\frac{2m}{E + m} |\beta|^2 = -m,
+\]
+
+which vanishes for a massless particle. This product continues to be a Lorentz scalar.\\
+
+ We can write the solution of the Dirac equation for a general motion (along an arbitrary direction) as
+
+\[
+\psi(x) = \int d^4 p a(p)\delta(p^2 - m^2) e^{-ip \cdot x} u(p),
+\]
+
+and
+\[
+\int d^3 x \psi^\dagger(x)\psi(x) = 1. \tag{2.55}
+\]
+
+\subsubsection{Spin Sums}
+
+In evaluating Feynman diagrams, we will often wish to sum over the polarization states of a fermion. We can derive the relevant completeness relations with a simple calculation:
+
+\[
+\sum_{s=1,2} u^s(p)\overline{u}^s(p) = \sum_s \left(\frac{\sqrt{p \cdot \sigma \xi^s}}{\sqrt{p \cdot \overline{\sigma} \xi^s}}\right) \left(\xi^{s\dagger}\sqrt{p \cdot \overline{\sigma}}, \xi^{s\dagger}\sqrt{p \cdot \sigma}\right)
+\]
+
+\[
+= \begin{pmatrix}
+\sqrt{p \cdot \sigma}\sqrt{p \cdot \overline{\sigma}} & \sqrt{p \cdot \sigma}\sqrt{p \cdot \sigma} \\
+\sqrt{p \cdot \overline{\sigma}}\sqrt{p \cdot \overline{\sigma}} & \sqrt{p \cdot \overline{\sigma}}\sqrt{p \cdot \sigma}
+\end{pmatrix}
+\]
+
+\[
+= \begin{pmatrix}
+m & p \cdot \sigma \\
+p \cdot \overline{\sigma} & m
+\end{pmatrix}.
+\]
+
+In the second line we have used
+
+\[
+\sum_{s=1,2} \xi^s \xi^{s\dagger} = \mathbf{1} = \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}. \tag{2.56}
+\]
+
+Thus we arrive at the desired formula,
+
+\[
+\sum_s u^s(p)\overline{u}^s(p) = \gamma \cdot p + m.
+\]
+
+Similarly,
+
+\[
+\sum_s v^s(p)\overline{v}^s(p) = \gamma \cdot p - m.
+\]
+
+
+
+\subsection{Quantization of the Dirac Field}
+
+From the Lagrangian density for the free Dirac field:
+\[
+\mathcal{L} = \bar{\psi}(i\slashed{\partial} - m)\psi = \bar{\psi}(i\gamma^\mu \partial_\mu - m)\psi,
+\]
+we compute the canonical conjugate momentum to the field \(\psi\):
+\[
+\pi = \frac{\partial \mathcal{L}}{\partial \dot{\psi}} = i \psi^\dagger.
+\]
+
+The Hamiltonian density is given by:
+\[
+\mathcal{H} = \pi \dot{\psi} - \mathcal{L} = i\psi^\dagger \dot{\psi} - \bar{\psi}(i\gamma^\mu \partial_\mu - m)\psi.
+\]
+
+Expanding the Lagrangian:
+\[
+\mathcal{H} = i \psi^\dagger \dot{\psi} - \bar{\psi}(i \gamma^0 \dot{\psi} + i \gamma^i \partial_i \psi - m \psi).
+\]
+
+Using \(\bar{\psi} = \psi^\dagger \gamma^0\), we substitute:
+\[
+\mathcal{H} = i \psi^\dagger \dot{\psi} - i \psi^\dagger \gamma^0 \gamma^0 \dot{\psi} - i \psi^\dagger \gamma^0 \gamma^i \partial_i \psi + m \psi^\dagger \gamma^0 \psi.
+\]
+
+Since \(\gamma^0 \gamma^0 = \mathbb{1}\), the first two terms cancel:
+\[
+\mathcal{H} = -i \psi^\dagger \gamma^0 \gamma^i \partial_i \psi + m \psi^\dagger \gamma^0 \psi.
+\]
+
+In vector notation:
+\[
+\mathcal{H} = \psi^\dagger \left( -i \gamma^0 \vec{\gamma} \cdot \vec{\nabla} + m \gamma^0 \right) \psi.
+\]
+
+The Hamiltonian is obtained by integrating over space:
+\[
+H = \int d^3x \, \mathcal{H} = \int d^3x \, \psi^\dagger \left( -i \gamma^0 \vec{\gamma} \cdot \vec{\nabla} + m \gamma^0 \right) \psi. \tag{2.57}
+\]
+
+Alternatively, using \(\bar{\psi} = \psi^\dagger \gamma^0\), this can be written as:
+\[
+H = \int d^3x \, \bar{\psi}(-i \vec{\gamma} \cdot \vec{\nabla} + m)\psi. 
+\]
+
+
+If we define $\boldsymbol{\alpha} = \gamma^0\boldsymbol{\gamma}$, $\beta = \gamma^0$, we may recognize the quantity in brackets as the Dirac Hamiltonian of one-particle quantum mechanics:
+
+\[h_D = -i\boldsymbol{\alpha} \cdot \boldsymbol{\nabla} + m\beta \tag{2.58} \]
+
+
+To quantize the Dirac field in analogy with the Klein-Gordon field we would impose the canonical commutation relations
+\[
+[\psi_a(\mathbf{x}), \psi_b^\dagger(\mathbf{y})] = \delta^{(3)}(\mathbf{x} - \mathbf{y})\delta_{ab} \tag{2.59}\]
+
+From the form of the Hamiltonian (2.57), it will clearly be helpful to expand $\psi(x)$ in a basis of eigenfunctions of $h_D$.
+
+\[[\gamma^0 \partial_0 + i\gamma \cdot \nabla - m] u^s(p)e^{-ip \cdot x} = 0\]
+
+so $u^s(\mathbf{p})e^{ip \cdot \mathbf{x}}$ are eigenfunctions of $h_D$ with eigenvalues $E_p$. Similarly, the functions $v^s(\mathbf{p})e^{-ip \cdot \mathbf{x}}$ (or equivalently, $v^s(-\mathbf{p})e^{+ip \cdot \mathbf{x}}$) are eigenfunctions of $h_D$ with eigenvalues $-E_p$. These form a complete set of eigenfunctions, since for any $\mathbf{p}$ there are two $u$'s and two $v$'s, giving us four eigenvectors of the $4 \times 4$ matrix $h_D$.\\
+
+
+Expanding $\psi$ in this basis, we obtain
+\[
+\psi(\mathbf{x}) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} e^{ip \cdot \mathbf{x}} \sum_{s=1,2} \left( a_p^s u^s(\mathbf{p}) + b_p^s v^s(-\mathbf{p}) \right) \tag{2.60}
+\]
+where $a_p^s$ and $b_p^s$ are operator coefficients. Postulate the commutation relations
+\[
+[a_p^r, a_q^{s\dagger}] = [b_p^r, b_q^{s\dagger}] = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q})\delta^{rs}. \tag{2.61}
+\]
+It is then easy to verify the commutation relations (2.59) for $\psi$ and $\psi^\dagger$:
+\[
+[\psi(\mathbf{x}), \psi^\dagger(\mathbf{y})] = \int \frac{d^3p \, d^3q}{(2\pi)^6} \frac{1}{\sqrt{2E_p \, 2E_q}} e^{i(\mathbf{p} \cdot \mathbf{x} - \mathbf{q} \cdot \mathbf{y})} 
+\times \sum_{r,s} \left( [a_p^r, a_q^{s\dagger}] u^r(\mathbf{p})\bar{u}^s(\mathbf{q}) + [b_p^r, b_q^{s\dagger}] v^r(-\mathbf{p})\bar{v}^s(-\mathbf{q}) \right) \gamma^0
+
+= \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_p} e^{ip \cdot (\mathbf{x} - \mathbf{y})}
+\times \left[ (\gamma^0 E_p - \gamma \cdot \mathbf{p} + m) + (\gamma^0 E_p + \gamma \cdot \mathbf{p} - m) \right] \gamma^0
+
+= \delta^{(3)}(\mathbf{x} - \mathbf{y}) \times \mathbf{1}_{4 \times 4}. \]
+
+In the second step we have used the spin sum completenesn relations.\\
+
+We are now ready to write H in terms of the a ’s and 6 ’s. After another 
+short calculation:\\
+
+\[\boxed{H = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( E_\mathbf{p} a_\mathbf{p}^{s\dagger} a_p^s - E_\mathbf{p} b_\mathbb{p}^{s\dagger} b_\mathbf{p}^s \right)} \tag{2.62}
+\].
+
+
+
+
+We seem to be in rather deep trouble, but again let's press on, and investigate the causality of this theory. To do this we should compute $[\psi_a(x), \bar{\psi}_b(y)]$ (or more conveniently, $[\psi(x), \bar{\psi}(y)]$) at non-equal times and hope to get zero outside the light-cone. First we must switch to the Heisenberg picture and restore the time-dependence of $\psi$ and $\bar{\psi}$. Using the relations
+\[
+e^{iHt} a^s_{\mathbf{p}} e^{-iHt} = a^s_{\mathbf{p}} e^{-iE_{\mathbf{p}} t}, 
+\qquad 
+e^{iHt} b^s_{\mathbf{p}} e^{-iHt} = b^s_{\mathbf{p}} e^{+iE_{\mathbf{p}} t},
+\]
+we immediately have
+\[
+\psi(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \sum_s 
+\left( a^s_{\mathbf{p}} u^s(p) e^{-ip \cdot x} + b^s_{\mathbf{p}} v^s(p) e^{ip \cdot x} \right),
+\]
+\[
+\bar{\psi}(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \sum_s 
+\left( a^{s\dagger}_{\mathbf{p}} \bar{u}^s(p) e^{ip \cdot x} + b^{s\dagger}_{\mathbf{p}} \bar{v}^s(p) e^{-ip \cdot x} \right).
+\]
+
+We can now calculate the general commutator:
+\[
+[\psi_a(x), \bar{\psi}_b(y)] = \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} \sum_s 
+\left( u^s_a(p) \bar{u}^s_b(p) e^{-ip \cdot (x - y)} + v^s_a(p) \bar{v}^s_b(p) e^{ip \cdot (x - y)} \right)
+\]
+\[
+= \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} 
+\left( (\slashed{p} + m)_{ab} e^{-ip \cdot (x - y)} + (\slashed{p} - m)_{ab} e^{ip \cdot (x - y)} \right)
+\]
+\[
+= (i \slashed{\partial}_x + m)_{ab} \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} 
+\left( e^{-ip \cdot (x - y)} - e^{ip \cdot (x - y)} \right)
+\]
+\[
+= (i \slashed{\partial}_x + m)_{ab} [\phi(x), \phi(y)].
+\]
+
+Since $[\phi(x), \phi(y)]$ (the commutator of a real Klein-Gordon field) vanishes outside the light-cone, this quantity does also.
+
+There is something odd, however, about this solution to the causality problem. Let $\ket{0}$ be the state that is annihilated by all the $a^s_{\mathbf{p}}$ and $b^s_{\mathbf{p}}$: $a^s_{\mathbf{p}} \ket{0} = b^s_{\mathbf{p}} \ket{0} = 0$. Then
+\[
+\bra{0} [\psi_a(x), \bar{\psi}_b(y)] \ket{0} 
+= \bra{0} \left( \psi_a(x) \bar{\psi}_b(y) - \bar{\psi}_b(y) \psi_a(x) \right) \ket{0}.
+\]
+just as for the Klein-Gordon field.\\
+
+Postulating anticommutation relations for the Dirac field 
+solves the negative energy problem. The equal-time anticommutation relations 
+will be
+
+
+\[
+\left\{ \psi_a(\mathbf{x}), \psi_b^\dagger(\mathbf{y}) \right\} = \delta^{(3)}(\mathbf{x} - \mathbf{y}) \delta_{ab};
+\]
+\[
+\left\{ \psi_a(\mathbf{x}), \psi_b(\mathbf{y}) \right\} = \left\{ \psi_a^\dagger(\mathbf{x}), \psi_b^\dagger(\mathbf{y}) \right\} = 0.
+\]
+\\
+
+
+
+
+We can expand $\psi(\mathbf{x})$ in terms of $a_{\mathbf{p}}^s$ and $b_{\mathbf{p}}^s$ as before (Eq. (3.87)). The creation and annihilation operators must now obey
+
+\[
+\{ a_{\mathbf{p}}^r, a_{\mathbf{q}}^{s \dagger} \} = \{ b_{\mathbf{p}}^r, b_{\mathbf{q}}^{s \dagger} \} = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) \delta^{rs}
+\]
+
+(with all other anticommutators equal to zero) in order that (3.96) be satisfied. Another computation gives the Hamiltonian,
+
+\[
+H = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( E_{\mathbf{p}} a_{\mathbf{p}}^{s \dagger} a_{\mathbf{p}}^s - E_{\mathbf{p}} b_{\mathbf{p}}^{s \dagger} b_{\mathbf{p}}^s \right),
+\]
+
+which is the same as before; $b_{\mathbf{p}}^{s \dagger}$ still creates negative energy. However, the relation $\{ b_{\mathbf{p}}^r, b_{\mathbf{q}}^{s \dagger} \} = (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) \delta^{rs}$ is symmetric between $b_{\mathbf{p}}^r$ and $b_{\mathbf{q}}^{s \dagger}$. So let us simply redefine
+
+\[
+\tilde{b}_{\mathbf{p}}^s = b_{\mathbf{p}}^{s \dagger}, \quad \tilde{b}_{\mathbf{p}}^{s \dagger} = b_{\mathbf{p}}^s.
+\]
+
+These of course obey exactly the same anticommutation relations, but now the second term in the Hamiltonian is
+
+\[
+- E_{\mathbf{p}} b_{\mathbf{p}}^{s \dagger} b_{\mathbf{p}}^s = + E_{\mathbf{p}} \tilde{b}_{\mathbf{p}}^s \tilde{b}_{\mathbf{p}}^{s \dagger} - \text{(const)}.
+\]
+
+If we choose $|0\rangle$ to be the state that is annihilated by all $a_{\mathbf{p}}^s$ and $\tilde{b}_{\mathbf{p}}^s$, then all excitations have positive energy.
+
+ More generally, the anticommutation relations imply that any multiparticle state is antisymmetric under the interchange of two particles: $a_{\mathbf{p}}^{\dagger} a_{\mathbf{q}}^{\dagger} |0\rangle = - a_{\mathbf{q}}^{\dagger} a_{\mathbf{p}}^{\dagger} |0\rangle$. Thus we conclude that \textbf{if the ladder operators obey anticommutation relations, the corresponding particles obey \textit{Fermi-Dirac statistics}.}
+
+We have just shown that in order to insure that the vacuum has only positive-energy excitations, we must quantize the Dirac field with anticommutation relations; under these conditions the particles associated with the Dirac field obey Fermi-Dirac statistics.
+
+
+
+\subsection{The Quantized Dirac Field}
+
+
+First we write the field operators:
+
+\[
+\psi(x) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_s \left( a^s_p u^s(p) e^{-ip \cdot x} + b^{s\dagger}_p v^s(p) e^{ip \cdot x} \right)
+\]
+
+\[
+\bar{\psi}(x) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_s \left( b^s_p \bar{v}^s(p) e^{-ip \cdot x} + a^{s\dagger}_p \bar{u}^s(p) e^{ip \cdot x} \right)
+\]
+
+The creation and annihilation operators obey the anticommutation rules
+
+\[
+\{ a^r_p, a^{s\dagger}_q \} = \{ b^r_p, b^{s\dagger}_q \} = (2\pi)^3 \delta^{(3)}(p-q) \delta^{rs}
+\]
+
+with all other anticommutators equal to zero. The equal-time anticommutation relations for $\psi$ and $\psi^\dagger$ are then
+
+\[
+\{ \psi_a(x), \psi_b^\dagger(y) \} = \delta^{(3)}(x-y) \delta_{ab}
+\]
+
+\[
+\{ \psi_a(x), \psi_b(y) \} = \{ \psi_a^\dagger(x), \psi_b^\dagger(y) \} = 0
+\]
+
+The vacuum $|0\rangle$ is defined to be the state such that
+
+\[
+a^s_p |0\rangle = b^s_p |0\rangle = 0
+\]
+
+The Hamiltonian can be written
+
+\[
+H = \int \frac{d^3 p}{(2\pi)^3} \sum_s E_p \left( a^{s\dagger}_p a^s_p + b^{s\dagger}_p b^s_p \right)
+\]
+
+where we have dropped the infinite constant term that comes from anticommuting $b^s_p$ and $b^{s\dagger}_p$. From this we see that the vacuum is the state of lowest energy, as desired. The momentum operator is
+
+\[
+\mathbf{P} = \int d^3 x\, \psi^\dagger(-i \vec{\nabla}) \psi = \int \frac{d^3 p}{(2\pi)^3} \sum_s \mathbf{p} \left( a^{s\dagger}_p a^s_p + b^{s\dagger}_p b^s_p \right)
+\]
+
+
+
+
+Thus both $a^{s\dagger}_{\mathbf{p}}$ and $b^{s\dagger}_{\mathbf{p}}$ create particles with energy $+E_{\mathbf{p}}$ and momentum $\mathbf{p}$. We will refer to the particles created by $a^{s\dagger}_{\mathbf{p}}$ as \textbf{\textit{fermions}} and to those created by $b^{s\dagger}_{\mathbf{p}}$ as \textbf{\textit{antifermions}}.
+
+The one-particle states
+\[
+|\mathbf{p}, s\rangle \equiv \sqrt{2E_{\mathbf{p}}} \, a^{s\dagger}_{\mathbf{p}} |0\rangle
+\]
+are defined so that their inner product
+\[
+\langle \mathbf{p}, r | \mathbf{q}, s \rangle = 2E_{\mathbf{p}} (2\pi)^3 \delta^{(3)}(\mathbf{p} - \mathbf{q}) \delta^{rs}
+\]
+is Lorentz invariant.
+
+\subsection{Continuity Equation}
+
+The Dirac equation, written in the Hamiltonian form, is given by
+\[
+i \frac{\partial \psi}{\partial t} = H \psi = \left( -i \alpha \cdot \nabla + \beta m \right) \psi. \tag{2.63}
+\]
+
+Taking the Hermitian conjugate of this equation, we obtain
+\[
+- i \frac{\partial \psi^\dagger}{\partial t} = \psi^\dagger \left( i \alpha \cdot \overleftrightarrow{\nabla} + \beta m \right), \tag{2.64}
+\]
+where the gradient is assumed to act on $\psi^\dagger$. Multiplying the first equation with $\psi^\dagger$ on the left and the second with $\psi$ on the right and subtracting the second from the first, we obtain
+\[
+i \psi^\dagger \frac{\partial \psi}{\partial t} + i \frac{\partial \psi^\dagger}{\partial t} \psi = -i \left( \psi^\dagger \alpha \cdot \nabla \psi + (\nabla \psi^\dagger) \cdot \alpha \psi \right),
+\]
+or,
+\[
+i \frac{\partial}{\partial t} (\psi^\dagger \psi) = -i \nabla \cdot (\psi^\dagger \alpha \psi),
+\]
+or,
+\[
+\frac{\partial}{\partial t} (\psi^\dagger \psi) = - \nabla \cdot (\psi^\dagger \alpha \psi).
+\]
+
+This is the \textbf{continuity equation} for the probability current density associated with the Dirac equation and we note that we can identify
+
+
+\[
+\rho = \psi^\dagger \psi \quad \text{:probability density,} \tag{2.65}
+\]
+\[
+\mathbf{J} = \psi^\dagger \alpha \psi \quad \text{:probability current density,} \tag{2.66}
+\]
+
+to write the continuity equation as
+
+\[
+\frac{\partial \rho}{\partial t} = -\nabla \cdot \mathbf{J} \tag{2.67}
+\]
+
+This suggests that we can write the current four vector as
+
+\[
+J^\mu = (\rho, \mathbf{J}) = (\psi^\dagger \psi, \psi^\dagger \alpha \psi), \tag{2.68}
+\]
+
+so that the continuity equation can be written in the manifestly covariant form
+
+\[
+\partial_\mu J^\mu = 0. \tag{2.69}
+\]
+
+Note that  \(j_{\mu}\) transforms like a four vector.\\
+On the other hand, the total probability P is a Lorentz invariant quantity:
+
+\[
+P = \int \mathrm{d}^3 x\, \rho = \int \mathrm{d}^3 x\, \psi^\dagger \psi, \tag{2.70}
+\]
+
+*********\\
+An alternative and more covariant way of deriving the continuity equation is to start with the covariant Dirac equation
+
+\[
+(i \gamma^\mu \partial_\mu - m)\psi = 0,
+\]
+
+and note that the Hermitian conjugate of $\psi$ satisfies
+
+\[
+\psi^\dagger \left( -i (\gamma^\mu)^\dagger \overleftarrow{\partial}_\mu - m \right) = 0
+\]
+
+Multiplying this equation with $\gamma^0$ on the right and using the fact that $(\gamma^0)^2 = \mathbb{I}$, we obtain
+
+\[
+\overline{\psi} \left( -i \gamma^0 (\gamma^\mu)^\dagger \gamma^0 \overleftarrow{\partial}_\mu - m \right) = 0,
+\]
+or,
+\[
+\overline{\psi} \left( -i \gamma^\mu \overleftarrow{\partial}_\mu - m \right) = 0,
+\]
+
+where we have used the property of the gamma matrices that (for $\mu = 0,1,2,3$)
+
+\[
+\gamma^0 \gamma_\mu \gamma^0 = (\gamma^\mu)^\dagger,
+\]
+\[
+\gamma^0 (\gamma^\mu)^\dagger \gamma^0 = \gamma^\mu.
+\]
+
+Multiplying the Dirac equation with $\overline{\psi}$ on the left and its adjoint with $\psi$ on the right and subtracting the second from the first, we obtain
+
+\[
+i \left( \overline{\psi} \gamma^\mu \partial_\mu \psi + \overline{\psi} \gamma^\mu \overleftarrow{\partial}_\mu \psi \right) = 0,
+\]
+or,
+\[
+i \partial_\mu \left( \overline{\psi} \gamma^\mu \psi \right) = 0,
+\]
+or,
+\[
+\partial_\mu \left( \overline{\psi} \gamma^\mu \psi \right) = 0,
+\]
+
+This is, in fact, the covariant continuity equation and we can identify
+
+\[
+J^\mu = \overline{\psi} \gamma^\mu \psi. \tag{2.71}
+\]
+
+Note from the definition above that
+
+\[
+J^0 = \overline{\psi} \gamma^0 \psi = \psi^\dagger \gamma^0 \gamma^0 \psi = \psi^\dagger \psi = \rho, \tag{2.72}
+\]
+\[
+\mathbf{J} = \overline{\psi} \gamma \psi = \psi^\dagger \gamma^0 \gamma \psi = \psi^\dagger \alpha \psi, \tag{2.73}
+\]
+
+which is what we had derived earlier.\\
+
+
+Although the Dirac
+equation has both positive and negative energy solutions, because it
+is a first order equation (particularly in the time derivative), the
+probability density is independent of time derivative much like the
+Schrodinger equation. Consequently, the probability density can be defined to be positive
+definite even in the presence of negative energy solutions.
+
+\subsubsection{Charges And Noether's Current}
+
+There is one more important conserved quantity in the Dirac theory. We know that the current \( j^\mu = \bar{\psi} \gamma^\mu \psi \) is conserved. The charge associated with this current is
+\[
+Q = \int d^3x\, \psi^\dagger(x)\psi(x) = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}} + b^s_{-\mathbf{p}} b^{s\dagger}_{-\mathbf{p}} \right), \tag{2.74}
+\]
+or, if we ignore another infinite constant,
+\[
+Q = \int \frac{d^3p}{(2\pi)^3} \sum_s \left( a^{s\dagger}_{\mathbf{p}} a^s_{\mathbf{p}} - b^{s\dagger}_{\mathbf{p}} b^s_{\mathbf{p}} \right). \tag{2.75}
+\]
+
+So \( a^{s\dagger}_{\mathbf{p}} \) creates fermions with charge \( +1 \), while \( b^{s\dagger}_{\mathbf{p}} \) creates antifermions with charge \( -1 \). When we couple the Dirac field to the electromagnetic field, we will see that \( Q \) is none other than the electric charge (up to a constant factor that depends on which type of particle we wish to describe; e.g., for electrons, the electric charge is \( Qe \)).\\
+
+
+***********\\
+
+In Quantum Electrodynamics we will use the spinor field $\psi$ to describe electrons and positrons. The particles created by $a^{s\dagger}_{\mathbf{p}}$ are electrons; they have energy $E_p$, momentum $\mathbf{p}$, spin $1/2$ with polarization appropriate to $\xi^s$, and charge $+1$ (in units of $e$). The particles created by $b^{s\dagger}_{\mathbf{p}}$ are positrons; they have energy $E_p$, momentum $\mathbf{p}$, spin $1/2$ with polarization opposite to that of $\xi^s$, and charge $-1$. The state $\psi_\alpha(x)\,|0\rangle$ contains a positron at position $x$, whose polarization corresponds to the spinor component chosen. Similarly, $\bar{\psi}_\alpha(x)\,|0\rangle$ is a state of one electron at position $x$.
+
+
+\subsection{The Dirac Propagator}
+
+Calculating propagation amplitudes for the Dirac field is by now a straightforward exercise:
+
+\[
+\langle 0 | \psi_a(x) \overline{\psi}_b(y) | 0 \rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2 E_{\mathbf{p}}} \sum_s u_a^s(\mathbf{p}) \overline{u}_b^s(\mathbf{p}) e^{-i p \cdot (x-y)} \tag{2.76}
+\]
+\[
+= (i \not{\partial}_x + m)_{ab} \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2 E_{\mathbf{p}}} e^{-i p \cdot (x-y)},
+\]
+and 
+\[
+\langle 0 | \overline{\psi}_b(y) \psi_a(x) | 0 \rangle = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2 E_{\mathbf{p}}} \sum_s v_a^s(\mathbf{p}) \overline{v}_b^s(\mathbf{p}) e^{-i p \cdot (y-x)}
+\]
+\[
+= - (i \not{\partial}_x + m)_{ab} \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2 E_{\mathbf{p}}} e^{-i p \cdot (y-x)}. \tag{2.77}
+\]
+
+
+
+
+
+
+
+
+
+
+\section*{The Dirac Propagator: Derivation and Physical Meaning}
+
+In quantum field theory, the Dirac propagator describes the amplitude for a fermionic particle (such as an electron or positron) to propagate from one spacetime point to another. We begin with evaluating the vacuum expectation values of bilinear field combinations.
+
+\subsection*{1. Field Expansions}
+
+For a free Dirac field, the field operator $\psi(x)$ and its adjoint $\bar{\psi}(x) = \psi^\dagger(x)\gamma^0$ can be expanded in momentum space as:
+\begin{align*}
+\psi(x) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \sum_s \left( a_s(\mathbf{p}) u^s(\mathbf{p}) e^{-ip \cdot x} + b_s^\dagger(\mathbf{p}) v^s(\mathbf{p}) e^{ip \cdot x} \right), \\
+\bar{\psi}(x) &= \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}} \sum_s \left( a_s^\dagger(\mathbf{p}) \bar{u}^s(\mathbf{p}) e^{ip \cdot x} + b_s(\mathbf{p}) \bar{v}^s(\mathbf{p}) e^{-ip \cdot x} \right).
+\end{align*}
+
+\subsection*{2. Propagator for Fermion: Equation (2.76)}
+
+We compute the vacuum expectation value:
+\[
+\langle 0 | \psi_a(x) \bar{\psi}_b(y) | 0 \rangle
+\]
+Only the terms involving $a_s(\mathbf{p})$ and $a_s^\dagger(\mathbf{p})$ contribute, leading to:
+\begin{align*}
+\langle 0 | \psi_a(x) \bar{\psi}_b(y) | 0 \rangle 
+&= \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} \sum_s u^s_a(p) \bar{u}^s_b(p) e^{-ip \cdot (x - y)} \\
+&= \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} \left[ (\not{p} + m)_{ab} \right] e^{-ip \cdot (x - y)} \\
+&= \left(i \not{\partial}_x + m\right)_{ab} \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-ip \cdot (x - y)},
+\end{align*}
+where we used the identity:
+\[
+\sum_s u^s(p)\bar{u}^s(p) = \not{p} + m.
+\]
+
+\subsubsection*{Physical Interpretation:}
+
+This expression represents the amplitude for a fermion (particle) to propagate from spacetime point $y$ to $x$. Specifically:
+\begin{itemize}
+  \item $\bar{\psi}_b(y)$ creates a fermion at point $y$.
+  \item $\psi_a(x)$ annihilates the fermion at point $x$.
+  \item Hence, the fermion travels from $y$ to $x$.
+  \item The exponential $e^{-ip \cdot (x - y)}$ enforces forward momentum propagation.
+  \item The spin sum includes only positive energy solutions $u^s(p)$, characteristic of particles.
+\end{itemize}
+
+Thus, this is the \textbf{fermion propagator}:
+\[
+\boxed{
+\langle 0 | \psi_a(x) \bar{\psi}_b(y) | 0 \rangle = \left(i \not{\partial}_x + m\right)_{ab} \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-ip \cdot (x - y)}
+}
+\]
+
+\subsection*{3. Propagator for Antifermion: Equation (2.77)}
+
+Now consider:
+\[
+\langle 0 | \bar{\psi}_b(y) \psi_a(x) | 0 \rangle
+\]
+Only the terms involving $b_s(\mathbf{p})$ and $b_s^\dagger(\mathbf{p})$ contribute, giving:
+\begin{align*}
+\langle 0 | \bar{\psi}_b(y) \psi_a(x) | 0 \rangle 
+&= \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} \sum_s v^s_a(p) \bar{v}^s_b(p) e^{-ip \cdot (y - x)} \\
+&= \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} \left[ (\not{p} - m)_{ab} \right] e^{-ip \cdot (y - x)} \\
+&= -\left(i \not{\partial}_x + m\right)_{ab} \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-ip \cdot (y - x)},
+\end{align*}
+where we used the identity:
+\[
+\sum_s v^s(p)\bar{v}^s(p) = \not{p} - m.
+\]
+
+\subsubsection*{Physical Interpretation:}
+
+This expression describes the propagation of an antifermion (antiparticle) from $x$ to $y$. Specifically:
+\begin{itemize}
+  \item $\psi_a(x)$ creates an antifermion at point $x$.
+  \item $\bar{\psi}_b(y)$ annihilates the antifermion at point $y$.
+  \item Hence, the antifermion travels from $x$ to $y$.
+  \item The exponential $e^{-ip \cdot (y - x)}$ enforces backward momentum flow (or forward antiparticle flow).
+  \item The spin sum includes only negative energy solutions $v^s(p)$, characteristic of antiparticles.
+\end{itemize}
+
+Thus, this is the \textbf{antifermion propagator}:
+\[
+\boxed{
+\langle 0 | \bar{\psi}_b(y) \psi_a(x) | 0 \rangle = -\left(i \not{\partial}_x + m\right)_{ab} \int \frac{d^3p}{(2\pi)^3} \frac{1}{2E_{\mathbf{p}}} e^{-ip \cdot (y - x)}
+}
+\]
+
+\subsection*{4. Summary Table}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Expression} & \textbf{Describes} & \textbf{Particle Type} & \textbf{Direction} \\
+\hline
+$\langle 0 | \psi(x) \bar{\psi}(y) | 0 \rangle$ & Fermion propagation & Particle & $y \to x$ \\
+\hline
+$\langle 0 | \bar{\psi}(y) \psi(x) | 0 \rangle$ & Antifermion propagation & Antiparticle & $x \to y$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{5. Relation to Time-Ordered Propagator}
+
+In actual Feynman diagram calculations, we use the \textbf{time-ordered propagator}:
+\[
+S_{ab}(x - y) = \langle 0 | T\{ \psi_a(x) \bar{\psi}_b(y) \} | 0 \rangle,
+\]
+which combines both expressions:
+\begin{itemize}
+  \item If $x^0 > y^0$, then $S(x - y) = \langle 0 | \psi(x) \bar{\psi}(y) | 0 \rangle$.
+  \item If $y^0 > x^0$, then $S(x - y) = - \langle 0 | \bar{\psi}(y) \psi(x) | 0 \rangle$.
+\end{itemize}
+This ensures proper causality and Lorentz invariance in quantum field theory.\\
+
+
+Just as we did for the Klein-Gordon equation, we can construct Green's functions for the Dirac equation obeying various boundary conditions. For example, the retarded Green's function is
+\[
+S_R^{ab}(x-y) \equiv \theta(x^0 - y^0) \langle 0 | \{ \psi_a(x), \overline{\psi}_b(y) \} | 0 \rangle.
+\]
+
+
+It is easy to verify that
+\[
+S_R(x-y) = (i \not{\partial}_x + m) D_R(x-y), \tag{2.78}
+\]
+since on the right-hand side the term involving $\partial_0 \theta(x^0 - y^0)$ vanishes. Using (2.78) and the fact that $\not{\partial} \not{\partial} = \partial^2$, we see that $S_R$ is a Green's function of the Dirac operator:
+\[
+(i \not{\partial}_x - m) S_R(x-y) = i \delta^{(4)}(x-y) \cdot 1_{4 \times 4}.
+\]
+
+The Green's function of the Dirac operator can also be found by Fourier transformation. Expanding $S_R(x-y)$ as a Fourier integral and acting on both sides with $(i \slashed{\partial}_x - m)$, we find
+\[
+i \delta^{(4)}(x-y) = \int \frac{d^4 p}{(2\pi)^4} (\not{p} - m) e^{-ip \cdot (x-y)} \tilde{S}_R(p),
+\]
+and hence
+\[
+\tilde{S}_R(p) = \frac{i}{\not{p} - m} = \frac{i (\not{p} + m)}{p^2 - m^2}. \tag{2.79}
+\]
+
+
+
+The Green's function with Feynman boundary conditions is defined by the contour shown on page 31:
+\[
+S_F(x-y) = \int \frac{d^4 p}{(2\pi)^4} \frac{i (\not{p} + m)}{p^2 - m^2 + i \epsilon} e^{-ip \cdot (x-y)} \tag{2.80}
+\]
+\[
+= \begin{cases}
+\langle 0 | \psi(x) \bar{\psi}(y) | 0 \rangle & \text{for } x^0 > y^0 \text{ (close contour below)} \\
+- \langle 0 | \bar{\psi}(y) \psi(x) | 0 \rangle & \text{for } x^0 < y^0 \text{ (close contour above)} \tag{2.81}
+\end{cases}
+\]
+\[
+\equiv \langle 0 | T \psi(x) \bar{\psi}(y) | 0 \rangle, \tag{2.82}
+\]
+where we have chosen to define the \textit{time-ordered product} of spinor fields with an additional minus sign when the operators are interchanged. This minus sign is extremely important in the quantum field theory of fermions.
+
+\newpage
+
+\subsection{Discrete Symmetries}
+
+\textbf{Definition:} \\
+Discrete symmetries are transformations that are not continuously connected to the identity transformation. In physics, the most important discrete symmetries are parity (P), charge conjugation (C), and time reversal (T). These symmetries play a key role in classifying physical processes and understanding conservation laws.
+
+\vspace{0.5cm}
+
+\textbf{Categories of Discrete Symmetries and Their Conservation:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Symmetry} & \textbf{Conserved in...} & \textbf{Violated in...} \\
+\hline
+\textbf{C (Charge conjugation)} & Electromagnetic, Strong & Weak \\
+\hline
+\textbf{P (Parity)} & Electromagnetic, Strong & Weak \\
+\hline
+\textbf{T (Time reversal)} & Mostly & Weak (e.g., kaon decays) \\
+\hline
+\textbf{CP (Charge $\&$ Parity)} & Electromagnetic, Strong & Weak (e.g., kaon, B-meson) \\
+\hline
+\textbf{CPT (Charge-Parity-Time)} & \multicolumn{2}{c|}{Always conserved in local, Lorentz-invariant QFT} \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\subsubsection{Parity Symmety}
+
+Parity, denoted by \( P \), sends \( (t, \vec{x}) \rightarrow (t, -\vec{x}) \), reversing the handedness of space.\\
+
+The operator P should reverse the 
+momentum of a particle without flipping its spin:\\
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-07-10 210838.png}
+    \caption{Parity opertor }
+    \label{fig:enter-label}
+\end{figure}
+
+
+Mathematically, this means that $P$ should be implemented by a unitary operator (properly called $U(P)$, but we'll just call it $P$) which, for example, transforms the state $a^\dagger_{\mathbf{p}}{}^s |0\rangle$ into $a^\dagger_{-\mathbf{p}}{}^s |0\rangle$. In other words, we want
+\begin{equation}
+    P a_{\mathbf{p}}^s P = \eta_a a_{-\mathbf{p}}^s \qquad \text{and} \qquad
+    P b_{\mathbf{p}}^s P = \eta_b b_{-\mathbf{p}}^s, \tag{2.83}
+\end{equation}
+where $\eta_a$ and $\eta_b$ are possible phases. \\
+
+
+The parity transformation should be represented by a $4 \times 4$ constant matrix. To find this matrix, and to determine $\eta_a$ and $\eta_b$, we compute the action of $P$ on $\psi(x)$. Using (2.83), we have
+
+\[
+P \psi(x) P = \int \frac{d^3 p}{(2 \pi)^3} \frac{1}{\sqrt{2 E_\mathbf{p}}} \sum_s \left( \eta_a a_{-\mathbf{p}}^{s} u^{s}(p) e^{-i p x} + \eta_b^{*} b_{-\mathbf{p}}^{s \dagger} v^{s}(p) e^{i p x} \right) \tag{2.84}
+\]
+
+Now change variables to $\tilde{p} = (p^0, -\mathbf{p})$. Note that $p \cdot x = \tilde{p} \cdot (t, -\mathbf{x})$. Also $\tilde{p} \cdot \sigma = p \cdot \bar{\sigma}$ and $\tilde{p} \cdot \bar{\sigma} = p \cdot \sigma$. This allows us to write
+
+\[
+\begin{aligned}
+    u(p) &= \begin{pmatrix} \sqrt{p \cdot \sigma} \, \xi \\ \sqrt{p \cdot \bar{\sigma}} \, \xi \end{pmatrix} = \begin{pmatrix} \sqrt{\tilde{p} \cdot \bar{\sigma}} \, \xi \\ \sqrt{\tilde{p} \cdot \sigma} \, \xi \end{pmatrix} = \gamma^0 u(\tilde{p}); \\
+    v(p) &= \begin{pmatrix} \sqrt{p \cdot \sigma} \, \xi \\ -\sqrt{p \cdot \bar{\sigma}} \, \xi \end{pmatrix} = \begin{pmatrix} \sqrt{\tilde{p} \cdot \bar{\sigma}} \, \xi \\ -\sqrt{\tilde{p} \cdot \sigma} \, \xi \end{pmatrix} = -\gamma^0 v(\tilde{p}).
+\end{aligned}
+\]
+
+So (2.84) becomes
+
+\[
+\begin{aligned}
+    P \psi(x) P &= \int \frac{d^3 \tilde{p}}{(2 \pi)^3} \frac{1}{\sqrt{2 E_{\tilde{p}}}} \sum_s \left( \eta_a a_{\tilde{p}}^{s} \gamma^0 u^{s}(\tilde{p}) e^{-i \tilde{p} (t, -\mathbf{x})} \right. \\
+    &\quad \left. - \eta_b^{*} b_{\tilde{p}}^{s \dagger} \gamma^0 v^{s}(\tilde{p}) e^{i \tilde{p} (t, -\mathbf{x})} \right)
+\end{aligned}
+\]
+
+
+This should equal some constant matrix times $\psi(t, -\mathbf{x})$, and indeed it works if we make $\eta_b^* = -\eta_a$. This implies
+
+\[
+\eta_a \eta_b = -\eta_a \eta_a^* = -1.
+\]
+
+Thus we have the parity transformation of $\psi(x)$ in its final form,
+
+\[
+P\psi(t, \mathbf{x})P = \eta_a \gamma^0 \psi(t, -\mathbf{x}).
+\]
+
+
+
+It will be very important (for example, in writing down Lagrangians) to know how the various Dirac field bilinears transform under parity. Recall that \textbf{the five bilinears are}
+\[
+\overline{\psi} \psi, \qquad
+\overline{\psi} \gamma^\mu \psi, \qquad
+i \overline{\psi} [\gamma^\mu, \gamma^\nu] \psi, \qquad
+\overline{\psi} \gamma^\mu \gamma^5 \psi, \qquad
+i \overline{\psi} \gamma^5 \psi.
+\]
+
+The factors of $i$ have been chosen to make all these quantities Hermitian. (Any new term that we add to a Lagrangian must be real.) First we should compute
+\[
+P \overline{\psi}(t, \mathbf{x}) P = P \psi^\dagger(t, \mathbf{x}) P \gamma^0 = (P \psi(t, \mathbf{x}) P)^\dagger \gamma^0 = \eta_a^* \overline{\psi}(t, -\mathbf{x}) \gamma^0.
+\]
+
+Then the scalar bilinear transforms as
+\[
+P \overline{\psi} \psi P = |\eta_a|^2 \overline{\psi}(t, -\mathbf{x}) \gamma^0 \gamma^0 \psi(t, -\mathbf{x}) = +\overline{\psi} \psi (t, -\mathbf{x}),
+\]
+
+while for the vector we obtain
+\[
+P \overline{\psi} \gamma^\mu \psi P = \overline{\psi} \gamma^0 \gamma^\mu \gamma^0 \psi (t, -\mathbf{x}) = 
+\begin{cases}
++\overline{\psi} \gamma^\mu \psi (t, -\mathbf{x}) & \text{for } \mu = 0, \\
+-\overline{\psi} \gamma^\mu \psi (t, -\mathbf{x}) & \text{for } \mu = 1,2,3.
+\end{cases}
+\]
+
+Note that the vector acquires the same minus sign on the spatial components as does the vector $x^\mu$. Similarly, the transformations of the pseudo-scalar and pseudo-vector are
+\[
+P i \overline{\psi} \gamma^5 \psi P = i \overline{\psi} \gamma^0 \gamma^5 \gamma^0 \psi (t, -\mathbf{x}) = -i \overline{\psi} \gamma^5 \psi (t, -\mathbf{x});
+\]
+
+\[
+P \overline{\psi} \gamma^\mu \gamma^5 \psi P = \overline{\psi} \gamma^0 \gamma^\mu \gamma^5 \gamma^0 \psi (t, -\mathbf{x}) = 
+\begin{cases}
+-\overline{\psi} \gamma^\mu \gamma^5 \psi (t, -\mathbf{x}) & \text{for } \mu = 0, \\
++\overline{\psi} \gamma^\mu \gamma^5 \psi (t, -\mathbf{x}) & \text{for } \mu = 1,2,3.
+\end{cases}
+\]
+
+
+Consider a fermion-antifermion state, $a_{\mathbf{p}}^{s\dagger} b_{\mathbf{q}}^{s'\dagger} |0\rangle$. Applying $P$, we find
+\[
+P \left( a_{\mathbf{p}}^{s\dagger} b_{\mathbf{q}}^{s'\dagger} |0\rangle \right) = - \left( a_{\mathbf{p}}^{s\dagger} b_{-\mathbf{q}}^{s'\dagger} |0\rangle \right).
+\]
+Thus a state containing a fermion-antifermion pair gets an extra $(-1)$ under parity. This information is most useful in the context of bound states.
+
+
+
+\subsubsection{Time Reversal Symmetry}
+
+ We would like $T$ to take the form of a unitary operator that sends $a_{\mathbf{p}}$ to $a_{-\mathbf{p}}$ (and similarly for $b_{\mathbf{p}}$) and $\psi(t, \mathbf{x})$ to $\psi(-t, \mathbf{x})$ (times some constant matrix).Time reversal should be a symmetry of the free Dirac theory, $[T, H] = 0$. Then
+
+\[
+\psi(t, \mathbf{x}) = e^{iHt} \psi(\mathbf{x}) e^{-iHt}
+\]
+
+\[
+\Rightarrow T \psi(t, \mathbf{x}) T = e^{iHt} [T \psi(\mathbf{x}) T] e^{-iHt}
+\]
+
+\[
+\Rightarrow T \psi(t, \mathbf{x}) T |0\rangle = e^{iHt} [T \psi(\mathbf{x}) T] |0\rangle,
+\]
+
+assuming that $H |0\rangle = 0$. Note that $T$ cannot be implemented as a linear unitary operator.\\
+
+T should retain the unitarity condition $T^\dagger = T^{-1}$, but have $T$ act on c-numbers as well as operators, as follows:
+
+\[
+T(\text{c-number}) = (\text{c-number})^* T.
+\]
+
+Then even if $[T, H] = 0$, the time dependence of all exponential factors is reversed:
+\[
+T e^{+iHt} = e^{-iHt} T.
+\]
+Since all time evolution in quantum mechanics is performed with such exponential factors, this effectively changes the sign of $t$. Note that the operation of complex conjugation is nonlinear; $T$ is referred to as an \textit{antilinear} or \textit{antiunitary} operator.
+
+\[
+\boxed{\text{In addition to reversing the momentum of a particle, $T$ should also flip the spin:}}
+\]
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-07-11 072717.png}
+    \caption{T flips both Spin and momentum}
+    \label{fig:enter-label}
+\end{figure}
+
+
+We define the time reversal transformation of fermion annihilation operators as follows:
+\[
+T a_{\mathbf{p}}^s T = a_{-\mathbf{p}}^{-s}, \qquad T b_{\mathbf{p}}^s T = b_{-\mathbf{p}}^{-s}.
+\]
+(An additional overall phase would have no effect on the rest of our discussion and is omitted for simplicity.) Now compute the action of $T$ on the fermion field $\psi(x)$:
+\[
+\begin{aligned}
+T \psi(t, \mathbf{x}) T &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_s T \left( a_{\mathbf{p}}^s u^s(p) e^{-ipx} + b_{\mathbf{p}}^{s\dagger} v^s(p) e^{ipx} \right) T \\
+&= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \sum_s \left( a_{-\mathbf{p}}^{-s} [u^s(p)]^* e^{ipx} + b_{-\mathbf{p}}^{-s\dagger} [v^s(p)]^* e^{-ipx} \right) \\
+&= \int \frac{d^3 \tilde{p}}{(2\pi)^3} \frac{1}{\sqrt{2E_{\tilde{p}}}} \sum_s \left( a_{\tilde{p}}^{-s} u^{-s}(\tilde{p}) e^{i\tilde{p}(t, -\mathbf{x})} + b_{\tilde{p}}^{-s\dagger} v^{-s}(\tilde{p}) e^{-i\tilde{p}(t, -\mathbf{x})} \right) \\
+&= (\gamma^1 \gamma^3) \psi(-t, \mathbf{x}).
+\end{aligned}
+\]
+
+In the last step we used $\tilde{p} \cdot (t, \mathbf{x}) = -\mathbf{p} \cdot (-t, \mathbf{x})$. Just as for parity, we have derived a simple transformation law for the fermion field $\psi(x)$. The relative minus sign in the transformation laws for particle and antiparticle is present here as well, implicit in the twice-flipped spinor in $v^{-s}$.
+
+Now we can check the action of $T$ on the various bilinears. First we need
+\[
+T \overline{\psi} T = (T \psi T)^\dagger (\gamma^0)^* = \psi^\dagger(-t, \mathbf{x}) [\gamma^1 \gamma^3]^\dagger \gamma^0 = \overline{\psi}(-t, \mathbf{x}) [-\gamma^1 \gamma^3].
+\]
+
+Then the transformation of the scalar bilinear is
+\[
+T \overline{\psi} \psi T = \overline{\psi}(-t, \mathbf{x}) (\gamma^1 \gamma^3)(\gamma^1 \gamma^3) \psi(-t, \mathbf{x}) = +\overline{\psi} \psi (-t, \mathbf{x}).
+\]
+
+The pseudo-scalar acquires an extra minus sign when $T$ goes through the $i$:
+\[
+T i \overline{\psi} \gamma^5 \psi T = -i \overline{\psi} \gamma^5 \psi (-t, \mathbf{x}).
+\]
+
+For the vector, we must separately compute each of the four cases $\mu = 0, 1, 2, 3$. After a bit of work you should find
+\[
+T \overline{\psi} \gamma^\mu \psi T = \overline{\psi}(-t, \mathbf{x}) (\gamma^1 \gamma^3) (\gamma^\mu)^* (\gamma^1 \gamma^3) \psi(-t, \mathbf{x}) = 
+\begin{cases}
++\overline{\psi} \gamma^\mu \psi(-t, \mathbf{x}) & \text{for } \mu = 0, \\
+-\overline{\psi} \gamma^\mu \psi(-t, \mathbf{x}) & \text{for } \mu = 1, 2, 3.
+\end{cases}
+\]
+
+********\\
+
+
+Suppose that the direction of spin has polar coordinates $\theta, \phi$, the two-component spinors with spin up and spin down along this axis are
+
+\[
+\xi(\uparrow) = \begin{pmatrix}
+\cos \frac{\theta}{2} \\
+e^{i\phi} \sin \frac{\theta}{2}
+\end{pmatrix}, \qquad
+\xi(\downarrow) = \begin{pmatrix}
+- e^{-i\phi} \sin \frac{\theta}{2} \\
+\cos \frac{\theta}{2}
+\end{pmatrix}.
+\]
+
+Let $\xi^s = (\xi(\uparrow), \xi(\downarrow))$ for $s = 1, 2$. Also define
+
+\[
+\xi^{-s} = -i \sigma^2 (\xi^s)^*.
+\]
+
+This quantity is the flipped spinor; from the explicit formulae,
+
+\[
+\xi^{-s} = (\xi(\downarrow), -\xi(\uparrow)).
+\]
+
+
+
+\subsubsection{Charge Conjugation}
+
+This is the particle-antiparticle symmetry C.\\We implement C as a unitary linear 
+operator.\\It is conventionally defined to take a fermion with 
+a given spin orientation into an antifermion with the same spin orientation.\\
+
+A convenient choice for the transformation of fermion annihilation operators is
+
+\[
+C a_{\mathbf{p}}^{s} C = b_{\mathbf{p}}^{s}; \qquad C b_{\mathbf{p}}^{s} C = a_{\mathbf{p}}^{s}.
+\]
+
+Again, we ignore possible additional phases for simplicity.
+
+
+
+Once again, we would like to know how $C$ acts on fermion bilinears. First we need
+
+\[
+C \overline{\psi}(x) C = C \psi^\dagger C \gamma^0 = (-i \gamma^2 \psi)^T \gamma^0 = (-i \gamma^0 \gamma^2 \psi)^T.
+\]
+
+Working out the transformations of bilinears is a bit tricky, and it helps to write in spinor indices. For the scalar,
+
+\[
+C \overline{\psi} \psi C = (-i \gamma^0 \gamma^2 \psi)^T (-i \overline{\psi} \gamma^0 \gamma^2)^T = -\gamma^0_{ab} \gamma^2_{bc} \overline{\psi}_d \gamma^0_{de} \gamma^2_{ea} \psi_c
+= +\psi_d \gamma^0_{de} \gamma^2_{ea} \gamma^0_{ab} \gamma^2_{bc} \psi_c
+= -\psi^T \gamma^0 \gamma^2 \gamma^0 \gamma^2 \psi
+= +\overline{\psi} \psi.
+\]
+
+(The minus sign in the third step is from fermion anticommutation.) The pseudo-scalar is no more difficult:
+
+\[
+C i \overline{\psi} \gamma^5 \psi C = i(-i \gamma^0 \gamma^2 \psi)^T \gamma^5 (-i \overline{\psi} \gamma^0 \gamma^2)^T = i \overline{\psi} \gamma^5 \psi.
+\]
+
+We must do each component of the vector and pseudo-vector separately. Noting that $\gamma^0$ and $\gamma^2$ are symmetric matrices while $\gamma^1$ and $\gamma^3$ are antisymmetric,
+
+
+we eventually find
+
+\[
+C \overline{\psi} \gamma^\mu \psi C = -\overline{\psi} \gamma^\mu \psi;
+\]
+\[
+C \overline{\psi} \gamma^\mu \gamma^5 \psi C = +\overline{\psi} \gamma^\mu \gamma^5 \psi.
+\]
+
+Although the operator $C$ interchanges $\psi$ and $\overline{\psi}$, it does not actually change the order of the creation and annihilation operators. Thus, if $\psi \gamma^0 \psi$ is defined.\\
+
+
+
+Next we want to work out the action of $C$ on $\psi(x)$. First we need a relation between $v^s(p)$ and $u^s(p)$. Using (3.136), and (3.134),
+
+\[
+\left( v^s(p) \right)^* = 
+\begin{pmatrix}
+\sqrt{p \cdot \sigma} (-i \sigma^2 \xi^*) \\
+-\sqrt{p \cdot \bar{\sigma}} (-i \sigma^2 \xi^*)
+\end{pmatrix}^*
+= 
+\begin{pmatrix}
+0 & -i \sigma^2 \\
+i \sigma^2 & 0
+\end{pmatrix}
+\begin{pmatrix}
+\sqrt{p \cdot \sigma} \, \xi \\
+\sqrt{p \cdot \bar{\sigma}} \, \xi
+\end{pmatrix},
+\]
+
+where $\xi$ stands for $\xi^s$. That is,
+
+\[
+u^s(p) = -i \gamma^2 \left( v^s(p) \right)^*, \qquad v^s(p) = -i \gamma^2 \left( u^s(p) \right)^*.
+\]
+
+If we substitute this into the expression for the fermion field operator, and then transform this operator with $C$, we find
+
+\[
+C \psi(x) C = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2 E_p}} \sum_s \left( -i \gamma^2 b_p^s (v^s(p))^* e^{-ipx} - i \gamma^2 a_p^{s\dagger} (u^s(p))^* e^{ipx} \right)
+\]
+\[
+= -i \gamma^2 \psi^*(x) = -i \gamma^2 (\psi^\dagger(x))^T = -i (\gamma^0 \gamma^2)^T.
+\]
+
+Note that $C$ is a linear unitary operator, even though it takes $\psi \to \psi^*$.
+
+
+
+\section*{Summary of $C$, $P$, and $T$}
+
+The transformation properties of the various fermion bilinears under $C$, $P$, and $T$ are summarized in the table below. Here we use the shorthand $(-1)^\mu \equiv 1$ for $\mu = 0$ and $(-1)^\mu \equiv -1$ for $\mu = 1,2,3$.
+
+\[
+\begin{array}{c|cccccc}
+ & \overline{\psi}\psi & i\overline{\psi}\gamma^5\psi & \overline{\psi}\gamma^\mu\psi & \overline{\psi}\gamma^\mu\gamma^5\psi & \overline{\psi}\sigma^{\mu\nu}\psi & \partial_\mu \\ \hline
+P & +1 & -1 & (-1)^\mu & -(-1)^\mu & (-1)^\mu(-1)^\nu & (-1)^\mu \\
+T & +1 & -1 & (-1)^\mu & (-1)^\mu & -(-1)^\mu(-1)^\nu & -(-1)^\mu \\
+C & +1 & +1 & -1 & +1 & -1 & +1 \\
+CPT & +1 & +1 & -1 & -1 & +1 & -1 \\
+\end{array}
+\]
+
+
+\noindent
+Notice first that the free Dirac Lagrangian $\mathcal{L}_0 = \psi(i\gamma^\mu \partial_\mu - m)\psi$ is invariant under $C$, $P$, and $T$ separately. We can build more general quantum systems that violate any of these symmetries by adding to $\mathcal{L}_0$ some perturbation $\delta\mathcal{L}$. But $\delta\mathcal{L}$ must be a Lorentz scalar, and the last line of the table shows that all Lorentz scalar combinations of $\overline{\psi}$ and $\psi$ are invariant under the combined symmetry $CPT$. Actually, it is quite generally true that one cannot build a Lorentz-invariant quantum field theory with a Hermitian Hamiltonian that violates $CPT$.
+
+\newpage
+
+\section{\huge \textbf{Interacting Fields\\ and Feynman Diagrams}}
+
+
+\subsection{Perturbation Theory}
+
+ In order to obtain a closer description of the real world, we must include new, nonlinear terms in the Hamiltonian (or Lagrangian) that will couple different Fourier modes (and the particles that occupy them) to one another. 
+
+
+To preserve causality, we insist that the new terms may involve only products of fields at the same spacetime point: $[\phi(x)]^{14}$ is fine, but $\phi(x)\phi(y)$ is not allowed.
+
+
+Thus the terms describing the interactions will be of the form
+
+\[
+H_{\text{int}} = \int d^3 x\, \mathcal{H}_{\text{int}}[\phi(x)] = -\int d^3 x\, \mathcal{L}_{\text{int}}[\phi(x)]. \tag{3.1}
+\]
+
+For now we restrict ourselves to theories in which $\mathcal{H}_{\text{int}}$ ($= -\mathcal{L}_{\text{int}}$) is a function only of the fields, not of their derivatives.
+
+\subsubsection{\textbf{$\boldsymbol{\phi^4}$-Theory}}
+
+
+The Lagrangian density is given by:\\
+\[
+\mathcal{L} = \frac{1}{2} (\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2 - \frac{\lambda}{4!} \phi^4 \tag{3.2}
+\]
+
+where \( \lambda \) is a dimensionless coupling constant.\\
+
+Models of the real world do contain \(\phi^4\) -interactions; the
+most important example in particle physics is the self-interaction of the Higgs 
+field in the standard electroweak theory.\\
+
+To derive the equation of motion from the Lagrangian, we use the Euler--Lagrange equation for fields:
+\[
+\frac{\partial \mathcal{L}}{\partial \phi} - \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = 0
+\]
+
+Given the Lagrangian density:
+\[
+\mathcal{L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2} m^2 \phi^2 - \frac{\lambda}{4!} \phi^4
+\]
+
+First, compute the partial derivative with respect to \( \phi \):
+\[
+\frac{\partial \mathcal{L}}{\partial \phi} = -m^2 \phi - \frac{\lambda}{3!} \phi^3
+\]
+
+Next, compute the derivative with respect to \( \partial_\mu \phi \):
+\[
+\frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} = \partial^\mu \phi \quad \Rightarrow \quad \partial_\mu \left( \frac{\partial \mathcal{L}}{\partial (\partial_\mu \phi)} \right) = \partial_\mu \partial^\mu \phi = \Box \phi
+\]
+
+Substituting into the Euler--Lagrange equation:
+\[
+- m^2 \phi - \frac{\lambda}{3!} \phi^3 - \Box \phi = 0
+\]
+
+Rewriting, we get the equation of motion:
+\[
+(\Box + m^2) \phi = -\frac{\lambda}{3!} \phi^3
+\]
+
+or using shorthand notation \( \partial^2 \equiv \Box \),
+\[
+(\partial^2 + m^2) \phi = -\frac{\lambda}{3!} \phi^3 \tag{3.3}
+\]
+
+In the quantum theory we impose the equal-time commutation relations
+\[
+[\phi(\mathbf{x}), \pi(\mathbf{y})] = i \delta^{(3)}(\mathbf{x} - \mathbf{y}), \tag{3.4}
+\]
+which are unaffected by $\mathcal{L}_{\text{int}}$. (Note, however, that if $\mathcal{L}_{\text{int}}$ contained $\partial_\mu \phi$, the definition of $\pi(\mathbf{x})$ would change.)
+
+
+\subsubsection{Quantum Electrodynamics}
+
+
+The Lagrangian is given by:
+
+\[
+\mathcal{L}_{\mathrm{QED}} = \mathcal{L}_{\mathrm{Dirac}} + \mathcal{L}_{\mathrm{Maxwell}} + \mathcal{L}_{\mathrm{int}}
+= \bar{\psi}(i\not{\partial} - m)\psi - \frac{1}{4}(F_{\mu\nu})^2 - e\bar{\psi}\gamma^\mu\psi A_\mu, \tag{3.5}
+\]
+
+where $A_\mu$ is the electromagnetic vector potential, $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$ is the electromagnetic field tensor, and $e = -|e|$ is the electron charge. (To describe a fermion of charge $Q$, replace $e$ with $Q$.The QED Lagrangian can be written even more simply:
+
+\[
+\mathcal{L}_{\mathrm{QED}} = \bar{\psi}(i\not{D} - m)\psi - \frac{1}{4}(F_{\mu\nu})^2, \tag{3.6}
+\]
+
+where $D_\mu$ is the \textit{gauge covariant derivative},
+
+\[
+D_\mu \equiv \partial_\mu + ieA_\mu(x). \tag{3.7}
+\]
+
+ QED Lagrangian  is invariant under the gauge transformation
+
+\[
+\psi(x) \rightarrow e^{i\alpha(x)}\psi(x), \qquad A_\mu \rightarrow A_\mu - \frac{1}{e}\partial_\mu \alpha(x), \tag{3.8}
+\]
+
+which is realized on the Dirac field as a \textit{local} phase rotation. 
+
+ The Euler-Lagrange equation for $\psi$ is
+
+\[
+(i\not{D} - m)\psi(x) = 0, \tag{3.9}
+\]
+
+which is just the Dirac equation coupled to the electromagnetic field by the \textit{minimal coupling} prescription, $\partial \rightarrow D$. The Euler-Lagrange equation for $A_\nu$ is
+
+\[
+\partial_\mu F^{\mu\nu} = e\bar{\psi}\gamma^\nu\psi = ej^\nu. \tag{3.11}
+\]
+
+These are the inhomogeneous Maxwell equations, with the current density
+\[
+j^\nu = \bar{\psi} \gamma^\nu \psi \tag{3.12}
+\]
+given by the conserved Dirac vector current.
+
+
+\subsubsection{Yukawa Theory}
+The Lagrangian is given by:\\
+
+
+\[
+\mathcal{L}_{\text{Yukawa}} = \mathcal{L}_{\text{Dirac}} + \mathcal{L}_{\text{Klein-Gordon}} - g\bar{\psi}\psi\phi. \tag{3.13}
+\]
+
+This will be our third example. It is similar to QED, but with the photon replaced by a scalar particle $\phi$. The interaction term contains a dimensionless coupling constant $g$, analogous to the electron charge $e$. Yukawa originally invented this theory to describe nucleons ($\psi$) and pions ($\phi$). In modern particle theory, the Standard Model contains Yukawa interaction terms coupling the scalar Higgs field to quarks and leptons; most of the free parameters in the Standard Model are Yukawa coupling constants.
+
+
+\subsection{Perturbation Expansion of Correlation Functions}
+
+
+The correlation function can be interpreted physically as the amplitude for 
+propagation of a particle or excitation between y and x:\\
+
+
+
+\[
+\langle \Omega | T \phi(x) \phi(y) | \Omega \rangle,
+\]
+
+in $\phi^4$ theory. We introduce the notation $|\Omega\rangle$ to denote the ground state of the interacting theory, which is generally different from $|0\rangle$, the ground state of the free theory.In the free theory it is simply the Feynman propagator:
+
+\[
+\langle 0| T \phi(x) \phi(y) |0 \rangle_{\text{free}} = D_F(x-y) = \int \frac{d^4 p}{(2\pi)^4} \frac{i\, e^{-ip \cdot (x-y)}}{p^2 - m^2 + i\epsilon}. \tag{3.14}
+\]
+ 
+\subsubsection{Time Ordering}
+The expression
+\[
+\langle \Omega | T \phi(x) \phi(y) | \Omega \rangle
+\]
+represents the \textbf{time-ordered two-point correlation function}, also known as the \textbf{two-point Green's function}, in $\phi^4$ theory.
+
+\bigskip
+ In quantum field theory, the \textit{time-ordering operator} $T$ ensures that field operators are placed in chronological order when evaluating vacuum expectation values. This is important because field operators at different times do not necessarily commute, and the order in which they appear can affect physical predictions.
+
+\bigskip
+
+For two scalar field operators $\phi(x)$ and $\phi(y)$, the time-ordered product is defined as
+\[
+T\left[ \phi(x) \phi(y) \right] =
+\begin{cases}
+\phi(x)\phi(y), & \text{if } x^0 > y^0 \\
+\phi(y)\phi(x), & \text{if } y^0 > x^0
+\end{cases} \tag{3.15}
+\]
+where $x^0$ and $y^0$ are the time components of the spacetime points $x$ and $y$. In other words, the operator evaluated at the later time is placed to the left.
+
+\bigskip
+
+\textbf{Importance of Time Ordering:}
+\begin{itemize}
+  \item \textit{Causality:} Time ordering preserves the causal structure of the theory, ensuring that causes precede effects.
+  \item \textit{Path Integral Formalism:} In the path integral approach, Green’s functions naturally involve time-ordered products.
+  \item \textit{Feynman Propagator:} The Feynman propagator is defined as a time-ordered two-point function:
+  \[
+  \langle 0 | T\{ \phi(x)\phi(y) \} | 0 \rangle = D_F(x - y) \tag{3.16}
+  \]
+  which describes the propagation of particles from point $y$ to point $x$.
+  \item \textit{Perturbation Theory:} In interacting theories like $\phi^4$ theory, calculations are performed using Wick's theorem, which applies to time-ordered products of operators.
+\end{itemize}
+
+\bigskip
+
+In the expression
+\[
+\langle \Omega | T \phi(x) \phi(y) | \Omega \rangle,
+\]
+\begin{itemize}
+  \item $|\Omega\rangle$ denotes the \textit{interacting vacuum state}, i.e., the ground state of the full theory with interactions.
+  \item $\phi(x)$ and $\phi(y)$ are scalar field operators at spacetime points $x$ and $y$.
+  \item $T$ enforces time ordering of the operators to maintain causal structure.
+\end{itemize}
+
+This two-point function plays a fundamental role in describing particle propagation and interactions in quantum field theory.
+
+
+To attack this problem, we write the Hamiltonian of $\phi^4$ theory as
+\[
+H = H_0 + H_{\text{int}} = H_{\text{Klein-Gordon}} + \int d^3 x\, \frac{\lambda}{4!}\, \phi^4(x). \tag{3.17}
+\]
+
+We want an expression for the two-point correlation function (4.10) as a power series in $\lambda$. The interaction Hamiltonian $H_{\text{int}}$ enters (4.10) in two places: first, in the definition of the Heisenberg field,
+\[
+\phi(x) = e^{iHt} \phi(\mathbf{x}) e^{-iHt}, \tag{3.18}
+\]
+and second, in the definition of $|\Omega\rangle$. We must express both $\phi(x)$ and $|\Omega\rangle$ in terms of quantities we know how to manipulate: free field operators and the free theory vacuum $|0\rangle$.
+
+It is easiest to begin with $\phi(x)$. At any fixed time $t_0$, we can of course expand $\phi$ as before in terms of ladder operators:
+\[
+\phi(t_0, \mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}}
+\left( a_{\mathbf{p}} e^{i\mathbf{p} \cdot \mathbf{x}} + a_{\mathbf{p}}^\dagger e^{-i\mathbf{p} \cdot \mathbf{x}} \right). \tag{3.19}
+\]
+
+Then to obtain $\phi(t, \mathbf{x})$ for $t \neq t_0$, we just switch to the Heisenberg picture as usual:
+\[
+\phi(t, \mathbf{x}) = e^{iH(t-t_0)} \phi(t_0, \mathbf{x}) e^{-iH(t-t_0)}.
+\]
+
+For $\lambda = 0$, $H$ becomes $H_0$ and this reduces to
+\[
+\phi(t, \mathbf{x})\big|_{\lambda=0} = e^{iH_0(t-t_0)} \phi(t_0, \mathbf{x}) e^{-iH_0(t-t_0)} \equiv \phi_I(t, \mathbf{x}).
+\]
+
+When $\lambda$ is small, this expression will still give the most important part of the time dependence of $\phi(x)$, and thus it is convenient to give this quantity a name: the \textit{interaction picture field}, $\phi_I(t, \mathbf{x})$. Since we can diagonalize $H_0$, it is easy to construct $\phi_I$ explicitly:
+\[
+\phi_I(t, \mathbf{x}) = \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{p}}}}
+\left( a_{\mathbf{p}} e^{-i\mathbf{p} \cdot \mathbf{x}} + a_{\mathbf{p}}^\dagger e^{i\mathbf{p} \cdot \mathbf{x}} \right)\bigg|_{x^0 = t - t_0}.
+\]
+
+This is just the familiar expression for the free field .
+
+
+The problem now is to express the full Heisenberg field $\phi$ in terms of $\phi_I$. Formally, it is just
+\[
+\phi(t, \mathbf{x}) = e^{iH(t-t_0)} e^{-iH_0(t-t_0)} \phi_I(t, \mathbf{x}) e^{iH_0(t-t_0)} e^{-iH(t-t_0)}
+\]
+\[
+\equiv U^\dagger(t, t_0) \phi_I(t, \mathbf{x}) U(t, t_0),
+\]
+where we have defined the unitary operator
+\[
+U(t, t_0) = e^{iH_0(t-t_0)} e^{-iH(t-t_0)}, \tag{3.20}
+\]
+known as the interaction picture propagator or time-evolution operator. We would like to express $U(t, t_0)$ entirely in terms of $\phi_I$, for which we have an explicit expression in terms of ladder operators. To do this, we note that $U(t, t_0)$ is the unique solution, with initial condition $U(t_0, t_0) = 1$, of a simple differential equation (the Schrödinger equation):
+\[
+i \frac{\partial}{\partial t} U(t, t_0) = e^{iH_0(t-t_0)} (H - H_0) e^{-iH(t-t_0)}
+\]
+\[
+= e^{iH_0(t-t_0)} (H_{\text{int}}) e^{-iH(t-t_0)}
+\]
+\[
+= e^{iH_0(t-t_0)} (H_{\text{int}}) e^{-iH_0(t-t_0)} e^{iH_0(t-t_0)} e^{-iH(t-t_0)}
+\]
+\[
+= H_I(t) U(t, t_0),
+\]
+where
+\[
+H_I(t) = e^{iH_0(t-t_0)} (H_{\text{int}}) e^{-iH_0(t-t_0)} = \int d^3x \, \frac{\lambda}{4!} \phi_I^4 \tag{3.21}
+\]
+is the interaction Hamiltonian written in the interaction picture. The solution of this differential equation for $U(t, t_0)$ should look something like $U \sim \exp(-i H_I t)$; this would be our desired formula for $U$ in terms of $\phi_I$. Doing it more carefully, we will show that the actual solution is the following power series in $\lambda$:
+\[
+U(t, t_0) = 1 + (-i) \int_{t_0}^t dt_1 H_I(t_1) + (-i)^2 \int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 H_I(t_1) H_I(t_2) \tag{3.22}
+\]
+\[
++ (-i)^3 \int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 \int_{t_0}^{t_2} dt_3 H_I(t_1) H_I(t_2) H_I(t_3) + \cdots.
+\]
+To verify this, just differentiate: Each term gives the previous one times $-iH_I(t)$. The initial condition $U(t, t_0) = 1$ for $t = t_0$ is obviously satisfied.
+
+Note that the various factors of $H_I$ in the above stand in \textit{time order}, later on the left. This allows us to simplify the expression considerably, using the \textit{time-ordering symbol} $T$. The $H_I^2$ term, for example, can be written
+\[
+\int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 H_I(t_1) H_I(t_2) = \frac{1}{2} \int_{t_0}^t dt_1 \int_{t_0}^t dt_2 T\{H_I(t_1) H_I(t_2)\}. \tag{3.23}
+\]
+
+The double integral on the right-hand side just counts everything twice, since in the $t_1 t_2$-plane, the integrand $T\{ H_I(t_1) H_I(t_2) \}$ is symmetric about the line $t_1 = t_2$.
+
+
+A similar identity holds for the higher terms:
+\[
+\int_{t_0}^t dt_1 \int_{t_0}^{t_1} dt_2 \cdots \int_{t_0}^{t_{n-1}} dt_n\, H_I(t_1) \cdots H_I(t_n) = \frac{1}{n!} \int_{t_0}^t dt_1 \cdots dt_n\, T\{ H_I(t_1) \cdots H_I(t_n) \}. \tag{3.24}
+\]
+
+This case is a little harder to visualize, but it is not hard to convince oneself that it is true. Using this identity, we can now write $U(t, t_0)$ in an extremely compact form:
+\[
+U(t, t_0) = 1 + (-i) \int_{t_0}^t dt_1\, H_I(t_1) + \frac{(-i)^2}{2!} \int_{t_0}^t dt_1 dt_2\, T\{ H_I(t_1) H_I(t_2) \} + \cdots
+\]
+\[
+\equiv T \left\{ \exp \left[ -i \int_{t_0}^t dt'\, H_I(t') \right] \right\}, \tag{3.25}
+\]
+
+where the time-ordering of the exponential is just defined as the Taylor series with each term time-ordered.
+
+We now have control over $\phi(t, \mathbf{x})$; we have written it entirely in terms of $\phi_I$, as desired. Before moving on to consider $|\Omega\rangle$, however, it is convenient to generalize the definition of $U$, allowing its second argument to take on values.\\
+
+
+
+The correct definition is quite natural:
+\[
+U(t, t') \equiv T \left\{ \exp \left[ -i \int_{t'}^{t} dt''\, H_I(t'') \right] \right\} \qquad (t \geq t')
+\]
+
+Several properties follow from this definition, and it is necessary to verify them. First, $U(t, t')$ satisfies the same differential equation:
+\[
+i \frac{\partial}{\partial t} U(t, t') = H_I(t) U(t, t'),
+\]
+but now with the initial condition $U = 1$ for $t = t'$. From this equation you can show that
+\[
+U(t, t') = e^{i H_0 (t - t_0)} e^{-i H (t - t')} e^{-i H_0 (t' - t_0)},
+\]
+which proves that $U$ is unitary. Finally, $U(t, t')$ satisfies the following identities (for $t_1 \geq t_2 \geq t_3$):
+\[
+U(t_1, t_2) U(t_2, t_3) = U(t_1, t_3);
+\]
+\[
+U(t_1, t_3) \left[ U(t_2, t_3) \right]^\dagger = U(t_1, t_2).
+\]
+
+Now we can go on to discuss $|\Omega\rangle$. Since $|\Omega\rangle$ is the ground state of $H$, we can isolate it by the following procedure. Imagine starting with $|0\rangle$, the ground state of $H_0$, and evolving through time with $H$:
+\[
+e^{-i H T} |0\rangle = \sum_n e^{-i E_n T} |n\rangle \langle n | 0 \rangle,
+\]
+where $E_n$ are the eigenvalues of $H$. We must assume that $|\Omega\rangle$ has some overlap with $|0\rangle$, that is, $\langle \Omega | 0 \rangle \neq 0$. Then the above series contains $|\Omega\rangle$, and we can write
+\[
+e^{-i H T} |0\rangle = e^{-i E_0 T} |\Omega\rangle \langle \Omega | 0 \rangle + \sum_{n \neq 0} e^{-i E_n T} |n\rangle \langle n | 0 \rangle,
+\]
+where $E_0 \equiv \langle \Omega | H | \Omega \rangle$. Since $E_n > E_0$ for all $n \neq 0$, we can get rid of all the $n \neq 0$ terms in the series by sending $T$ to infinity in a slightly imaginary direction: $T \to \infty (1 - i \epsilon)$. Then the exponential factor $e^{-i E_n T}$ dies slowest for $n = 0$, and we have
+\[
+|\Omega\rangle = \lim_{T \to \infty (1 - i \epsilon)} \left( e^{-i E_0 T} \langle \Omega | 0 \rangle \right)^{-1} e^{-i H T} |0\rangle.
+\]
+
+Since $T$ is now very large, we can shift it by a small constant:
+\[
+|\Omega\rangle = \lim_{T \to \infty (1 - i \epsilon)} \left( e^{-i E_0 (T + t_0)} \langle \Omega | 0 \rangle \right)^{-1} e^{-i H (T + t_0)} |0\rangle
+\]
+\[
+= \lim_{T \to \infty (1 - i \epsilon)} \left( e^{-i E_0 (t_0 - (-T))} \langle \Omega | 0 \rangle \right)^{-1} e^{-i H (t_0 - (-T))} e^{-i H_0 (-T - t_0)} |0\rangle
+\]
+\[
+= \lim_{T \to \infty (1 - i \epsilon)} \left( e^{-i E_0 (t_0 - (-T))} \langle \Omega | 0 \rangle \right)^{-1} U(t_0, -T) |0\rangle.
+\]
+
+
+In the second line we have used $H_0 |0\rangle = 0$. Ignoring the $c$-number factor in front, this expression tells us that we can get $|\Omega\rangle$ by simply evolving $|0\rangle$ from time $-T$ to time $t_0$ with the operator $U$. Similarly, we can express $\langle \Omega|$ as
+\[
+\langle \Omega| = \lim_{T \to \infty (1 - i\epsilon)} \langle 0| U(T, t_0) \left( e^{-i E_0 (T - t_0)} \langle 0| \Omega \rangle \right)^{-1}.
+\]
+
+Let us put together the pieces of the two-point correlation function. For the moment, assume that $x^0 > y^0 > t_0$. Then
+\[
+\langle \Omega| \, \phi(x) \phi(y) \, |\Omega \rangle = \lim_{T \to \infty (1 - i\epsilon)} \left( e^{-i E_0 (T - t_0)} \langle 0| \Omega \rangle \right)^{-1} \langle 0| U(T, t_0)
+\]
+\[
+\times \left[ U(x^0, t_0) \right]^\dagger \phi_I(x) U(x^0, t_0) \left[ U(y^0, t_0) \right]^\dagger \phi_I(y) U(y^0, t_0)
+\]
+\[
+\times U(t_0, -T) |0\rangle \left( e^{-i E_0 (t_0 - (-T))} \langle \Omega| 0 \rangle \right)^{-1}
+\]
+\[
+= \lim_{T \to \infty (1 - i\epsilon)} \left( |\langle 0| \Omega \rangle|^2 e^{-i E_0 (2T)} \right)^{-1}
+\]
+\[
+\times \langle 0| U(T, x^0) \phi_I(x) U(x^0, y^0) \phi_I(y) U(y^0, -T) |0\rangle.
+\]
+
+This is starting to look simple, except for the awkward factor in front. To get rid of it, divide by $1$ in the form
+\[
+1 = \langle \Omega| \Omega \rangle = \left( |\langle 0| \Omega \rangle|^2 e^{-i E_0 (2T)} \right)^{-1} \langle 0| U(T, t_0) U(t_0, -T) |0\rangle.
+\]
+
+Then our formula, still for $x^0 > y^0$, becomes
+\[
+\langle \Omega| \phi(x) \phi(y) |\Omega \rangle = \lim_{T \to \infty (1 - i\epsilon)} \frac{\langle 0| U(T, x^0) \phi_I(x) U(x^0, y^0) \phi_I(y) U(y^0, -T) |0\rangle}{\langle 0| U(T, -T) |0\rangle}.
+\]
+
+Now note that all fields on both sides of this expression are in time order. If we had considered the case $y^0 > x^0$ this would still be true. Thus we arrive at our final expression, now valid for any $x^0$ and $y^0$:
+\[\boxed{
+\langle \Omega| T\{ \phi(x) \phi(y) \} |\Omega \rangle = \lim_{T \to \infty (1 - i\epsilon)} \frac{\langle 0| T \left\{ \phi_I(x) \phi_I(y) \exp \left[ -i \int_{-T}^T dt\, H_I(t) \right] \right\} |0\rangle}{\langle 0| T \left\{ \exp \left[ -i \int_{-T}^T dt\, H_I(t) \right] \right\} |0\rangle}}. \tag{3.26}
+\]
+
+\newpage
+
+\subsection{\textbf{Wick's Theorem}}
+
+The vacuum expectation values of time-ordered products of finite numbers of free field operators is given by:
+
+
+\[
+\langle 0 | T \left\{ \phi_I(x_1) \phi_I(x_2) \cdots \phi_I(x_n) \right\} | 0 \rangle
+\]
+
+For n = 2 this expression is just 
+the Feynman propagator.
+
+Consider again the case of two fields, $\langle 0| T\{ \phi_I(x) \phi_I(y) \} |0 \rangle$.We first decompose $\phi_I(x)$ into positive- and negative-frequency parts:
+\[
+\phi_I(x) = \phi_I^+(x) + \phi_I^-(x), \tag{3.27}
+\]
+where
+\[
+\phi_I^+(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} a_p e^{-ip \cdot x}; \qquad
+\phi_I^-(x) = \int \frac{d^3p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} a_p^\dagger e^{+ip \cdot x}. \tag{3.28}
+\]
+This decomposition can be done for any free field. It is useful because
+\[
+\phi_I^+(x) |0\rangle = 0 \qquad \text{and} \qquad \langle 0| \phi_I^-(x) = 0. \tag{3.29}
+\]
+
+For example, consider the case $x^0 > y^0$. The time-ordered product of two fields is then
+\[
+T \phi_I(x) \phi_I(y) \bigg|_{x^0 > y^0} = \phi_I^+(x) \phi_I^+(y) + \phi_I^+(x) \phi_I^-(y) + \phi_I^-(x) \phi_I^+(y) + \phi_I^-(x) \phi_I^-(y)
+\]
+\[
+= \phi_I^+(x) \phi_I^+(y) + \phi_I^-(y) \phi_I^+(x) + \phi_I^-(x) \phi_I^+(y) + \left[ \phi_I^-(x), \phi_I^-(y) \right].  \tag{3.30}
+\]
+
+In every term except the commutator, all the $a_p$'s are to the right of all the $a_p^\dagger$'s. Such a term (e.g., $a_p^\dagger a_q^\dagger a_k a_l$) is said to be in normal order, and has vanishing vacuum expectation value. Let us also define the normal ordering symbol $N()$ to place whatever operators it contains in normal order, for example,
+\[
+N(a_p a_k^\dagger a_q) \equiv a_k^\dagger a_p a_q.  \tag{3.31}
+\]
+The order of $a_p$ and $a_q$ on the right-hand side makes no difference since they commute.*\footnote{In the literature one often sees the notation $:\phi_1 \phi_2 :$ instead of $N(\phi_1 \phi_2)$.
+}
+
+\subsubsection{Normal Ordering}
+
+
+
+Normal ordering is a prescription for arranging creation and annihilation operators such that all creation operators \( a^\dagger \) appear to the left of all annihilation operators \( a \). This rearrangement is useful because the vacuum expectation value of a normal-ordered product vanishes:
+\[
+\langle 0 | N(\text{operators}) | 0 \rangle = 0. \tag{3.32}
+\]
+
+\vspace{0.3cm}
+
+\noindent
+For example, consider the operator product \( a a^\dagger \). Its vacuum expectation value is non-zero:
+\[
+\langle 0 | a a^\dagger | 0 \rangle = \langle 0 | [a, a^\dagger] + a^\dagger a | 0 \rangle = 1.
+\]
+However, when we normal order it, we write:
+\[
+:a a^\dagger: = a^\dagger a,
+\]
+and this satisfies
+\[
+\langle 0 | a^\dagger a | 0 \rangle = 0.
+\]
+
+\vspace{0.3cm}
+
+\noindent
+In the context of quantum field theory, this is particularly helpful because it ensures that the vacuum contributions (which often lead to infinities) are automatically removed.
+
+\noindent
+As shown in the example from the text, we define:
+\[
+N(a_{\mathbf{p}} a_{\mathbf{k}}^\dagger a_{\mathbf{q}}) = a_{\mathbf{k}}^\dagger a_{\mathbf{p}} a_{\mathbf{q}},
+\]
+which means that normal ordering reorders the operators such that all \( a^\dagger \)'s are to the left of the \( a \)'s.
+
+\vspace{0.3cm}
+
+\noindent
+Sometimes, instead of writing \( N(\phi_1 \phi_2) \), one uses colons to denote normal ordering:
+\[
+:\phi_1 \phi_2:.
+\]
+
+
+
+
+
+
+
+
+If we had instead considered the case \( y^0 > x^0 \), we would get the same four normal-ordered terms as in (4.33), but this time the final commutator would be \( [\phi_I^{+}(y), \phi_I^{-}(x)] \). Let us therefore define one more quantity, the \textit{contraction} of two fields, as follows:
+\[
+\contraction{}{\phi}{(x)}{\phi}
+\phi(x)\phi(y) \equiv 
+\begin{cases}
+[\phi^+(x), \phi^-(y)] & \text{for } x^0 > y^0 \\
+[\phi^+(y), \phi^-(x)] & \text{for } y^0 > x^0
+\end{cases}
+\]
+This quantity is exactly the Feynman propagator:
+\[
+\contraction{}{\phi}{(x)}{\phi}
+\phi(x)\phi(y) = D_F(x - y).
+\]
+
+\noindent
+\textit{(From here on we will often drop the subscript $I$ for convenience; contractions will always involve interaction-picture fields.)}
+
+\vspace{0.3cm}
+
+\noindent
+The relation between time-ordering and normal-ordering is now extremely simple to express, at least for two fields:
+\[
+T\{\phi(x)\phi(y)\} = N\{\phi(x)\phi(y) + \contraction{}{\phi}{(x)}{\phi} \phi(x)\phi(y)\}.
+\]
+
+\noindent
+But now that we have all this new notation, the generalization to arbitrarily many fields is also easy to write down:
+\[
+T\{\phi(x_1)\phi(x_2)\cdots\phi(x_m)\} 
+= N\{\phi(x_1)\phi(x_2)\cdots\phi(x_m) + \text{all possible contractions}\}.
+\]
+
+\noindent
+This identity is known as \textit{Wick’s theorem}, and we will prove it in a moment. For \( m = 2 \) it is identical to the previous result. The phrase \textit{all possible contractions} means there will be one term for each possible way of contracting the \( m \) fields in pairs. Thus for \( m = 4 \) we have (writing \( \phi(x_a) \) as \( \phi_a \) for brevity)
+\[
+\begin{aligned}
+T\{\phi_1 \phi_2 \phi_3 \phi_4\} = N\{ & \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction{}{\phi}{_1}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction{}{\phi}{_1 \phi_2}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction[2ex]{}{\phi}{_1 \phi_2 \phi_3}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 \\
+&+ \contraction[1ex]{}{\phi}{_1}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction[2ex]{\phi_1 }{\phi}{_2}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction[3ex]{\phi_1 \phi_2 }{\phi}{_3}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 \\
+&+ \contraction{}{\phi}{_1}{\phi} \contraction[2ex]{\phi_1 \phi_2 }{\phi}{_3}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction{}{\phi}{_1}{\phi} \contraction[2ex]{\phi_1 \phi_2 \phi_3}{\phi}{}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
++ \contraction[2ex]{\phi_1}{\phi}{_2}{\phi} \contraction[2ex]{\phi_1 \phi_2 \phi_3}{\phi}{}{\phi} \phi_1 \phi_2 \phi_3 \phi_4 
+\}.
+\end{aligned}
+\]
+
+\noindent
+When the contraction symbol connects two operators that are not adjacent, we still define it to give a factor of \( D_F \). For example,
+\[
+N\{\contraction{}{\phi}{_1 \phi_2}{\phi} \phi_1 \phi_2 \phi_3 \phi_4\} 
+\quad \text{means} \quad 
+D_F(x_1 - x_3) \cdot N\{\phi_2 \phi_4\}.
+\]
+
+\noindent
+In the vacuum expectation value of the above expression, any term in which there remain uncontracted operators gives zero (since \( \langle 0| N(\text{any operator}) |0\rangle = 0 \)). Only the three fully contracted terms in the last line survive, and they are all \( c \)-numbers, so we have
+\[
+\begin{aligned}
+\langle 0| T\{\phi_1 \phi_2 \phi_3 \phi_4\} |0\rangle &= D_F(x_1 - x_2) D_F(x_3 - x_4) \\
+&\quad + D_F(x_1 - x_3) D_F(x_2 - x_4) \\
+&\quad + D_F(x_1 - x_4) D_F(x_2 - x_3).
+\end{aligned} \tag{3.33}
+\]
+
+
+
+
+\subsection{Feynman Diagrams}
+
+
+
+Wick's theorem allows us to turn any expression of the form
+\[
+\langle 0| T\{ \phi_I(x_1) \phi_I(x_2) \cdots \phi_I(x_n) \} |0 \rangle
+\]
+into a sum of products of Feynman propagators.Feynman diagram lets us develop a diagrammatic interpretation of such expressions.
+
+Let us represent each of the points \(x_1\) through \(x_4\) by a dot, and each factor
+
+$D_F(x - y)$ by a line joining $x$ to $y$. Then Eq.\ (3.33) can be represented as the sum of three diagrams (called \textit{Feynman diagrams}):
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{Screenshot 2025-07-12 143402.png}
+  \caption{Feynman Diagram}
+  \label{fig:enter-label}
+\end{figure}
+
+
+Although this isn’t exactly a measurable quantity, the diagrams do suggest an interpretation: Particles are created at two spacetime points, each propagates to one of the other points, and then they are annihilated. This can happen in three ways, corresponding to the three ways to connect the points in pairs, as shown in the three diagrams. The total amplitude for the process is the sum of the three diagrams.
+\newpage
+\subsubsection{Feynnman Rules}
+
+The rules for associating analytic expressions with pieces of diagrams are 
+called the Feynman rules. In \(\phi^4\) theory the rules are:
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2025-07-12 144600.png}
+    \caption{Feynman rules}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+Since these rules are written in terms of the spacetime points $x$, $y$, etc., they are sometimes called the \textit{position-space Feynman rules}. In most calculations, it is simpler to express the Feynman rules in terms of momenta, by introducing the Fourier expansion of each propagator:
+
+\[
+D_F(x - y) = \int \frac{d^4 p}{(2\pi)^4} \frac{i}{p^2 - m^2 + i\epsilon} e^{-ip \cdot (x - y)}. \tag{3.34}
+\]
+
+Represent this in the diagram by assigning a 4-momentum $p$ to each propagator, indicating the direction with an arrow. (Since $D_F(x - y) = D_F(y - x)$, the direction of $p$ is arbitrary.) Then when four lines meet at a vertex, the $z$-dependent factors of the diagram are
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2025-07-12 145309.png}
+    \caption{}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+In other words, momentum is conserved at each vertex. The delta functions from the vertices can now be used to perform some of the momentum integrals from the propagators. We are left with the following momentum-space
+
+Feynman rules:
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2025-07-12 145528.png}
+    \caption{}
+    \label{fig:enter-label}
+\end{figure}
+
+
+**\\
+Note that in \(\phi^4\) theory, all correlation functions of an odd number of fields 
+vanish, since it is impossible to draw an allowed diagram with an odd number 
+of external points. We can also see this by going back to Wick’s theorem: The 
+interaction Hamiltonian \(H_I\) contains an even number of fields, so all terms 
+in the perturbation expansion of an odd correlation function will contain an 
+odd number of fields. But it is impossible to fully contract an odd number 
+of fields in pairs, and only fully contracted terms have nonvanishing vacuum 
+expectation value.  
+**\\
+
+
+\subsubsection{S-matrix}
+
+
+
+In the scattering of particles in relativistic quantum field theory, assume that the incoming particles at $t = -\infty$ as well as the outgoing particles at $t = \infty$ are described by free particle states. This can clearly be implemented by assuming that the interaction switches off adiabatically at $t = \pm\infty$ (adiabatic hypothesis).So we can implement this by modifying the interaction Hamiltonian as
+
+\[
+H_I(t) \to \lim_{\eta \to 0^+} H_I^{(\eta)}(t) = \lim_{\eta \to 0^+} e^{-\eta |t|} H_I(t)\tag{3.34}
+\]
+
+so that in the infinite past as well as in the infinite future, the interaction vanishes.We can take the initial and the final
+states to be the eigenstates of the free Hamiltonian which we know
+to be free particle energy-momentum states.\\
+
+Let us denote the initial state at infinite past as the free particle state
+
+\[
+|\psi_i(-\infty)\rangle = |i\rangle
+\]
+
+Then, the state into which this will evolve at \( t = \infty \) is defined to be
+
+\[
+|\psi_i(\infty)\rangle = U(\infty, -\infty)|\psi_i(-\infty)\rangle = U(\infty, -\infty)|i\rangle = S|i\rangle
+\]
+
+where we have identified
+
+\[
+S = U(\infty, -\infty) \tag{3.35}
+\]
+
+Therefore, the probability amplitude for an initial state \( |i\rangle \) to be in the final free particle state \( |f\rangle \) at \( t = \infty \), which is the definition of the scattering amplitude, is 
+
+\[
+S_{fi} = \langle f|\psi_i(\infty)\rangle = \langle f|U(\infty, -\infty)|i\rangle = \langle f|S|i\rangle \tag{3.36}
+\]
+
+Consequently, the \( S \)-matrix (or the scattering matrix) of the theory can be identified with the time evolution operator (3.35) which has
+
+the explicit perturbative expansion of the form 
+
+\[
+S = U(\infty, -\infty) = \lim_{\eta \to 0^+} T \left( e^{-i \int_{-\infty}^{\infty} dt\, H_I^{(\eta)}(t)} \right)
+\]
+
+\[
+= \mathbb{I} - \lim_{\eta \to 0^+} i \int_{-\infty}^{\infty} dt\, H_I^{(\eta)}(t)
+\]
+
+\[
++ \lim_{\eta \to 0^+} \frac{(-i)^2}{2!} \int_{-\infty}^{\infty} dt\, dt' \, T\left( H_I^{(\eta)}(t) H_I^{(\eta)}(t') \right)
+\]
+
+\[
++ \cdots \tag{3.37}
+\]
+
+
+Furthermore, the $S$-matrix (the scattering matrix) is unitary since the time evolution operator.\\
+
+Note that: \(
+U(t, t_0) = T \left( e^{-i \int_{t_0}^{t} dt' H_I(t')} \right)
+
+\) has been used in (3.37).\\
+
+
+
+Now we state the notion of “in” and “out” states which are
+quite important in a formal description of scattering theory. These
+are asymptotic free states as \(t \to -\infty\)
+ and \(t \to \infty\) respectively.\\
+
+ 
+ Let us suppose that at \( t \to -\infty \) we have a free incoming state denoted as \( |\Psi(-\infty)\rangle^{(\text{in})} = |i\rangle \) and 
+ as \( t \to \infty \), we have a free outgoing state \( |\Psi(\infty)\rangle^{(\text{out})} \)
+
+They are related to each other as:\\
+
+\[
+\begin{aligned}
+|\Psi(\infty)\rangle^{(\text{out})}
+&= U^\dagger(0, \infty) |\Psi\rangle^{(H)} = U(\infty, 0) |\Psi\rangle^{(H)} \\
+&= U(\infty, 0) U(0, -\infty) |\Psi(-\infty)\rangle^{(\text{in})} \\
+&= U(\infty, -\infty) |\Psi(-\infty)\rangle^{(\text{in})} = S |\Psi(-\infty)\rangle^{(\text{in})}
+\end{aligned} \tag{3.38}
+\]
+
+
+This shows that the “in” and the “out” states are
+related by the S-matrix (and, therefore, by a phase since
+the S-matrix is unitary).
+
+
+
+\subsection{Cross-sections And The S-matrix}
+
+\textbf{The Cross-Section:}
+
+
+The cross section is defined as follows. Consider a target, at rest, of particles of type $A$, with density $\rho_A$ (particles per unit volume). Aim at this target a bunch of particles of type $B$, with number density $\rho_B$ and velocity $v$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Screenshot 2025-07-13 073954.png}
+    \caption{}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Let $\ell_A$ and $\ell_B$ be the lengths of the bunches of particles. Then we expect the total number of scattering events (or scattering events of any particular desired type) to be proportional to $\rho_A$, $\rho_B$, $\ell_A$, $\ell_B$, and the cross-sectional area $A$ common to the two bunches. The \textit{cross section}, denoted by $\sigma$, is just the total number of events (of whatever type desired) divided by all of these quantities:
+
+\[
+\sigma \equiv \frac{\text{Number of scattering events}}{\rho_A\, \ell_A\, \rho_B\, \ell_B\, A}
+\]
+
+The definition is symmetric between the $A$'s and $B$'s, so of course we could have taken the $B$'s to be at rest, or worked in any other reference frame.
+
+The cross section has units of area. In fact, it is the effective area of a chunk taken out of one beam, by each particle in the other beam, that subsequently becomes the final state we are interested in.\\
+
+
+To compute the event rate in an actual accelerator, one must integrate 
+over the beam area:\\
+
+Number of events $= \sigma\, \ell_A\, \ell_B \int d^2x\, \rho_A(x)\, \rho_B(x).$ \\
+
+
+
+If the densities are constant, or if we use this formula to compute an effective area $A$ of the beams, then we have simply
+
+\[
+\text{Number of events} = \frac{\sigma N_A N_B}{A},
+\]
+
+where $N_A$ and $N_B$ are the total numbers of $A$ and $B$ particles.\\
+
+A somewhat simpler measurable quantity is the \textit{decay rate} $\Gamma$ of an unstable particle $\mathcal{A}$ (assumed to be at rest) into a specified final state (of two or more particles). It is defined as
+
+\[
+\Gamma \equiv \frac{\text{Number of decays per unit time}}{\text{Number of } \mathcal{A} \text{ particles present}}.
+\]
+
+The lifetime $\tau$ of the particle is then the reciprocal of the sum of its decay rates into all possible final states. (The particle's half-life is $\tau \cdot \ln 2$.)
+
+In nonrelativistic quantum mechanics, an unstable atomic state shows up in scattering experiments as a \textit{resonance}. Near the resonance energy $E_0$, the scattering amplitude is given by the \textbf{Breit-Wigner formula:}
+
+\[
+f(E) \propto \frac{1}{E - E_0 + i\Gamma/2}.
+\]
+
+The cross section therefore has a peak of the form
+
+\[
+\sigma \propto \frac{1}{(E - E_0)^2 + \Gamma^2/4}.
+\]
+
+The width of the resonance peak is equal to the decay rate of the unstable state.
+
+The Breit-Wigner formula also applies in relativistic quantum mechanics. In particular, it gives the scattering amplitude for processes in which initial particles combine to form an unstable particle, which then decays. The unstable particle, viewed as an excited state of the vacuum, is a direct analogue of the unstable nonrelativistic atomic state.\\
+
+
+
+\textbf{The S-matrix :}
+
+
+A wavepacket representing some desired state $|\phi\rangle$ can be expressed as
+
+\[
+|\phi\rangle = \int \frac{d^3 k}{(2\pi)^3} \frac{1}{\sqrt{2E_{\mathbf{k}}}} \, \phi(\mathbf{k}) \, |\mathbf{k}\rangle,
+\]
+
+where $\phi(\mathbf{k})$ is the Fourier transform of the spatial wavefunction, and $|\mathbf{k}\rangle$ is a one-particle state of momentum $\mathbf{k}$ in the interacting theory. In the free theory, we would have $|\mathbf{k}\rangle = \sqrt{2E_{\mathbf{k}}} a_{\mathbf{k}}^\dagger |0\rangle$. The factor of $\sqrt{2E_{\mathbf{k}}}$ converts our relativistic normalization of $|\mathbf{k}\rangle$ to the conventional normalization in which the sum of all probabilities adds up to 1:
+
+\[
+\langle \phi | \phi \rangle = 1 \quad \text{if} \quad \int \frac{d^3 k}{(2\pi)^3} |\phi(\mathbf{k})|^2 = 1.
+\]
+
+The probability we wish to compute is then
+
+\[
+\mathcal{P} = \left| \langle \underbrace{\phi_1 \phi_2 \cdots}_{\text{future}} | \underbrace{\phi_A \phi_B}_{\text{past}} \rangle \right|^2
+\]
+
+where $|\phi_A \phi_B\rangle$ is a state of two wavepackets constructed in the far past and $\langle \phi_1 \phi_2 \cdots |$ is a state of several wavepackets (one for each final-state particle) constructed in the far future. Note that we use the Heisenberg picture: States are time-independent, but the name we give a state depends on the eigenvalues or expectation values of time-dependent operators. \\
+
+If we set up $|\phi_A \phi_B\rangle$ in the remote past, and then take the limit in which the wavepackets $\phi_i(\mathbf{k}_i)$ become concentrated about definite momenta $\mathbf{p}_i$, this defines an \textit{in} state $|\mathbf{p}_A \mathbf{p}_B\rangle_{\text{in}}$ with definite initial momenta. It is useful to view $|\phi_A \phi_B\rangle$ as a linear superposition of such states. Although we could leave this implicit in the form of $\phi_B(\mathbf{k}_B)$, we instead adopt the convention that our reference momentum-space wavefunctions are collinear (that is, have impact parameter $\mathbf{b} = 0$), and write $\phi_B(\mathbf{k}_B)$ with an explicit factor $\exp(-i\mathbf{b} \cdot \mathbf{k}_B)$ to account for the spatial translation. Then, since $\phi_A$ and $\phi_B$ are constructed independently at different locations, we can write the initial state as
+
+\[
+|\phi_A \phi_B\rangle_{\text{in}} = \int \frac{d^3 k_A}{(2\pi)^3} \int \frac{d^3 k_B}{(2\pi)^3} \frac{\phi_A(\mathbf{k}_A)\phi_B(\mathbf{k}_B) e^{-i\mathbf{b} \cdot \mathbf{k}_B}}{\sqrt{(2E_A)(2E_B)}} |\mathbf{k}_A \mathbf{k}_B\rangle_{\text{in}} \tag{3.39}
+\]
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Screenshot 2025-07-13 135746.png}
+    
+    \caption{Incident wavepackets are uniformly distributed in impact parameter \(\textbf{b}\).}
+    \label{fig:enter-label}
+\end{figure}
+
+
+We could expand $\langle \phi_1 \phi_2 \cdots |$ in terms of similarly defined out states of definite momentum formed in the asymptotic future:
+
+\[
+\langle \phi_1 \phi_2 \cdots |_{\text{out}} = \left( \prod_f \int \frac{d^3 p_f}{(2\pi)^3} \frac{\phi_f(\mathbf{p}_f)}{\sqrt{2E_f}} \right)_{\text{out}} \langle \mathbf{p}_1 \mathbf{p}_2 \cdots |
+\]
+
+
+We can now relate the probability of scattering in a real experiment to an idealized set of transition amplitudes between the asymptotically defined \textit{in} and \textit{out} states of definite momentum,
+
+\[
+{}_{\text{out}}\langle \mathbf{p}_1 \mathbf{p}_2 \cdots | \mathbf{k}_A \mathbf{k}_B \rangle_{\text{in}}.
+\]
+
+
+
+To compute the overlap of \textit{in} states with \textit{out} states, we note that the conventions for defining the two sets of states are related by time translation:
+
+\[
+\langle \text{out}|\mathbf{p}_1 \mathbf{p}_2 \cdots | \mathbf{k}_A \mathbf{k}_B \rangle_{\text{in}} = \lim_{T \to \infty} \langle \mathbf{p}_1 \mathbf{p}_2 \cdots | e^{-iH(2T)} | \mathbf{k}_A \mathbf{k}_B \rangle
+\]
+
+ Thus, the \textit{in} and \textit{out} states are related by the limit of a sequence of unitary operators. This limiting unitary operator is called the \textbf{\textit{S-matrix}}:
+
+\[
+\langle \text{out}|\mathbf{p}_1 \mathbf{p}_2 \cdots | \mathbf{k}_A \mathbf{k}_B \rangle_{\text{in}} \equiv \langle \mathbf{p}_1 \mathbf{p}_2 \cdots | S | \mathbf{k}_A \mathbf{k}_B \rangle
+\]
+
+
+ If the particles in question do not interact at all, $S$ is simply the identity operator.To isolate the interesting part of the $S$-matrix—that is, the part due to interactions—we define the \textit{T-matrix} by
+
+\[
+S = 1 + iT.
+\]
+
+Next, we note that the matrix elements of $S$ should reflect 4-momentum conservation. Thus $S$ or $T$ should always contain a factor $\delta^{(4)}(k_A + k_B - \sum p_f)$. Extracting this factor, we define the \textit{invariant matrix element} $\mathcal{M}$ by
+
+\[
+\langle \mathbf{p}_1 \mathbf{p}_2 \cdots | iT | \mathbf{k}_A \mathbf{k}_B \rangle = (2\pi)^4 \delta^{(4)}(k_A + k_B - \sum p_f) \, i\mathcal{M}(k_A, k_B \to p_f).
+\]
+
+We have written this expression in terms of 4-momenta $p$ and $k$, but of course all 4-momenta are on mass-shell: $p^0 = E_p$, $k^0 = E_k$. (Note that our entire treatment is specific to the case where the initial state contains only two particles.)
+
+The matrix element \(\mathcal{M}\) is analogous to the scattering amplitude f of 
+one-particle quantum mechanics.\\
+
+
+Let us calculate, in terms of $\mathcal{M}$, the probability for the initial state $|\phi_A \phi_B\rangle$ to scatter and become a final state of $n$ particles whose momenta lie in a small region $d^3p_1 \cdots d^3p_n$. In our normalization, this probability is
+
+\[
+\mathcal{P}(AB \to 12 \ldots n) = \left( \prod_f \frac{d^3 p_f}{(2\pi)^3} \frac{1}{2E_f} \right) \left| \langle \text{out} | \mathbf{p}_1 \cdots \mathbf{p}_n | \phi_A \phi_B \rangle_{\text{in}} \right|^2. \tag{3.40}
+\]
+
+
+
+
+For a single target ($A$) particle and many incident ($B$) particles with different impact parameters $\mathbf{b}$, the number of scattering events is
+
+\[
+N = \sum_{\text{all incident particles } i} P_i = \int d^2b\, n_B\, P(\mathbf{b}),
+\]
+
+where $n_B$ is the number density (particles per unit area) of $B$ particles. Since we are assuming that this number density is constant over the range of the interaction, $n_B$ can be taken outside the integral. The cross section is then
+
+\[
+\sigma = \frac{N}{n_B N_A} = \frac{N}{n_B \cdot 1} = \int d^2b\, P(\mathbf{b}). \tag{3.41}
+\]
+
+Deriving a simple expression for $\sigma$ in terms of $\mathcal{M}$ is now a fairly straightforward calculation. Combining (3.39), (3.40), and (3.41), we have (writing $d\sigma$ rather than $\sigma$ since this is an infinitesimal quantity)
+
+\[
+d\sigma = \left( \prod_f \frac{d^3p_f}{(2\pi)^3} \frac{1}{2E_f} \right) \int d^2b \left( \prod_{i=A,B} \int \frac{d^3k_i}{(2\pi)^3} \frac{\phi_i(\mathbf{k}_i)}{\sqrt{2E_i}} \int \frac{d^3\bar{k}_i}{(2\pi)^3} \frac{\phi_i^*(\bar{\mathbf{k}}_i)}{\sqrt{2E_i}} \right) \tag{3.42}
+\]
+\[
+\times e^{i\mathbf{b}\cdot(\mathbf{k}_B - \bar{\mathbf{k}}_B)} \left( \langle \text{out}|\{p_f\}|\{k_i\}\rangle_{\text{in}} \right) \left( \langle \text{out}|\{p_f\}|\{\bar{k}_i\}\rangle_{\text{in}} \right)^*,
+\]
+
+where we have used $\bar{\mathbf{k}}_A$ and $\bar{\mathbf{k}}_B$ as dummy integration variables in the second half of the squared amplitude.
+
+
+
+Now recall that the initial wavepackets are localized in momentum space, centered on $\mathbf{p}_A$ and $\mathbf{p}_B$. This means that we can evaluate all factors that are smooth functions of $\mathbf{k}_A$ and $\mathbf{k}_B$ at $\mathbf{p}_A$ and $\mathbf{p}_B$, pulling them outside the integrals. These factors include $E_A$, $E_B$, $|v_A - v_B|$, and $\mathcal{M}$—everything except the remaining delta function. After doing this, we arrive at the expression
+
+\[
+\begin{aligned}
+d\sigma = &\left( \prod_f \frac{d^3 p_f}{(2\pi)^3} \frac{1}{2E_f} \right)
+\frac{|\mathcal{M}(p_A, p_B \to \{p_f\})|^2}{2E_A 2E_B |v_A - v_B|} \\
+&\times \int \frac{d^3 k_A}{(2\pi)^3} \int \frac{d^3 k_B}{(2\pi)^3} 
+|\phi_A(\mathbf{k}_A)|^2 |\phi_B(\mathbf{k}_B)|^2 (2\pi)^4 \delta^{(4)}(k_A + k_B - \sum p_f).
+\end{aligned} \tag{3.43}
+\]
+
+
+
+All dependence on the shapes of the wavepackets has disappeared.
+
+The integral over final-state momenta in (4.79) has the structure
+
+\[
+\int d\Pi_n = \left( \prod_f \int \frac{d^3 p_f}{(2\pi)^3} \frac{1}{2E_f} \right) (2\pi)^4 \delta^{(4)} \left( P - \sum p_f \right) \tag{3.44}
+\]
+
+with $P$ the total initial 4-momentum.
+
+This integral is known as relativistically
+invariant n-body phase space.\\
+
+For the special case of two particles in the final state, we can simplify the general expression (3.43) by partially evaluating the phase-space integrals in the center-of-mass frame. Label the momenta of the two final particles $p_1$ and $p_2$. We first choose to integrate all three components of $p_2$ over the delta functions enforcing 3-momentum conservation. This sets $p_2 = -p_1$ and converts the integral over two-body phase space to the form
+
+\[
+\int d\Pi_2 = \int \frac{dp_1\, p_1^2\, d\Omega}{(2\pi)^3\, 2E_1\, 2E_2}\, (2\pi)\delta(E_{\text{cm}} - E_1 - E_2),
+\]
+
+where $E_1 = \sqrt{p_1^2 + m_1^2}$, $E_2 = \sqrt{p_1^2 + m_2^2}$, and $E_{\text{cm}}$ is the total initial energy. Integrating over the final delta function gives
+
+\[
+\int d\Pi_2 = \int d\Omega\, \frac{p_1^2}{16\pi^2 E_1 E_2} \left( \frac{p_1}{E_1} + \frac{p_1}{E_2} \right)^{-1}
+= \int d\Omega\, \frac{1}{16\pi^2} \frac{|p_1|}{E_{\text{cm}}}.
+\]
+
+For reactions symmetric about the collision axis, two-body phase space can be written simply as an integral over the polar angle in the center-of-mass frame:
+
+\[
+\int d\Pi_2 = \int d\cos\theta\, \frac{1}{16\pi} \frac{2|p_1|}{E_{\text{cm}}}.
+\]
+
+The last factor tends to 1 at high energy.
+
+Applying this simplification to (4.79), we find the following form of the cross section for two final-state particles:
+
+\[
+\left( \frac{d\sigma}{d\Omega} \right)_{\text{CM}} = \frac{1}{2E_A 2E_B |v_A - v_B|} \frac{|p_1|}{(2\pi)^2 4E_{\text{cm}}} |\mathcal{M}(p_A, p_B \to p_1, p_2)|^2.
+\]
+
+In the special case where all four particles have identical masses (including the commonly seen limit $m \to 0$), this reduces to the formula quoted in Chapter 1,
+
+\[
+\left( \frac{d\sigma}{d\Omega} \right)_{\text{CM}} = \frac{|\mathcal{M}|^2}{64\pi^2 E_{\text{cm}}^2} \quad \text{(all four masses identical)}.
+\]
+
+Now we calculate $d\Gamma$, in terms of $\mathcal{M}$. The correct expression is only a slight modification of (3.43), and is quite easy to guess: Just remove from (3.43) the factors that do not make sense when the initial state consists of a single particle. The definition of $\Gamma$ assumes that the decaying particle is at rest, so the normalization factor $(2E_A)^{-1}$ becomes $(2m_A)^{-1}$. (In any other frame, this factor would give the usual time dilation.) Thus the decay rate formula is
+
+\[
+d\Gamma = \frac{1}{2m_A} \left( \prod_f \frac{d^3 p_f}{(2\pi)^3} \frac{1}{2E_f} \right) |\mathcal{M}(m_A \to \{p_f\})|^2\, (2\pi)^4 \delta^{(4)}(p_A - \sum p_f).
+\]
+\newpage
+
+
+\section{\huge \textbf{Dirac Field Theory}}
+
+In trying to go beyond and study the theory of spin 1
+2 fields,
+we note that spin 1
+2 particles such as electrons are fermions. Unlike
+Bose particles, fermions obey the Pauli exclusion principle which
+simply says that there can at the most be one fermion in a given
+state. (There can be more fermions only if they are non-identical.)
+
+
+
+\subsection{Quantized Dirac Field}
+
+Tthe normal ordered Hamiltonian for the free Dirac field theory  is obtained to have the form
+
+\[
+: H := \sum_{s=\pm \frac{1}{2}} \int d^{3}k \, E_{k} \left( c^{\dagger}(\mathbf{k}, s)c(\mathbf{k}, s) + d^{\dagger}(\mathbf{k}, s)d(\mathbf{k}, s) \right) . \tag{4.1}
+\]
+
+where :\\
+
+\[
+c^\dagger(\mathbf{k}, s) = \int d^3x\, \sqrt{\frac{m}{(2\pi)^3 k^0}}\, e^{-ik \cdot x} \, \psi^\dagger_\alpha(x)\, u_\alpha(\mathbf{k}, s),
+\]
+
+\[
+d(\mathbf{k}, s) = \int d^3x\, \sqrt{\frac{m}{(2\pi)^3 k^0}}\, e^{ik \cdot x} \, \psi^\dagger_\alpha(x)\, v_\alpha(\mathbf{k}, s).
+\]
+
+
+
+
+
+As in the case of the complex (Klein-Gordon) scalar field theory , we can define the vacuum state of the theory to correspond to the state which is annihilated by both $c(\mathbf{k}, s)$ and $d(\mathbf{k}, s)$. (The Hamiltonian is understood to be normal ordered as in above even though we do not put the normal ordering symbol explicitly.)
+
+\[
+\begin{aligned}
+& c(\mathbf{k}, s)|0\rangle = 0 = \langle 0|c^{\dagger}(\mathbf{k}, s), \\
+& d(\mathbf{k}, s)|0\rangle = 0 = \langle 0|d^{\dagger}(\mathbf{k}, s), \\
+& H|0\rangle = 0.
+\end{aligned} \tag{4.2}
+\]
+
+The one particle states of the theory can now be defined as 
+
+\[
+\begin{aligned}
+& |k, s\rangle = c^{\dagger}(\mathbf{k}, s)|0\rangle, \\
+& |\widetilde{k}, s\rangle = d^{\dagger}(\mathbf{k}, s)|0\rangle.
+\end{aligned} \tag{4.3}
+\]
+
+
+Both these states can be checked to be eigenstates of the Hamiltonian (4.1) with energy eigenvalue
+\[
+k^0 = E_k = \sqrt{\mathbf{k}^2 + m^2} > 0. \tag{4.4}
+\]
+Therefore, as in the case of the complex scalar field theory, there are two distinct one particle states with degenerate mass (energy). 
+
+
+\subsection{Green’s functions}
+we can define the Green’s function for the Dirac field theory as satisfying the Dirac equation with a delta function potential (source)
+as
+
+\[
+(i\slashed{\partial} - m) S(x-y) = \delta^4(x-y). \tag{4.5}
+\]
+
+Here, $S(x-y)$ is a $4 \times 4$ matrix function in the spinor space. The right-hand side is also a matrix, but it is the trivial $4 \times 4$ identity matrix . Let us recall the identity
+
+\[
+\begin{aligned}
+(i\slashed{\partial} - m)(i\slashed{\partial} + m) &= (i\slashed{\partial})^2 - m^2 \\
+&= -\gamma^\mu \partial_\mu \gamma^\nu \partial_\nu - m^2 \\
+&= -\gamma^\mu \gamma^\nu \partial_\mu \partial_\nu - m^2 \\
+&= -\frac{1}{2} [\gamma^\mu, \gamma^\nu]_+ \partial_\mu \partial_\nu - m^2 \\
+&= -\eta^{\mu\nu} \partial_\mu \partial_\nu - m^2 \\
+&= -(\partial_\mu \partial^\mu + m^2).
+\end{aligned} \tag{4.6}
+\]
+
+We know that the Green's function for the Klein-Gordon equation satisfies
+
+\[
+(\partial_\mu \partial^\mu + m^2) G(x-y) = -\delta^4(x-y). \tag{4.7}
+\]
+
+From these then, we can identify
+
+\[
+S(x-y) = (i\slashed{\partial} + m) G(x-y), \tag{4.8}
+\]
+
+so that
+
+\[
+\begin{aligned}
+(i\slashed{\partial} - m) S(x-y) &= (i\slashed{\partial} - m)(i\slashed{\partial} + m) G(x-y) \\
+&= -(\partial_\mu \partial^\mu + m^2) G(x-y) \\
+&= \delta^4(x-y).
+\end{aligned} \tag{4.9}
+\]
+
+Therefore, we do not have to calculate the Green's function for the Dirac field theory separately.
+
+Although the relation above holds for any Green's function of the theory (retarded, advanced, Feynman, etc.), we would concentrate mainly on the Feynman Green's function since that is the most useful in the calculation of S-matrix elements.\\
+
+We note that the relation (4.8) can be written in the momentum space as
+\[
+S(k) = (\slashed{k} + m) G(k),  \tag{4.10}
+\]
+so that we can write,
+\[
+S_F(k) = (\slashed{k} + m) G_F(k) = \lim_{\epsilon \to 0^+} \frac{\slashed{k} + m}{k^2 - m^2 + i\epsilon},
+\]
+which can also be written as
+\[
+S_F(k) = \lim_{\epsilon \to 0^+} \frac{1}{\slashed{k} - m + i\epsilon}. \tag{4.11}
+\]
+
+From (4.8) we can also obtain the positive and the negative energy Green's functions for the Dirac field theory where \( k^0 = E_k = \sqrt{\mathbf{k}^2 + m^2} > 0 \):
+
+\[
+\begin{aligned}
+S^{(+)}(x) &= (i\slashed{\partial} + m) G^{(+)}(x) \\
+           &= (i\slashed{\partial} + m) \frac{i}{2} \int \frac{d^3 k}{(2\pi)^3} \frac{1}{k^0} e^{-ik \cdot x} \\
+           &= \frac{i}{2} \int \frac{d^3 k}{(2\pi)^3} \frac{\slashed{k} + m}{k^0} e^{-ik \cdot x},
+\end{aligned} \tag{4.12}
+\]
+
+\[
+\begin{aligned}
+S^{(-)}(x) &= (i\slashed{\partial} + m) G^{(-)}(x) \\
+           &= (i\slashed{\partial} + m) \left( -\frac{i}{2} \int \frac{d^3 k}{(2\pi)^3} \frac{1}{k^0} e^{ik \cdot x} \right) \\
+           &= -\frac{i}{2} \int \frac{d^3 k}{(2\pi)^3} \frac{-\slashed{k} + m}{k^0} e^{ik \cdot x} \\
+           &= \frac{i}{2} \int \frac{d^3 k}{(2\pi)^3} \frac{\slashed{k} - m}{k^0} e^{ik \cdot x}.
+\end{aligned} \tag{4.13}
+\]
+
+We can express the Feynman Green's function in terms of the positive and the negative energy Green's functions as well 
+
+
+\[
+\begin{aligned}
+S_F(x) &= (i\slashed{\partial} + m) G_F(x) \\
+       &= (i\slashed{\partial} + m) \left[ -\theta(x^0) G^{(+)}(x) + \theta(-x^0) G^{(-)}(x) \right] \\
+       &= -\theta(x^0) S^{(+)}(x) + \theta(-x^0) S^{(-)}(x),
+\end{aligned} \tag{4.14}
+\]
+where we have used the fact that the terms involving derivatives of the step function cancel out (namely, $\delta(x^0) (G^{(+)}(x) + G^{(-)}(x)) = 0$). Similarly, other Green's functions for the Dirac field theory can also be easily obtained from the corresponding functions for the Klein-Gordon field theory.
+
+
+
+\subsection{Covariant anti-commutation relations}
+
+Let us decompose the field operator into its positive and negative energy (frequency) parts as
+\[
+\psi_\alpha(x) = \psi^{(+)}_\alpha(x) + \psi^{(-)}_\alpha(x), \tag{4.15}
+\]
+where
+\[
+\psi^{(+)}_\alpha(x) = \sum_{s=\pm\frac{1}{2}} \int d^3k\, \sqrt{\frac{m}{(2\pi)^3 k^0}}\, e^{-ik\cdot x} c(k,s) u_\alpha(k,s), 
+\]
+\[
+\psi^{(-)}_\alpha(x) = \sum_{s=\pm\frac{1}{2}} \int d^3k\, \sqrt{\frac{m}{(2\pi)^3 k^0}}\, e^{ik\cdot x} d^\dagger(k,s) v_\alpha(k,s). \tag{4.16}
+\]
+
+Similarly, we can decompose the adjoint field operator also as
+\[
+\overline{\psi}_\alpha(x) = \overline{\psi}^{(+)}_\alpha(x) + \overline{\psi}^{(-)}_\alpha(x), \tag{4.17}
+\]
+where
+\[
+\overline{\psi}^{(+)}_\alpha(x) = \sum_{s=\pm\frac{1}{2}} \int d^3k\, \sqrt{\frac{m}{(2\pi)^3 k^0}}\, e^{-ik\cdot x} d(k,s) \overline{v}_\alpha(k,s),
+\]
+\[
+\overline{\psi}^{(-)}_\alpha(x) = \sum_{s=\pm\frac{1}{2}} \int d^3k\, \sqrt{\frac{m}{(2\pi)^3 k^0}}\, e^{ik\cdot x} c^\dagger(k,s) \overline{u}_\alpha(k,s). \tag{4.18}
+\]
+
+
+
+\[
+\left[ c(\mathbf{k}, s),\, c^\dagger(\mathbf{k}', s') \right]_+ = \delta_{s s'} \delta^3(\mathbf{k} - \mathbf{k}') = \left[ d(\mathbf{k}, s),\, d^\dagger(\mathbf{k}', s') \right]_+ \tag{4.19}
+\]
+
+
+
+using eqn(4.19),we get the following:\\
+
+
+\[
+\begin{aligned}
+&\left[ \psi_\alpha^{(+)}(x),\, \overline{\psi}_\beta^{(-)}(y) \right]_+ \\
+&= \sum_{s,s' = \pm \frac{1}{2}} \iint \frac{d^3k\, d^3k'}{(2\pi)^6} \sqrt{\frac{m^2}{k^0 k'^0}} \\
+&\quad \times e^{-ik\cdot x + ik'\cdot y} u_\alpha(k,s) \overline{u}_\beta(k',s') \left[ c(k,s),\, c^\dagger(k',s') \right]_+ \\
+&= \sum_{s,s' = \pm \frac{1}{2}} \iint \frac{d^3k\, d^3k'}{(2\pi)^6} \sqrt{\frac{m^2}{k^0 k'^0}} \\
+&\quad \times e^{-ik\cdot x + ik'\cdot y} u_\alpha(k,s) \overline{u}_\beta(k',s') \, \delta_{ss'} \, \delta^3(\mathbf{k} - \mathbf{k}') \\
+&= \sum_{s=\pm \frac{1}{2}} \int \frac{d^3k}{(2\pi)^3} \frac{m}{k^0} e^{-ik\cdot(x - y)} u_\alpha(k,s) \overline{u}_\beta(k,s) \\
+&= \int \frac{d^3k}{(2\pi)^3} \frac{m}{k^0} \frac{(\slashed{k} + m)_{\alpha\beta}}{2m} e^{-ik\cdot(x-y)} \\
+&= \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} \frac{(\slashed{k} + m)_{\alpha\beta}}{k^0} e^{-ik\cdot(x-y)} \\
+&= -i S_{\alpha\beta}^{(+)}(x-y), 
+\end{aligned} \tag{4.20}
+\]
+where we have used the completeness relation as well as the identification in the preceding discussion. Similarly,
+\[
+\begin{aligned}
+&\left[ \psi_\alpha^{(-)}(x),\, \overline{\psi}_\beta^{(+)}(y) \right]_+ \\
+&= \sum_{s,s' = \pm \frac{1}{2}} \iint \frac{d^3k\, d^3k'}{(2\pi)^6} \sqrt{\frac{m^2}{k^0 k'^0}} \\
+&\quad \times e^{ik\cdot x - ik'\cdot y} v_\alpha(k,s) \overline{v}_\beta(k',s') \left[ d^\dagger(k,s),\, d(k',s') \right]_+ \\
+&= \sum_{s,s' = \pm \frac{1}{2}} \iint \frac{d^3k\, d^3k'}{(2\pi)^6} \sqrt{\frac{m^2}{k^0 k'^0}} \\
+&\quad \times e^{ik\cdot x - ik'\cdot y} v_\alpha(k,s) \overline{v}_\beta(k',s') \, \delta_{ss'} \, \delta^3(\mathbf{k} - \mathbf{k}') \\
+&= \sum_{s=\pm \frac{1}{2}} \int \frac{d^3k}{(2\pi)^3} \frac{m}{k^0} e^{ik\cdot(x - y)} v_\alpha(k,s) \overline{v}_\beta(k,s). \\
+\end{aligned} \tag{4.21}
+\]
+
+
+\[
+\begin{aligned}
+&\times e^{ik\cdot x - ik' \cdot y} v_\alpha(k, s)\overline{v}_\beta(k', s') \delta_{ss'} \delta^3(k - k') \\
+&= \sum_{s = \pm \frac{1}{2}} \int \frac{d^3k}{(2\pi)^3} \frac{m}{k^0} e^{ik\cdot(x-y)} v_\alpha(k, s) \overline{v}_\beta(k, s) \\
+&= \int \frac{d^3k}{(2\pi)^3} \frac{m}{k^0} \frac{(\slashed{k} - m)_{\alpha\beta}}{2m} e^{ik\cdot(x-y)} \\
+&= \frac{1}{2} \int \frac{d^3k}{(2\pi)^3} \frac{(\slashed{k} - m)_{\alpha\beta}}{k^0} e^{ik\cdot(x-y)} \\
+&= -i S^{(-)}_{\alpha\beta}(x-y),
+\end{aligned}
+\]
+ As a result, we can write
+\[
+\begin{aligned}
+\left[ \psi_\alpha(x),\, \overline{\psi}_\beta(y) \right]_+ &= \left[ \psi^{(+)}_\alpha(x), \overline{\psi}^{(-)}_\beta(y) \right]_+ + \left[ \psi^{(-)}_\alpha(x), \overline{\psi}^{(+)}_\beta(y) \right]_+ \\
+&= -i S^{(+)}_{\alpha\beta}(x-y) - i S^{(-)}_{\alpha\beta}(x-y) \\
+&= -i \left( S^{(+)}(x-y) + S^{(-)}(x-y) \right)_{\alpha\beta} \\
+&= -i S_{\alpha\beta}(x-y),
+\end{aligned} \tag{4.22}
+\]
+ these relations are analogous to the covariant commutation relations for the Klein-Gordon field operators.
+
+
+
+\subsection{Feynman Rules For Fermions}
+
+
+The time-ordering operator T acting on two 
+spinor fields is most conveniently defined with an additional minus sign:\\
+
+\[
+T\left( \psi(x) \overline{\psi}(y) \right) \equiv 
+\begin{cases}
+    \psi(x)\overline{\psi}(y) & \text{for } x^0 > y^0 ; \\[1.5ex]
+    -\overline{\psi}(y)\psi(x) & \text{for } x^0 < y^0.
+\end{cases} \tag{4.23}
+\]
+
+With this definition, the Feynman propagator for the Dirac field is
+
+\[
+S_F(x - y) = \int \frac{d^4p}{(2\pi)^4} \frac{i (\slashed{p} + m)}{p^2 - m^2 + i\epsilon} e^{-ip \cdot (x-y)} 
+= \langle 0 | T \psi(x) \overline{\psi}(y) | 0 \rangle. \tag{4.24}
+\]
+
+
+For products of more than two spinor fields, we generalize this definition in the natural way: The time-ordered product picks up one minus sign for each interchange of operators that is necessary to put the fields in time order. For example,
+\[
+T(\psi_1 \psi_2 \psi_3 \psi_4) = (-1)^3 \psi_3 \psi_1 \psi_4 \psi_2 \qquad \text{if}\quad x_3^0 > x_1^0 > x_4^0 > x_2^0. \tag{4.25}
+\]
+
+The definition of the normal-ordered product of spinor fields is analogous: Put in an extra minus sign for each fermion interchange. The anticommutation properties make it possible to write a normal-ordered product in several ways, but with our conventions these are completely equivalent:
+\[
+N(a_p a_q a_r^\dagger) = (-1)^2 a_r^\dagger a_p a_q = (-1)^3 a_r^\dagger a_q a_p. \tag{4.26}
+\]
+
+Using these definitions, it is not hard to generalize Wick's theorem. Consider first the case of two Dirac fields, say \( T\big[\psi(x)\overline{\psi}(y)\big] \). Now, define the contraction of two fields by
+\[
+T\left[\psi(x)\overline{\psi}(y)\right] = N\left[\psi(x)\overline{\psi}(y)\right] + \ \overbracket{\psi(x)\overline{\psi}(y)}.
+\]
+
+Explicitly, for the Dirac field,
+\[
+\overbracket{\psi(x)\overline{\psi}(y)} \equiv 
+\begin{cases}
+\langle 0 | \psi(x) \overline{\psi}(y) | 0 \rangle & \text{for } x^0 > y^0, \\
+- \langle 0 | \overline{\psi}(y) \psi(x) | 0 \rangle & \text{for } x^0 < y^0
+\end{cases} = S_F(x-y) ;
+\]
+\[
+\psi(x)\psi(y) = \overbracket{\psi(x)\psi(y)} = 0.
+\]
+
+Define contractions under the normal-ordering symbol to include minus signs for operator interchanges:
+\[
+N\left(\overbracket{\psi_1\psi_2}\psi_3\psi_4\right) = -\psi_1\psi_3 N(\psi_2\psi_4) = -S_F(x_1 - x_3) N(\psi_2\psi_4).
+\]
+
+With these conventions, Wick's theorem takes the same form as before:
+\[
+T\left[\psi_1\psi_2\psi_3\cdots \right] = N\left[\psi_1\psi_2\psi_3 \cdots\right] + \text{ all possible contractions.}
+\]
+
+The proof is essentially unchanged from the bosonic case, since all extra minus signs are accounted for by the above definitions.
+
+\subsection{Normal ordered and time ordered products}
+
+Since fermionic field operators anti-commute, in rearranging terms to bring them to a particular form, we need to be careful about negative signs that can
+arise from changing the order of any two such operators:\\
+
+
+\[
+:\psi_\alpha^{(-)}(x)\psi_\beta^{(+)}(y): \ =\ \psi_\alpha^{(-)}(x)\psi_\beta^{(+)}(y)
+\]
+
+\[
+:\psi_\beta^{(+)}(y)\psi_\alpha^{(-)}(x): \ =\ -\psi_\alpha^{(-)}(x)\psi_\beta^{(+)}(y)
+\]
+\[
+\hspace{4cm}=\, - : \psi_\alpha^{(-)}(x)\psi_\beta^{(+)}(y) :
+\]
+
+and we note that, unlike the bosonic case, here the order of factors inside normal ordering can lead to additional signs.
+
+From the definition above, it is clear that
+
+\[
+:\psi_\alpha(x)\overline{\psi}_\beta(y):\
+= \big(\psi_\alpha^{(+)}(x) + \psi_\alpha^{(-)}(x)\big) \big(\overline{\psi}_\beta^{(+)}(y) + \overline{\psi}_\beta^{(-)}(y)\big):
+\]
+\[
+= \big( \psi_\alpha^{(+)}(x)\overline{\psi}_\beta^{(+)}(y) + \psi_\alpha^{(+)}(x)\overline{\psi}_\beta^{(-)}(y) \big)
+   + \big( \psi_\alpha^{(-)}(x)\overline{\psi}_\beta^{(+)}(y) + \psi_\alpha^{(-)}(x)\overline{\psi}_\beta^{(-)}(y) \big):
+\]
+\[
+= \psi_\alpha^{(+)}(x)\overline{\psi}_\beta^{(-)}(y) - \psi_\alpha^{(-)}(x)\overline{\psi}_\beta^{(+)}(y)
++ \psi_\alpha^{(+)}(x)\overline{\psi}_\beta^{(+)}(y) + \psi_\alpha^{(-)}(x)\overline{\psi}_\beta^{(-)}(y)
+\]
+\[
+= \psi_\alpha(x)\overline{\psi}_\beta(y) - [\psi_\alpha^{(+)}(x),\, \overline{\psi}_\beta^{(+)}(y)]_+
+\]
+\[
+= \psi_\alpha(x)\overline{\psi}_\beta(y) + i S^{(+)}_{\alpha\beta}(x-y)
+\]
+
+where in the last step we have made the identification in the context (that is, recognizing that \([\,\psi_\alpha^{(+)}(x), \overline{\psi}_\beta^{(+)}(y)\,]_+ = -i S^{(+)}_{\alpha\beta}(x-y)\)).
+In other words, we can write
+
+\[
+\psi_\alpha(x)\overline{\psi}_\beta(y) = :\psi_\alpha(x)\overline{\psi}_\beta(y): - i S^{(+)}_{\alpha\beta}(x-y)
+\]
+
+Similarly,
+\[
+:\overline{\psi}_\beta(y)\psi_\alpha(x): \ = \ \overline{\psi}_\beta(y)\psi_\alpha(x) - i S^{(-)}_{\alpha\beta}(x-y)
+\]
+
+As a result, we see that we can denote
+
+\[
+\langle 0| \psi_\alpha(x)\overline{\psi}_\beta(y)|0 \rangle = -i S^{(+)}_{\alpha\beta}(x-y) = \overbracket{\psi_\alpha(x)\overline{\psi}_\beta(y)}
+\]
+
+
+
+
+
+ The Wick's theorem for normal ordered products of Dirac fields can now be developed .
+
+The time ordered product of Dirac field operators is again defined with time ordering of the operators from left to right (largest time on the left) keeping in mind the appropriate negative signs associated with rearranging fermionic operators as
+
+\[
+T(\psi_\alpha(x)\overline{\psi}_\beta(y)) = \theta(x^0 - y^0)\psi_\alpha(x)\overline{\psi}_\beta(y) - \theta(y^0 - x^0)\overline{\psi}_\beta(y)\psi_\alpha(x).
+\]
+
+This can be expressed in terms of the normal ordered products as
+
+\[
+\begin{aligned}
+T(\psi_\alpha(x)\overline{\psi}_\beta(y))
+&= \theta(x^0-y^0)\left(:\psi_\alpha(x)\overline{\psi}_\beta(y): - iS^{(+)}_{\alpha\beta}(x-y)\right) \\
+&\quad - \theta(y^0-x^0)\left(:\overline{\psi}_\beta(y)\psi_\alpha(x): - iS^{(-)}_{\beta\alpha}(y-x)\right) \\
+&= \theta(x^0-y^0):\psi_\alpha(x)\overline{\psi}_\beta(y): + \theta(y^0-x^0):\psi_\alpha(x)\overline{\psi}_\beta(y): \\
+&\quad + i\big(-\theta(x^0-y^0)S^{(+)}_{\alpha\beta}(x-y) + \theta(y^0-x^0)S^{(-)}_{\alpha\beta}(x-y)\big) \\
+&= \left(\theta(x^0-y^0)+\theta(y^0-x^0)\right):\psi_\alpha(x)\overline{\psi}_\beta(y): + iS_{F,\alpha\beta}(x-y) \\
+&= :\psi_\alpha(x)\overline{\psi}_\beta(y): + iS_{F,\alpha\beta}(x-y),
+\end{aligned}
+\]
+It follows now from above that the Feynman Green's function is related to the vacuum expectation value of the time ordered product of $\psi_\alpha(x)$ and $\overline{\psi}_\beta(y)$,
+\[
+\langle 0|T(\psi_\alpha(x)\overline{\psi}_\beta(y))|0\rangle = iS_{F,\alpha\beta}(x-y) = \overbracket{\psi_\alpha(x)\overline{\psi}_\beta(y)}.
+\]
+
+\subsection{Yukawa interaction}
+
+This theory which describes the interaction between a Dirac field and a charge neutral Klein-Gordon field.\\
+
+It can represent the interaction between protons (if assumed to be fundamental) and the \(\pi^0\)-meson as well as
+the self-interaction of the mesons.\\
+The Lorentz invariant Lagrangian
+density, in this case, has the form
+
+
+\[
+\mathcal{L} = i \bar{\psi} \not{\partial} \psi - m \bar{\psi} \psi + \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{M^2}{2} \phi^2 - g \bar{\psi} \psi \phi - \frac{\lambda}{4!} \phi^4,
+\]
+
+where we are assuming that the fermionic particle (say the proton) has mass $m$ while the spin zero meson (e.g., the $\pi^0$ meson) has mass $M$.$\bar{\psi} \psi$ is invariant under a Lorentz transformation and $\phi$ is a scalar field) and is known as the Yukawa interaction, since it leads to the Yukawa potential in the Born approximation and the coupling constant $g$ represents the strength of the interaction.We can separate the Lagrangian density (above) into a free part and an interaction part,
+
+\[
+\mathcal{L} = \mathcal{L}_0 + \mathcal{L}_I,
+\]
+
+where
+\[
+\mathcal{L}_0 = i \bar{\psi} \not{\partial} \psi - m \bar{\psi} \psi + \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{M^2}{2} \phi^2,
+\]
+\[
+\mathcal{L}_I = -g \bar{\psi} \psi \phi - \frac{\lambda}{4!} \phi^4.
+\]
+
+ In this case, we can denote the interaction Lagrangian density as (remember everything is normal ordered)
+
+
+
+
+
+
+
+\[
+\mathcal{L}_{I} = -g : \overline{\psi} \psi \phi := -\mathcal{H}_{I}.
+\]
+
+As a result, in this theory the $S$-matrix will have the expansion (see (6.69), the adiabatic switch-off is assumed)
+
+\[
+\begin{aligned}
+S &= T \left( e^{-i \int_{-\infty}^{\infty} dt H_I} \right) = T\left(e^{-i \int d^4x \mathcal{H}_I} \right) \\
+&= T\left(e^{-ig \int d^4x : \overline{\psi} \psi \phi : } \right) \\
+&= \mathbb{I} - ig \int d^4x : \overline{\psi}(x)\psi(x)\phi(x) : \\
+&\quad - \frac{g^2}{2} \iint d^4x d^4x' T\left(:\overline{\psi}(x)\psi(x)\phi(x)::\overline{\psi}(x')\psi(x')\phi(x'):\right) + \cdots
+\end{aligned}
+\]
+
+Using Wick's theorem (see sections \textbf{6.5} and \textbf{6.6}), we can write the above in terms of normal ordered products as
+
+\[
+\begin{aligned}
+S &= \mathbb{I} - ig \int d^4x : \overline{\psi}(x)\psi(x)\phi(x) : \\
+&\quad - \frac{g^2}{2} \iint d^4x d^4x' \big[ : \overline{\psi}(x)\psi(x)\phi(x)\overline{\psi}(x')\psi(x')\phi(x') : \\
+&\quad + \contraction{}{\overline{\psi}}{(x)}{\psi}
+\contraction[2ex]{\overline{\psi}(x)\psi(x)}{\overline{\psi}}{(x')}{\psi}
+\overline{\psi}(x)\psi(x)\overline{\psi}(x')\psi(x') : \phi(x)\phi(x') \\
+&\quad + \contraction{}{\psi}{_\alpha(x)}{\overline{\psi}}
+\contraction[2ex]{\psi_\alpha(x)\overline{\psi}_\beta(x')}{\psi}{_\beta(x')}{\overline{\psi}}
+\psi_\alpha(x)\overline{\psi}_\beta(x') : \overline{\psi}_\alpha(x)\psi_\beta(x')\phi(x)\phi(x') : \\
+&\quad - \contraction{}{\psi}{_\alpha(x')}{\overline{\psi}}
+\contraction[2ex]{\psi_\alpha(x')\overline{\psi}_\beta(x)}{\psi}{_\beta(x)}{\overline{\psi}}
+\psi_\alpha(x')\overline{\psi}_\beta(x) : \psi_\beta(x)\overline{\psi}_\alpha(x')\phi(x)\phi(x') : \\
+&\quad + \contraction{}{\phi}{(x')}{\phi}
+\phi(x')\phi(x) \psi_\alpha(x)\overline{\psi}_\beta(x') : \overline{\psi}_\alpha(x)\psi_\beta(x') : \\
+&\quad - \contraction{}{\phi}{(x)}{\phi}
+\phi(x)\phi(x') \psi_\alpha(x')\overline{\psi}_\beta(x) : \psi_\beta(x)\overline{\psi}_\alpha(x') : \\
+&\quad - \contraction{}{\psi}{_\alpha(x)}{\overline{\psi}}
+\contraction[2ex]{\psi_\alpha(x)\overline{\psi}_\beta(x')}{\psi}{_\beta(x')}{\overline{\psi}}
+\psi_\alpha(x)\overline{\psi}_\beta(x')\psi_\beta(x')\overline{\psi}_\alpha(x) : \phi(x)\phi(x') : \\
+&\quad - \contraction{}{\psi}{_\alpha(x)\overline{\psi}_\beta(x')\psi_\beta(x')}{\overline{\psi}}
+\contraction[2ex]{\psi_\alpha(x)}{\overline{\psi}}{_\beta(x')}{\psi}
+\psi_\alpha(x)\overline{\psi}_\beta(x')\psi_\beta(x')\overline{\psi}_\alpha(x) \contraction{}{\phi}{(x)}{\phi}
+\phi(x)\phi(x') \big] + \cdots
+\end{aligned} \tag{4.27}
+\]
+
+
+
+To see how perturbation theory works in the interacting quantum field theory, let us look at the lowest order (order $g$) term in the expansion (4.27). This can be written out in detail as
+
+\[
+S^{(1)} = -ig \int d^4x \left[ \contraction{}{\overline{\psi}}{_\alpha^{(+)}(x)\psi_\alpha^{(+)}(x)}{\psi}
+\overline{\psi}_\alpha^{(+)}(x)\psi_\alpha^{(+)}(x) - \psi_\alpha^{(-)}(x)\overline{\psi}_\alpha^{(+)}(x)
+\right. \tag{4.28}
+\]
+\[
+\left.
++ \contraction{}{\overline{\psi}}{_\alpha^{(-)}(x)\psi_\alpha^{(+)}(x)}{\overline{\psi}}
+\overline{\psi}_\alpha^{(-)}(x)\psi_\alpha^{(+)}(x) + \overline{\psi}_\alpha^{(-)}(x)\psi_\alpha^{(-)}(x) \right] \phi^{(+)}(x)
+\]
+\[
++ \phi^{(-)}(x)\left( \contraction{}{\overline{\psi}}{_\alpha^{(+)}(x)\psi_\alpha^{(+)}(x)}{\psi}
+\overline{\psi}_\alpha^{(+)}(x)\psi_\alpha^{(+)}(x) - \psi_\alpha^{(-)}(x)\overline{\psi}_\alpha^{(+)}(x)
+\right.
+\]
+\[
+\left.
++ \contraction{}{\overline{\psi}}{_\alpha^{(-)}(x)\psi_\alpha^{(+)}(x)}{\overline{\psi}}
+\overline{\psi}_\alpha^{(-)}(x)\psi_\alpha^{(+)}(x) + \overline{\psi}_\alpha^{(-)}(x)\psi_\alpha^{(-)}(x) \right) \right].
+\]
+
+Each term in this expression leads to a distinct physical process. For example, just to get a feeling for what is involved, let us look at the first term in (4.28)
+
+\[
+S_1^{(1)} = -ig \int d^4x \, \contraction{}{\overline{\psi}}{_\alpha^{(+)}(x)\psi_\alpha^{(+)}(x)}{\phi}
+\overline{\psi}_\alpha^{(+)}(x)\psi_\alpha^{(+)}(x)\phi^{(+)}(x). \tag{4.29}
+\]
+
+Each positive energy operator in (4.29) contains an annihilation operator and, therefore, a nontrivial matrix element would result for the case
+
+\[
+\langle 0|S_1^{(1)}|k, s; k', s'; q \rangle, \tag{4.30}
+\]
+
+where the initial state contains a proton with momentum $k$ and spin $s$, an anti-proton with momentum $k'$ and spin $s'$ and a $\pi^0$ meson with momentum $q$ and the final state contains no particles. (There can be other nontrivial matrix elements where the initial state has one more proton, anti-proton and $\pi^0$ meson than the final state.) To evaluate the matrix element (4.30) we substitute the field decomposition for each of the positive energy field operators and write
+
+
+\[
+\langle 0|S_1^{(1)}|k, s; k', s'; q \rangle
+\]
+\[
+= -ig \sum_{s,s'=\pm\frac{1}{2}} \iiiint d^4x \frac{d^3p d^3p' d^3p''}{\sqrt{(2\pi)^3 2p^0}} \sqrt{\frac{m}{(2\pi)^3 p^0}} \sqrt{\frac{m}{(2\pi)^3 p'^0}}
+\]
+\[
+\times e^{-i(p+p'+\tilde{p})\cdot x} \overline{u}_\alpha(p', s') u_\alpha(p, s)
+\]
+\[
+\times \langle 0|d(p', s') c(p, s) a(\tilde{p}) c^\dagger(k, s) d^\dagger(k', s') a^\dagger(q)|0\rangle
+\]
+\[
+= -ig \sum_{s,s'=\pm\frac{1}{2}} \iiint \frac{d^3p d^3p' d^3p''}{\sqrt{(2\pi)^3 2p^0}} \sqrt{\frac{m}{(2\pi)^3 p^0}} \sqrt{\frac{m}{(2\pi)^3 p'^0}}
+\]
+\[
+\times (2\pi)^4 \delta^4(p + p' + \tilde{p}) \overline{u}_\alpha(p', s') u_\alpha(p, s)
+\]
+\[
+\times \delta_{ss} \delta^3(p - k) \delta_{s's'} \delta^3(p' - k') \delta^3(\tilde{p} - q)
+\]
+\[
+= -(2\pi)^4 ig \delta^4(k + k' + q)
+\]
+\[
+\times \frac{1}{\sqrt{(2\pi)^3 2q^0}} \sqrt{\frac{m}{(2\pi)^3 k^0}} \sqrt{\frac{m}{(2\pi)^3 k'^0}} \overline{u}_\alpha(k', s') u_\alpha(k, s), \tag{4.31}
+\]
+
+where we have used the appropriate (anti) commutation relations between the creation and the annihilation operators in evaluating the vacuum expectation value. The matrix element (4.31) represents the process where a proton, an anti-proton along with a $\pi^0$ meson are annihilated. The delta function merely ensures the overall conservation of energy and momentum in the process. We can similarly associate a physical process with every other term of $S^{(1)}$ . (For completeness, we note here that this lowest order matrix element in (8.99) vanishes because energy-momentum conservation cannot be satisfied. In fact, note that since $k^0, k'^0, q^0 > 0$, energy conservation $\delta(k^0 + k'^0 + q^0)$ in (4.31) can be satisfied only if the energy of each of the particles vanishes which is not possible since the particles are massive.
+
+Each term at order $g^2$ in the expansion  also leads to a distinct physical process. For example, let us consider the second
+
+
+term in the expansion at order $g^2$ in (8.95)
+
+\[
+S_2^{(2)} = -\frac{g^2}{2} \iint d^4x d^4x' \contraction{}{\phi}{(x)}{\phi} \phi(x)\phi(x') : \overline{\psi}(x)\psi(x)\overline{\psi}(x')\psi(x') :
+\]
+\[
+= -\frac{g^2}{2} \iint d^4x d^4x' iG_F(x-x') : \overline{\psi}(x)\psi(x)\overline{\psi}(x')\psi(x') :.
+\]
+
+A nontrivial matrix element of this operator would be obtained if the initial state contains a proton and an anti-proton of momenta $k_1$ and $k_2$ respectively and the final state also contains a proton and an anti-proton of momenta $k_3$ and $k_4$ respectively. In such a case, the matrix element will have the form
+
+\[
+\langle k_4, s_4; k_3, s_3|S_2^{(2)}|k_1, s_1; k_2, s_2\rangle
+\]
+\[
+= -\frac{ig^2}{2} \iint d^4x d^4x' G_F(x-x')
+\]
+\[
+\times \langle k_4, s_4; k_3, s_3|\overline{\psi}_\alpha^{(-)}(x)\psi_\alpha^{(-)}(x)\overline{\psi}_\beta^{(+)}(x')\psi_\beta^{(+)}(x')
+\]
+\[
++ \overline{\psi}_\alpha^{(-)}(x')\psi_\alpha^{(-)}(x')\overline{\psi}_\beta^{(+)}(x)\psi_\beta^{(+)}(x)|k_1, s_1; k_2, s_2\rangle
+\]
+\[
+= -ig^2 \iint d^4x d^4x' G_F(x-x')
+\]
+\[
+\times \langle k_4, s_4; k_3, s_3|\overline{\psi}_\alpha^{(-)}(x)\psi_\alpha^{(-)}(x)\overline{\psi}_\beta^{(+)}(x')\psi_\beta^{(+)}(x')|k_1, s_1; k_2, s_2\rangle
+\]
+\[
+= -ig^2 \iint d^4x d^4x' G_F(x-x') e^{i(k_3+k_4)\cdot x} e^{-i(k_1+k_2)\cdot x'}
+\]
+\[
+\times \sqrt{\frac{m}{(2\pi)^3 k_1^0}} \sqrt{\frac{m}{(2\pi)^3 k_2^0}} \sqrt{\frac{m}{(2\pi)^3 k_3^0}} \sqrt{\frac{m}{(2\pi)^3 k_4^0}}
+\]
+\[
+\times \overline{u}_\alpha(k_3, s_3)u_\alpha(k_4, s_4)\overline{u}_\beta(k_2, s_2)u_\beta(k_1, s_1). \tag{4.32}
+\]
+
+Recalling that the Fourier transformation of the Green's function is given by 
+
+\[
+G_F(x-x') = \int \frac{d^4q}{(2\pi)^4} e^{-iq\cdot(x-x')} G_F(q),
+\]
+
+
+
+
+
+the matrix element (8.101) can be written as
+
+\[
+\langle k_4, s_4; k_3, s_3|S_2^{(2)}|k_1, s_1; k_2, s_2\rangle
+\]
+\[
+= -ig^2 \iiint \frac{d^4q}{(2\pi)^4} d^4x d^4x' G_F(q) e^{-iq-(k_3-k_4)\cdot x} e^{i(q-k_1+k_2)\cdot x'}
+\]
+\[
+\times \sqrt{\frac{m}{(2\pi)^3 k_1^0}} \sqrt{\frac{m}{(2\pi)^3 k_2^0}} \sqrt{\frac{m}{(2\pi)^3 k_3^0}} \sqrt{\frac{m}{(2\pi)^3 k_4^0}}
+\]
+\[
+\times \overline{u}_\alpha(k_3, s_3) u_\alpha(k_4, s_4) \overline{u}_\beta(k_2, s_2) u_\beta(k_1, s_1)
+\]
+\[
+= -ig^2 \int d^4q (2\pi)^4 \delta^4(q - k_3 - k_4) \delta^4(q - k_1 - k_2) G_F(q)
+\]
+\[
+\times \sqrt{\frac{m}{(2\pi)^3 k_1^0}} \sqrt{\frac{m}{(2\pi)^3 k_2^0}} \sqrt{\frac{m}{(2\pi)^3 k_3^0}} \sqrt{\frac{m}{(2\pi)^3 k_4^0}}
+\]
+\[
+\times \overline{u}_\alpha(k_3, s_3) u_\alpha(k_4, s_4) \overline{u}_\beta(k_2, s_2) u_\beta(k_1, s_1)
+\]
+\[
+= -(2\pi)^4 g^2 \delta^4(k_1 + k_2 - k_3 - k_4)
+\]
+\[
+\times \sqrt{\frac{m}{(2\pi)^3 k_1^0}} \sqrt{\frac{m}{(2\pi)^3 k_2^0}} \sqrt{\frac{m}{(2\pi)^3 k_3^0}} \sqrt{\frac{m}{(2\pi)^3 k_4^0}}
+\]
+\[
+\times \overline{u}_\alpha(k_3, s_3) u_\alpha(k_4, s_4) i G_F(k_1 + k_2) \overline{u}_\beta(k_2, s_2) u_\beta(k_1, s_1).
+\]
+
+Physically this matrix element corresponds to a proton and an anti-proton annihilating to create a $\pi^0$ meson which subsequently pair produces a proton and an anti-proton. The delta function merely ensures the overall energy momentum conservation in the process.
+
+
+
+\subsection{Feynman Diagrams }
+
+Feynman developed a graphical method for evaluating S-matrix elements which
+is in one to one correspondence with the Wick expansion.\\
+
+
+
+Let us define the two kinds of
+Feynman propagators that are possible for our theory (the Yukawa
+theory), namely,
+
+
+
+\begin{align}
+----\frac{}{k}---- &= iG_F(k) = \lim_{\epsilon \to 0^+} \frac{i}{k^2 - M^2 + i\epsilon} 
+\end{align}
+
+    
+\begin{align}
+\beta --\frac{}{k}>---- \alpha &= iS_{F,\alpha\beta}(k) = \lim_{\epsilon \to 0^+} \frac{i(\not{k} + m)_{\alpha\beta}}{k^2 - m^2 + i\epsilon} \\[1em]
+&= \lim_{\epsilon \to 0^+} \left( \frac{i}{\not{k} - m + i\epsilon} \right)_{\alpha\beta}
+\end{align}
+
+First line corresponds to mesons and the second line with direction corresponds to fermions.\\
+
+
+
+*****\\
+An external boson line can represent
+either the annihilation or the creation of a particle at the interaction
+point (vertex), simply because we have a charge neutral scalar field and in such a case, the normalization factor for the external line (state) is denoted by $(k^0 = \sqrt{\mathbf{k}^2 + M^2})$
+
+\begin{align*}
+\frac{1}{k} &= \frac{1}{\sqrt{(2\pi)^3 2k^0}}
+\end{align*}
+
+
+******\\
+Since the fermion field carries a charge (and,
+therefore, carries a direction for charge flow), a fermion external line
+with an arrow flowing into an interaction point (vertex) can represent
+either the annihilation of a particle or the creation of an anti-particle
+at that point and the external line factor, in such a case is given by
+
+
+\[
+\begin{tikzpicture}[baseline={(current bounding box.center)}]
+  \draw[fermion] (-1.5,0) -- (0,0);
+  \filldraw (0,0) circle (0.05);
+  \node at (-1.2,0.3) {\(k, s\)};
+  \node at (0.3,0) {\(\alpha\)};
+\end{tikzpicture}
+\quad
+\left\{
+\begin{aligned}
+&= \sqrt{\frac{m}{(2\pi)^3 k^0}}\, u_\alpha(k,s), \quad &&\text{(particle annihilation)},\\
+&= \sqrt{\frac{m}{(2\pi)^3 k^0}}\, v_\alpha(k,s), \quad &&\text{(anti-particle creation)}.
+\end{aligned}
+\right.
+\]
+
+\noindent
+However, a fermion external line with an arrow away from the interaction point (vertex) can represent the creation of a particle or the annihilation of an anti-particle (since it corresponds to the field \(\bar\psi\)) with an external line factor
+
+\[
+\begin{tikzpicture}[baseline={(current bounding box.center)}]
+  \draw[fermionbar] (-1.5,0) -- (0,0);
+  \filldraw (0,0) circle (0.05);
+  \node at (-1.2,0.3) {\(k, s\)};
+  \node at (0.3,0) {\(\alpha\)};
+\end{tikzpicture}
+\quad
+\left\{
+\begin{aligned}
+&= \sqrt{\frac{m}{(2\pi)^3 k^0}}\, \bar{u}_\alpha(k,s), \quad &&\text{(particle creation)},\\
+&= \sqrt{\frac{m}{(2\pi)^3 k^0}}\, \bar{v}_\alpha(k,s), \quad &&\text{(anti-particle annihilation)}.
+\end{aligned}
+\right.
+\]
+
+
+*******\\
+
+Note that it is the interaction between the different fields which gives
+rise to nontrivial scattering. The interaction can be read out from the
+Lagrangian density \(\mathcal{L}_I\) and, in a local quantum field theory, is represented as a vertex (point of interaction) with no meaning attached
+to the external lines. Thus, for the Yukawa interaction, we
+
+
+\[
+\begin{tikzpicture}[baseline={(current bounding box.center)}]
+  % Incoming dashed line
+  \draw[dashed] (-1.5,0) -- (0,0);
+  \node at (-1.2,0.2) {\(k_1\)};
+  \node at (-0.2,-0.2) {\(\alpha\)};
+  
+  % Outgoing fermion line 1
+  \draw[fermion] (0,0) -- (1.5,-0.7);
+  \node at (1.3,-0.9) {\(k_2\)};
+  
+  % Outgoing fermion line 2
+  \draw[fermion] (0,0) -- (1.5,0.7);
+  \node at (1.3,0.9) {\(k_3\)};
+  \node at (0.2,0.5) {\(\beta\)};
+  
+  % Vertex
+  \filldraw (0,0) circle (0.05);
+\end{tikzpicture}
+\quad = - (2\pi)^4 i g\, \delta^{4}(k_1 + k_2 + k_3)\, \delta_{\alpha\beta}.
+\]
+
+
+
+**********\\
+These are the basic elements out of which Feynman diagrams are
+constructed by attaching internal and external lines to vertices. Furthermore, the rule for connecting vertices and lines is that the four
+momentum of every internal line (propagator) must be integrated
+over all possible values, with the normalization factor \((\frac{1}{2\pi})^4\) for every momentum integration. With these rules, conventionally known
+as \textbf{Feynman rules}, we can show that every Feynman diagram corresponds to a unique physical process in one to one correspondence
+with Wick’s expansion. (There is one other rule, namely, one has
+to have a factor of (−1) for every internal fermion loop. There are
+also some other subtleties like the symmetry factor associated with
+a diagram (graph), which we do not worry about at this point. We
+should also note for completeness that these are the Feynman rules
+in momentum space.
+
+
+
+\subsubsection{Examples of Feynman Diagrams}
+
+1. The physical process where a proton, an anti-proton and a $\pi^0$ meson are annihilated , will correspond in the lowest order to evaluating the Feynman diagram in Fig. 11, where the external lines represent the respective physical particles that are annihilated. The value of this diagram can be obtained from the Feynman rules to be
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Screenshot 2025-07-17 065511.png}
+    \caption{Lowest order Feynman diagram}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{align*}
+\langle 0|S_1^{(1)}|k,s;k',s';q\rangle &= -(2\pi)^4 iq g^4(k + k' + q)\delta_{\alpha\beta} \\
+&\quad \times \frac{1}{\sqrt{(2\pi)^3 2q^0}} \sqrt{\frac{m}{(2\pi)^3 k^0}} u_\alpha(k,s) \sqrt{\frac{m}{(2\pi)^3 k'^0}} \overline{v}_\beta(k',s') \\
+&= -(2\pi)^4 iq g^4(k + k' + q) \\
+&\quad \times \frac{1}{\sqrt{(2\pi)^3 2q^0}} \sqrt{\frac{m}{(2\pi)^3 k^0}} \sqrt{\frac{m}{(2\pi)^3 k'^0}} \overline{v}_\alpha(k',s') u_\alpha(k,s).
+\end{align*}
+
+This is exactly the value of the first order $S$-matrix element which we had evaluated in (4.31).\\
+
+
+
+2.  In the second order
+process where a proton and an anti-proton annihilate and create a π0
+meson which subsequently pair creates a proton and an anti-proton,
+the corresponding lowest order Feynman diagram will be given by
+Fig. 12, with the external lines representing physical particles. The
+
+value of the diagram can now be calculated using the Feynman rules
+to be\\
+
+
+
+\langle k_4, s_4; k_3, s_3 | S_2^{(2)} | k_1, s_1; k_2, s_2 \rangle 
+
+= \int \frac{d^4q}{(2\pi)^4} (-2\pi i)^4 iq \delta^4(k_1 + k_2 - q) \delta_{\alpha\beta} \sqrt{\frac{m}{(2\pi)^3 k_1^0}} \sqrt{\frac{m}{(2\pi)^3 k_2^0}}
+
+\times u_\alpha(k_1, s_1) \overline{v}_\beta(k_2, s_2) iG_F(q)(-2\pi i)^4 iq \delta^4(q - k_3 - k_4) \delta_{\gamma\delta}
+
+\times \sqrt{\frac{m}{(2\pi)^3 k_3^0}} \sqrt{\frac{m}{(2\pi)^3 k_4^0}} \overline{u}_\gamma(k_3, s_3) v_\delta(k_4, s_4)
+
+= -(2\pi)^4 q^2 \delta^4(k_1 + k_2 - k_3 - k_4) 
+
+\times \sqrt{\frac{m}{(2\pi)^3 k_1^0}} \sqrt{\frac{m}{(2\pi)^3 k_2^0}} \sqrt{\frac{m}{(2\pi)^3 k_3^0}} \sqrt{\frac{m}{(2\pi)^3 k_4^0}}
+
+\times \overline{u}_\alpha(k_3, s_3) v_\alpha(k_4, s_4) iG_F(k_1 + k_2) \overline{v}_\beta(k_2, s_2) u_\beta(k_1, s_1).
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Screenshot 2025-07-17 070506.png}
+    \caption{A second order Feynman diagram.}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Once again, this is exactly the second order S-matrix element which
+we had calculated from the Wick expansion in (4.32).\\
+
+
+
+
+
+We observe that the same Feynman diagram can describe distinct physical processes depending on the external lines. For example, the Feynman diagram in Fig. 8.2 can describe the scattering of two protons through the exchange of a $\pi^0$ meson, namely, a proton with initial momentum $k_1$ scattering into a state with momentum $k_2$ by emitting a $\pi^0$ meson with momentum $q = k_1 - k_2$ which is captured by an initial proton of momentum $k_4$ scattering into a state with momentum $k_3$. 
+
+
+
+
+
+\section{\huge{References }}
+
+1. Peskin QFT\\
+2. Ashok Das QFT
+
+
+
+\begin{center}
+     **** Thank You!****
+\end{center}
+
+
+\end{document}
